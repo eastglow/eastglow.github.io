@@ -25,3 +25,7 @@ permalink: /posts/
   {% if forloop.last == false %}<hr>{% endif %}
 {% endfor %}
 <br>
+<div class="container content">
+  {{ content }}
+  {% include comments.html %}
+</div>
