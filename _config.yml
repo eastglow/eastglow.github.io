@@ -41,7 +41,7 @@ jekyll-archives:
     tag: '/tag/:name/'
 
 # Disqus comments
-disqus_shortname: EastGlow's Blog
+disqus_shortname: EastGlow
 
 # Google analytics
 # ga_tracking_id: "UA-XXXX-1"
