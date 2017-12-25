@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[공통]Scala Subquery vs Inline View vs Subquery"
+title:  "[공통]Scala Subquery vs Left Outer Join"
 date:   2017-12-21 17:41:00
 author: EastGlow
 categories: DataBase
