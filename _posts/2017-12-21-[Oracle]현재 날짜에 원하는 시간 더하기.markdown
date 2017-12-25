@@ -14,12 +14,13 @@ categories: DataBase
 (SQLDeveloper에서 시간 포맷을 바꾸고 싶다면 [http://egloos.zum.com/aslike/v/2976365](http://) 참조.)
 
 물론 아래와 같은 쿼리로 위 날짜 포맷을 바꿔서 출력할 수도 있다.
-
-`SELECT TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') FROM DUAL`
-
+~~~
+SELECT TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') FROM DUAL
+~~~
 그렇다면 내가 원하는 시간을 더한 날짜는 어떻게 출력할 수 있을까?
-
-`SELECT TO_CHAR(SYSDATE + 1/24, 'YYYYMMDDHH24MISS') FROM DUAL`
+~~~
+SELECT TO_CHAR(SYSDATE + 1/24, 'YYYYMMDDHH24MISS') FROM DUAL
+~~~
 
 위 쿼리를 실행하면 현재 시간에서 1시간을 더한 날짜값이 나온다. 하루는 24시간이기 때문에 1시간이면 1/24, 9시간이면 9/24를 SYSDATE에 더해주면 된다. 일 단위로 더하고 싶다면 그냥 1, 2, 3, ... 등의 숫자값을 더해주면 된다.
 
