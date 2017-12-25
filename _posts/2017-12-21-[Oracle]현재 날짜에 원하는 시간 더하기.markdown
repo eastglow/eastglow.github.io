@@ -11,7 +11,7 @@ categories: DataBase
 `17/12/25`
 
 연도/월/일 순으로 나오며 분, 초 단위의 시간까진 나오지 않는다.
-(SQLDevelper에서 시간 포맷을 바꾸고 싶다면 [http://egloos.zum.com/aslike/v/2976365](http://) 참조.)
+(SQLDeveloper에서 시간 포맷을 바꾸고 싶다면 [http://egloos.zum.com/aslike/v/2976365](http://) 참조.)
 
 물론 아래와 같은 쿼리로 위 날짜 포맷을 바꿔서 출력할 수도 있다.
 
