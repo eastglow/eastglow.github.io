@@ -15,25 +15,25 @@ water_melon함수는 정수 n을 매개변수로 입력받습니다.
 ## 풀이 1
 ~~~
 public class WaterMelon {
-	public String watermelon(int n){
-		StringBuilder sf = new StringBuilder();
-    
-    	// Case 1
-        for(int i=1; i<=n; ++i){
-          if(i%2 != 0){
-            sf.append("수");
-          }else{
-            sf.append("박");
-          }
-        }
-        
-        // Case 2
-        for(int i=1; i<=n; ++i){        
-        	sf.append(i%2 != 0 ? "수":"박");
-        }
-    
-		return str.toString();
-	}
+  public String watermelon(int n){
+    StringBuilder sf = new StringBuilder();
+
+    // Case 1
+    for(int i=1; i<=n; ++i){
+      if(i%2 != 0){
+        sf.append("수");
+      }else{
+        sf.append("박");
+      }
+    }
+
+    // Case 2
+    for(int i=1; i<=n; ++i){        
+      sf.append(i%2 != 0 ? "수":"박");
+    }
+
+    return str.toString();
+  }
 
 	// 실행을 위한 테스트코드입니다.
 	public static void  main(String[] args){
@@ -48,9 +48,9 @@ public class WaterMelon {
 ## 풀이 2
 ~~~
 public class WaterMelon {
-	public String watermelon(int n){    
-   	 return new String(new char [n/2+1]).replace("\0", "수박").substring(0,n);
-	}
+  public String watermelon(int n){    
+    return new String(new char [n/2+1]).replace("\0", "수박").substring(0,n);
+  }
 
 	// 실행을 위한 테스트코드입니다.
 	public static void  main(String[] args){
