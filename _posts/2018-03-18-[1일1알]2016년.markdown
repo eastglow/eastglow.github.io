@@ -1,0 +1,121 @@
+---
+layout: post
+title:  "[1일1알]2016년"
+date:   2018-03-18 20:40:00
+author: EastGlow
+categories: 1일1알
+---
+## 문제
+```
+2016년 1월 1일은 금요일입니다. 2016년 A월 B일은 무슨 요일일까요? 두 수 A,B를 입력받아 A월 B일이 무슨 요일인지 출력하는 getDayName 함수를 완성하세요. 요일의 이름은 일요일부터 토요일까지 각각
+
+SUN,MON,TUE,WED,THU,FRI,SAT
+
+를 출력해주면 됩니다. 예를 들어 A=5, B=24가 입력된다면 5월 24일은 화요일이므로 TUE를 반환하면 됩니다.
+```
+
+## 풀이 1
+~~~
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+class TryHelloWorld
+{
+    public String getDayName(int a, int b)
+    {
+        String answer = "";
+        String month = a < 10 ? "0"+String.valueOf(a) : String.valueOf(a);
+        String day = b < 10 ? "0"+String.valueOf(b) : String.valueOf(b);      
+      
+        try{
+          Date currDate = new SimpleDateFormat("yyyy-MM-dd").parse("2016-"+month+"-"+day);
+          Calendar cal = Calendar.getInstance();
+          cal.setTime(currDate);
+          
+          int days= cal.get(Calendar.DAY_OF_WEEK) ;
+
+          switch(days){
+            case 1: answer = "SUN"; break;
+            case 2: answer = "MON"; break;
+            case 3: answer = "TUE"; break;
+            case 4: answer = "WED"; break;
+            case 5: answer = "THU"; break;
+            case 6: answer = "FRI"; break;
+            case 7: answer = "SAT"; break;
+          }
+
+        }catch(ParseException e){
+        	e.printStackTrace();
+        }
+
+        return answer;
+    }
+    public static void main(String[] args)
+    {
+        TryHelloWorld test = new TryHelloWorld();
+        int a=5, b=24;
+        System.out.println(test.getDayName(a,b));
+    }
+}
+~~~
+다른 사랆의 풀이를 보니 2016년의 1~12월까지의 날짜를 배열에 담아 구하던데 결국 이 방식은 각 월 끝 날자를 모르면 풀 수 없을거라 생각했다. 즉, 달력을 보지 않으면 풀 수 없지 않나?라고 생각하여 Calendar와 Date를 이용해봤다.(이 방식도 결국 캘린더와 데이트를 모르면 못 푸는거지만-_-) 입력받은 날짜로 요일 리턴값을 받은 후 case 문을 통해 분기 처리해주었다.
+
+
+## 풀이 2
+~~~
+import java.util.*;
+
+class TryHelloWorld
+{
+    public String getDayName(int month, int day)
+    {
+        Calendar cal = new Calendar.Builder().setCalendarType("iso8601").setDate(2016, month - 1, day).build();
+        return cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ko-KR")).toUpperCase();
+    }
+    public static void main(String[] args)
+    {
+        TryHelloWorld test = new TryHelloWorld();
+        int a=5, b=24;
+        System.out.println(test.getDayName(a,b));
+    }
+}
+~~~
+라이브러리 사용의 끝을 보여준 예.
+
+
+## 풀이 2
+~~~
+class TryHelloWorld
+{
+    public String getDayName(int a, int b)
+    {
+     String answer = " ";
+        int[] monthDay={31,29,31,30,31,30,31,31,30,31,30,31};
+        for (int i = 1; i < a; i++) {
+            b+=monthDay[i-1];
+        }
+        switch(b%7){
+        case 3:answer="SUN";break;
+        case 4:answer="MON";break;
+        case 5:answer="TUE";break;
+        case 6:answer="WED";break;
+        case 0:answer="THU";break;
+        case 1:answer="FRI";break;
+        case 2:answer="SAT";break;
+        }
+
+
+
+        return answer;
+    }
+    public static void main(String[] args)
+    {
+        TryHelloWorld test = new TryHelloWorld();
+        int a=5, b=24;
+        System.out.println(test.getDayName(a,b));
+    }
+}
+
+~~~
+이렇게 2016년에 속한 월의 끝 날짜값을 배열에 담아 구하는 풀이가 많았다. 가장 무난한 방법인 듯.
