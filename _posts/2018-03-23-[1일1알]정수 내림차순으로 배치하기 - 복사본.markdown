@@ -1,0 +1,115 @@
+---
+layout: post
+title:  "[1일1알]정수 내림차순으로 배치하기"
+date:   2018-03-23 20:40:00
+author: EastGlow
+categories: 1일1알
+---
+## 문제
+```
+reverseInt 메소드는 int형 n을 매개변수로 입력받습니다.
+n에 나타나는 숫자를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요.
+예를들어 n이 118372면 873211을 리턴하면 됩니다.
+n은 양의 정수입니다.
+```
+
+## 풀이 1
+~~~
+public class ReverseInt {
+	public int reverseInt(int n){
+        String result = "";
+        String[] array = String.valueOf(n).split("");
+
+        for(int i=0; i<array.length-1; ++i){
+          for(int j=i+1; j<array.length; ++j){
+            if(Integer.parseInt(array[i]) < Integer.parseInt(array[j])){
+              String temp = array[i];
+              array[i] = array[j];
+              array[j] = temp;
+            }        
+          }
+        }
+
+        for(String str : array) result += str;
+    
+		return Integer.parseInt(result);
+	}
+  
+	// 아래는 테스트로 출력해 보기 위한 코드입니다.
+	public static void  main(String[] args){
+		ReverseInt ri = new ReverseInt();
+		System.out.println(ri.reverseInt(118372));
+	}
+}
+~~~
+자바에 포함되어 있는 정렬 관련 메서드가 있긴 하지만(arraylist의 sort라든가 reverse 등...) 그런 것들을 안 쓰고 최대한 순수 자바 기본 코드들로 풀어보았다.
+
+
+## 풀이 2
+~~~
+import java.util.*;
+
+class TryHelloWorld
+{
+    public String getDayName(int month, int day)
+    {
+        Calendar cal = new Calendar.Builder().setCalendarType("iso8601").setDate(2016, month - 1, day).build();
+        return cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, new Locale("ko-KR")).toUpperCase();
+    }
+    public static void main(String[] args)
+    {
+        TryHelloWorld test = new TryHelloWorld();
+        int a=5, b=24;
+        System.out.println(test.getDayName(a,b));
+    }
+}
+~~~
+라이브러리 사용의 끝을 보여준 예.
+
+
+## 풀이 2
+~~~
+public class ReverseInt {
+    String res = "";
+    public int reverseInt(int n){
+        res = "";
+        Integer.toString(n).chars().sorted().forEach(c -> res = Character.valueOf((char)c) + res);
+        return Integer.parseInt(res);
+    }
+
+    // 아래는 테스트로 출력해 보기 위한 코드입니다.
+    public static void  main(String[] args){
+        ReverseInt ri = new ReverseInt();
+        System.out.println(ri.reverseInt(118372));
+    }
+}
+~~~
+음... 말이 필요없다...ㅎㅎ
+
+
+## 풀이 3
+~~~
+import java.util.Arrays;
+public class ReverseInt {
+    public int reverseInt(int n){
+
+        String[] arr = String.valueOf(n).split("");
+        Arrays.sort(arr);
+        StringBuffer sb = new StringBuffer();
+        for(String tmp: arr) {
+            sb.append(tmp);
+        }
+
+        sb.reverse();
+
+        return Integer.parseInt(sb.toString());
+    }
+
+    // 아래는 테스트로 출력해 보기 위한 코드입니다.
+    public static void  main(String[] args){
+        ReverseInt ri = new ReverseInt();
+        System.out.println(ri.reverseInt(118372));
+    }
+}
+~~~
+풀이2 만큼 자바 내의 메서드를 잘 활용한 풀이이다.
