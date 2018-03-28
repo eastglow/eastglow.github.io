@@ -20,7 +20,7 @@ permalink: /about/
 * 2015~2016 SW 개발 동아리 '수은불망' 활동
  * [2016 SW 동아리 재능기부 챌린지 (미래창조과학부)](https://github.com/eastglow/DJN)
  * 2016 제 3회 대한민국 해카톤 (미래창조과학부, NIPA)
- * [2015~2016 명함관리시스템 (동아리 내부 프로젝트)](http://https://github.com/eastglow/BCMS)
+ * [2015~2016 명함관리시스템 (동아리 내부 프로젝트)](http://github.com/eastglow/BCMS)
 
 # Skill Set
 
