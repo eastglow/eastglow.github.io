@@ -3,6 +3,7 @@ layout: page
 title: About
 permalink: /about/
 ---
+
 # 들어가며...
 
 아직은 미숙한 초보 개발자입니다. 서울의 SI/SM 및 솔루션 업체에서 일하고 있습니다.
@@ -13,7 +14,7 @@ permalink: /about/
 포스팅한 글들 중에서 틀리거나 잘못된 부분이 있을 수 있씁니다. 피드백은 언제나 환영합니다.
 
 
-#Specification
+# Specification
 
 * 경영정보학(Management Information System) 전공 / 컴퓨터공학(Computer Engineering) 부전공
 * 2015~2016 SW 개발 동아리 '수은불망' 활동
@@ -21,7 +22,7 @@ permalink: /about/
  * 2016 제 3회 대한민국 해카톤 (미래창조과학부, NIPA)
  * [2015~2016 명함관리시스템 (동아리 내부 프로젝트)](http://https://github.com/eastglow/BCMS)
 
-#Skill Set
+# Skill Set
 
 * Language: Java
 * Database: Oracle, MySQL, MSSQL, Tibero
