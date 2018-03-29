@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]하샤드수"
+title:  "[Level2]하샤드수"
 date:   2018-03-24 20:40:00
 author: EastGlow
 categories: 1일1알

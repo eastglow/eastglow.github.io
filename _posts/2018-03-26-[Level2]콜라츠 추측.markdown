@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]콜라츠 추측"
+title:  "[Level2]콜라츠 추측"
 date:   2018-03-26 20:40:00
 author: EastGlow
 categories: 1일1알

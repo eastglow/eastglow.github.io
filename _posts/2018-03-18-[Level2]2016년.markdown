@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]2016년"
+title:  "[Level2]2016년"
 date:   2018-03-18 20:40:00
 author: EastGlow
 categories: 1일1알

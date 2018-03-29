@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]소수 찾기"
+title:  "[Level2]소수 찾기"
 date:   2018-03-27 22:40:00
 author: EastGlow
 categories: 1일1알

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]정수 내림차순으로 배치하기"
+title:  "[Level2]정수 내림차순으로 배치하기"
 date:   2018-03-23 20:40:00
 author: EastGlow
 categories: 1일1알

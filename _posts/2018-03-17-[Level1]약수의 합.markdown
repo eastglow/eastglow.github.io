@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]약수의 합"
+title:  "[Level1]약수의 합"
 date:   2018-03-17 18:20:00
 author: EastGlow
 categories: 1일1알

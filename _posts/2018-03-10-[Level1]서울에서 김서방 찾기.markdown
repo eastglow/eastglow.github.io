@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[1일1알]서울에서 김서방 찾기"
+title:  "[Level1]서울에서 김서방 찾기"
 date:   2018-03-10 23:00:00
 author: EastGlow
 categories: 1일1알
