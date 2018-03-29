@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "[1일1알]멀리 뛰기"
+date:   2018-03-29 21:40:00
+author: EastGlow
+categories: 1일1알
+---
+## 문제
+```
+효진이는 멀리 뛰기를 연습하고 있습니다. 효진이는 한번에 1칸, 또는 2칸을 뛸 수 있습니다.  
+칸이 총 4개 있을 때, 효진이는  
+(1칸, 1칸, 1칸, 1칸)  
+(1칸, 2칸, 1칸)  
+(1칸, 1칸, 2칸)  
+(2칸, 1칸, 1칸)  
+(2칸, 2칸)  
+의 5가지 방법으로 맨 끝 칸에 도달할 수 있습니다. 멀리뛰기에 사용될 칸의 수 n이 주어질 때, 효진이가 끝에 도달하는 방법이 몇 가지인지 출력하는 jumpCase 함수를 완성하세요. 예를 들어 4가 입력된다면, 5를 반환해 주면 됩니다.
+```
+
+## 풀이 1
+~~~
+class JumpCase {
+    public int jumpCase(int num) {
+        if(num<3) return num;
+        else return (jumpCase(num-1) + jumpCase(num-2));
+    }
+
+    public static void main(String[] args) {
+        JumpCase c = new JumpCase();
+        int testCase = 4;
+        //아래는 테스트로 출력해 보기 위한 코드입니다.
+        System.out.println(c.jumpCase(testCase));
+    }
+}
+~~~
+처음 문제를 봤을 땐 1과 2로 주어진 수를 분해(?)해서 경우의 수를 구하는 건가 싶어서 이상한 쪽으로 생각을 계속 하였다. 그러다가 도저히 답이 안 나와서 노가다로 경우의 수를 직접 구해보았다. 노가다를 하고나서야 이 결과값들이 피보나치 수열인 것을 알게 되었다.ㅠㅠ 이처럼 알고리즘 문제는 알고리즘 푸는 방법을 아는 것도 중요하지만 주어진 문제 속에 어떤 알고리즘이 숨어있는지 파악하는 것도 정말 중요하다.
+
+## 풀이 2
+~~~
+class JumpCase {
+
+    public int jumpCase(int num) {
+        int answer = 0;
+        int bNum = 0;
+        int nNum = 1;
+
+        for (int i = 0; i < num; i++) {
+            answer = bNum + nNum;
+            bNum = nNum;
+            nNum = answer;
+        }
+        return answer;
+    }
+
+    public static void main(String[] args) {
+        JumpCase c = new JumpCase();
+        int testCase = 4;
+        // 아래는 테스트로 출력해 보기 위한 코드입니다.
+        System.out.println(c.jumpCase(testCase));
+    }
+}
+~~~
+나는 재귀함수로 풀었는데 이 풀이처럼 for문을 이용해 재귀함수를 쓰지 않고도 풀 수 있다.
