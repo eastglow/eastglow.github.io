@@ -1,0 +1,90 @@
+---
+layout: post
+title:  "[Level3]다음 큰 숫자"
+date:   2018-03-30 21:30:00
+author: EastGlow
+categories: 1일1알
+---
+## 문제
+```
+어떤 수 N(1≤N≤1,000,000) 이 주어졌을 때, N의 다음 큰 숫자는 다음과 같습니다.  
+
+- N의 다음 큰 숫자는 N을 2진수로 바꾸었을 때의 1의 개수와 같은 개수로 이루어진 수입니다.
+- 1번째 조건을 만족하는 숫자들 중 N보다 큰 수 중에서 가장 작은 숫자를 찾아야 합니다.
+
+예를 들어, 78을 2진수로 바꾸면 1001110 이며, 78의 다음 큰 숫자는 83으로 2진수는 1010011 입니다.
+N이 주어질 때, N의 다음 큰 숫자를 찾는 nextBigNumber 함수를 완성하세요.
+```
+
+## 풀이 1
+~~~
+class TryHelloWorld
+{
+  public int nextBigNumber(int n)
+  {
+    int answer = 0;
+    int count = 0;
+    int count2 = 0;
+    String binary = Integer.toBinaryString(n);
+
+    for(int i=0; i<binary.length(); ++i){
+    	if(binary.charAt(i) == '1') count++;
+    }
+
+  	n++;
+
+    while(true){
+      String binary2 = Integer.toBinaryString(n);
+
+      for(int i=0; i<binary2.length(); ++i){
+        if(binary2.charAt(i) == '1') count2++;
+      }
+
+      if(count==count2){
+        answer = n;
+        break;
+      }else{
+        count2 = 0;
+        n++;
+      }
+    }  
+
+  	return answer;
+  }
+  public static void main(String[] args)
+  {
+    TryHelloWorld test = new TryHelloWorld();
+    int n = 279597;
+    System.out.println(test.nextBigNumber(n));
+  }
+}
+~~~
+풀고나서 다른 사람들의 풀이를 보니 부끄럽다...ㅠ toBinaryString을 이용하여 2진수로 변환 후, 1의 개수를 카운트 하였다. 후에 while 문을 이용하여 n 다음의 숫자들을 같은 방식으로 카운트하여 처음 카운트한 숫자와 같으면 정답을 리턴할 수 있도록 하였다.
+
+## 풀이 2
+~~~
+class TryHelloWorld
+{
+    public int nextBigNumber(int n)
+    {
+      int a = Integer.bitCount(n);
+      int compare = n+1;
+
+      while(true) {
+        if(Integer.bitCount(compare)==a)
+          break;
+        compare++;
+      }
+
+      return compare;
+    }
+
+    public static void main(String[] args)
+    {
+        TryHelloWorld test = new TryHelloWorld();
+        int n = 78;
+        System.out.println(test.nextBigNumber(n));
+    }
+}
+~~~
+bitCount라는 좋은 메서드가 있었다. 이것은 비트 연산을 하여 '1'의 개수를 리턴해준다. 코드가 반 이상 줄어버렸다.
