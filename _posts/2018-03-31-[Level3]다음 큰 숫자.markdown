@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Level3]다음 큰 숫자"
-date:   2018-03-30 21:30:00
+date:   2018-03-31 21:30:00
 author: EastGlow
 categories: 1일1알
 ---
