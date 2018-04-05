@@ -7,7 +7,8 @@ categories: Front-end
 ---
 
 ![](/assets/post/image1.png)
-<체크박스 선택 화면>
+
+**<체크박스 선택 화면>**
 
 
 ### 1. Javascript 소스
