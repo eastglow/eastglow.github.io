@@ -6,7 +6,9 @@ author: EastGlow
 categories: Front-end
 ---
 
-![](/assets/post/image1.png){: refdef: style="text-align: center;"}
+{: refdef: style="text-align: center;"}
+![](/assets/post/image1.png)
+{: refdef}
 
 
 ### 1. Javascript 소스
