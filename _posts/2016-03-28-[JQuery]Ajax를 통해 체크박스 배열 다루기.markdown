@@ -6,10 +6,11 @@ author: EastGlow
 categories: Front-end
 ---
 
+{: refdef: style="text-align: center;"}
 ![](/assets/post/image1.png)
 
 **<체크박스 선택 화면>**
-
+{: refdef}
 
 ### 1. Javascript 소스
 ```
