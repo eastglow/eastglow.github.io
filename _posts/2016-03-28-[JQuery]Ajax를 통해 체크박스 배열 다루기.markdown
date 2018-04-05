@@ -8,7 +8,9 @@ categories: Front-end
 
 {: refdef: style="text-align: center;"}
 ![](/assets/post/image1.png)
+{: refdef}
 
+{: refdef: style="text-align: center;"}
 **<체크박스 선택 화면>**
 {: refdef}
 
