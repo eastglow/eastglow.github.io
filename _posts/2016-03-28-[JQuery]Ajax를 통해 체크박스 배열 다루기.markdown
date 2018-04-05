@@ -7,7 +7,7 @@ categories: Front-end
 ---
 
 
-![](/assets/post/image1.png) {.aligncenter}
+![](/assets/post/image1.png){.aligncenter}
 
 **<체크박스 선택 화면>**
 
