@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[JQuery]Ajax를 통해 체크박스 배열 다루기"
-date:   2018-02-25 19:00:00
+date:   2016-03-28 19:00:00
 author: EastGlow
 categories: Front-end
 ---
