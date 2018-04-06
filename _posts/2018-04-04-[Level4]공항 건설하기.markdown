@@ -55,7 +55,7 @@ class TryHelloWorld
   {
     TryHelloWorld test = new TryHelloWorld();
     int tn = 3;
-    int [][]tcity = `{{1,5},{2,2},{3,3}}`;
+    int [][]tcity = `{{`1,5},{2,2},{3,3`}}`;
    System.out.println(test.chooseCity(tn,tcity));
   }
 }
