@@ -4,7 +4,6 @@ title:  "[Level4]땅따먹기 게임"
 date:   2018-04-09 20:40:00
 author: EastGlow
 categories: 1일1알
-tags: [kakao, recruitment]
 ---
 ## 문제
 
