@@ -1,79 +1,85 @@
----
-layout: post
-title:  "[Level1]행렬의 덧셈"
-date:   2018-03-15 23:59:00
-author: EastGlow
-categories: 1일1알
----
-## 문제
-
-행렬의 덧셈은 행과 열의 크기가 같은 두 행렬의 같은 행, 같은 열의 값을 서로 더한 결과가 됩니다.
-2개의 행렬을 입력받는 sumMatrix 함수를 완성하여 행렬 덧셈의 결과를 반환해 주세요.
-
-예를 들어 2x2 행렬인 A = ((1, 2), (2, 3)), B = ((3, 4), (5, 6)) 가 주어지면,
-같은 2x2 행렬인 ((4, 6), (7, 9))를 반환하면 됩니다.(어떠한 행렬에도 대응하는 함수를 완성해주세요.)
-
-
-## 풀이 1
-~~~
-class SumMatrix {
-    int[][] sumMatrix(int[][] A, int[][] B) {  
-      int[][] answer = new int[A.length][A[0].length];
-
-      for(int i=0; i<A.length; ++i)
-        for(int j=0; j<A[0].length; ++j)
-          answer[i][j] = A[i][j] + B[i][j];
-
-    return answer;
-  }
-
-  // 아래는 테스트로 출력해 보기 위한 코드입니다.
-  public static void main(String[] args) {
-    SumMatrix c = new SumMatrix();
-    int[][] A = { { 1, 2 }, { 2, 3 } };
-    int[][] B = { { 3, 4 }, { 5, 6 } };
-    int[][] answer = c.sumMatrix(A, B);
-    if (answer[0][0] == 4 && answer[0][1] == 6 && 
-      answer[1][0] == 7 && answer[1][1] == 9) {
-      System.out.println("맞았습니다. 제출을 눌러 보세요");
-    } else {
-     System.out.println("틀렸습니다. 수정하는게 좋겠어요");
-    }
-  }
-}
-~~~
-처음에 한 20분 동안 너무 멀리 돌아가는 방법으로 고민해서 풀어놓고 갑자기 떠올라서 푼 방식이다. 이렇게 풀고 다른사람 풀이를 보니 다들 이렇게 풀었더라...
-
-## 풀이 2
-~~~
-class SumMatrix {
-    int[][] sumMatrix(int[][] A, int[][] B) {
-        int row = Math.max(A.length, B.length);
-        int col = Math.max(A[0].length, B[0].length);
-        int[][] answer = new int[row][col];
-        for(int i=0; i<row ; i++){
-          for(int j=0; j<col; j++){
-            answer[i][j] = A[i][j] + B[i][j];
-          }
-        }
-
-        return answer;
-    }
-
-    // 아래는 테스트로 출력해 보기 위한 코드입니다.
-    public static void main(String[] args) {
-        SumMatrix c = new SumMatrix();
-        int[][] A = { { 1, 2 }, { 2, 3 } };
-        int[][] B = { { 3, 4 }, { 5, 6 } };
-        int[][] answer = c.sumMatrix(A, B);
-        if (answer[0][0] == 4 && answer[0][1] == 6 && 
-                answer[1][0] == 7 && answer[1][1] == 9) {
-            System.out.println("맞았습니다. 제출을 눌러 보세요");
-        } else {
-            System.out.println("틀렸습니다. 수정하는게 좋겠어요");
-        }
-    }
-}
-
-~~~
-이 문제는 이 방식보다 더 효율적으로 풀 방법이 없는 듯 하다. 다른 사람들의 풀이를 봐도 크게 다른 풀이가 없다. 이 풀이도 크게 다른 점이 없지만 Math 함수를 이용해서 혹시 모를 행렬이 다를 경우를 대비하여 푼 방식인 듯 하여 다른 풀이로 집어넣어봤다. (사실 문제에서 이미 같은 행렬 2개라고 못을 박아버려서 저런건 생각도 안하고 풀었다.)
+---
+layout: post
+title:  "[Level1]행렬의 덧셈"
+date:   2018-03-15 23:59:00
+author: EastGlow
+categories: 프로그래머스
+---
+
+## 문제
+
+행렬의 덧셈은 행과 열의 크기가 같은 두 행렬의 같은 행, 같은 열의 값을 서로 더한 결과가 됩니다.
+2개의 행렬을 입력받는 sumMatrix 함수를 완성하여 행렬 덧셈의 결과를 반환해 주세요.
+예를 들어 2x2 행렬인 A = ((1, 2), (2, 3)), B = ((3, 4), (5, 6)) 가 주어지면,
+같은 2x2 행렬인 ((4, 6), (7, 9))를 반환하면 됩니다.(어떠한 행렬에도 대응하는 함수를 완성해주세요.)
+
+
+## 풀이 1
+
+~~~
+class SumMatrix {
+    int[][] sumMatrix(int[][] A, int[][] B) {  
+        int[][] answer = new int[A.length][A[0].length];
+
+        for(int i=0; i<A.length; ++i)
+            for(int j=0; j<A[0].length; ++j)
+            	answer[i][j] = A[i][j] + B[i][j];
+                
+        return answer;
+    }
+
+  // 아래는 테스트로 출력해 보기 위한 코드입니다.
+  public static void main(String[] args) {
+    SumMatrix c = new SumMatrix();
+    int[][] A = { { 1, 2 }, { 2, 3 } };
+    int[][] B = { { 3, 4 }, { 5, 6 } };
+    int[][] answer = c.sumMatrix(A, B);
+    
+    if (answer[0][0] == 4 && answer[0][1] == 6 && answer[1][0] == 7 && answer[1][1] == 9) {
+      System.out.println("맞았습니다. 제출을 눌러 보세요");
+    } else {
+     System.out.println("틀렸습니다. 수정하는게 좋겠어요");
+    }
+  }
+}
+
+~~~
+
+처음에 한 20분 동안 너무 멀리 돌아가는 방법으로 고민해서 풀어놓고 갑자기 떠올라서 푼 방식이다. 이렇게 풀고 다른사람 풀이를 보니 다들 이렇게 풀었더라...
+
+
+## 풀이 2
+
+~~~
+class SumMatrix {
+    int[][] sumMatrix(int[][] A, int[][] B) {
+        int row = Math.max(A.length, B.length);
+        int col = Math.max(A[0].length, B[0].length);
+        int[][] answer = new int[row][col];
+        
+        for(int i=0; i<row ; i++){
+          for(int j=0; j<col; j++){
+            answer[i][j] = A[i][j] + B[i][j];
+          }
+        }
+
+        return answer;
+    }
+
+    // 아래는 테스트로 출력해 보기 위한 코드입니다.
+    public static void main(String[] args) {
+        SumMatrix c = new SumMatrix();
+        int[][] A = { { 1, 2 }, { 2, 3 } };
+        int[][] B = { { 3, 4 }, { 5, 6 } };
+        int[][] answer = c.sumMatrix(A, B);
+
+        if (answer[0][0] == 4 && answer[0][1] == 6 && answer[1][0] == 7 && answer[1][1] == 9) {
+            System.out.println("맞았습니다. 제출을 눌러 보세요");
+        } else {
+            System.out.println("틀렸습니다. 수정하는게 좋겠어요");
+        }
+    }
+}
+~~~
+
+이 문제는 이 방식보다 더 효율적으로 풀 방법이 없는 듯 하다. 다른 사람들의 풀이를 봐도 크게 다른 풀이가 없다. 이 풀이도 크게 다른 점이 없지만 Math 함수를 이용해서 혹시 모를 행렬이 다를 경우를 대비하여 푼 방식인 듯 하여 다른 풀이로 집어넣어봤다. (사실 문제에서 이미 같은 행렬 2개라고 못을 박아버려서 저런건 생각도 안하고 풀었다.)

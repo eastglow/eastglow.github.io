@@ -1,74 +1,81 @@
----
-layout: post
-title:  "[Level1]최대값과 최소값"
-date:   2018-03-11 23:00:00
-author: EastGlow
-categories: 1일1알
----
-## 문제
-
-getMinMaxString 메소드는 String형 변수 str을 매개변수로 입력받습니다.
-str에는 공백으로 구분된 숫자들이 저장되어 있습니다.
-str에 나타나는 숫자 중 최소값과 최대값을 찾아 이를 (최소값) (최대값)형태의 String을 반환하는 메소드를 완성하세요.
-예를 들어 str이 1 2 3 4라면 1 4를 리턴하고, -1 -2 -3 -4라면 -4 -1을 리턴하면 됩니다.
-
-
-## 풀이 1
-~~~
-public class GetMinMaxString {
-    public String getMinMaxString(String str) {
-        String[] strArr = str.split(" ");
-        String result;
-        int min = Integer.parseInt(strArr[0]);
-        int max = Integer.parseInt(strArr[0]);
-
-        for(int i=1; i < strArr.length; ++i){
-            if (min > Integer.parseInt(strArr[i])) min = Integer.parseInt(strArr[i]);
-            if (max < Integer.parseInt(strArr[i])) max = Integer.parseInt(strArr[i]);
-        }
-
-    	result = min + " " + max;
-
-        return result;
-    }
-
-    public static void main(String[] args) {
-        String str = "1 2 3 4";
-        GetMinMaxString minMax = new GetMinMaxString();
-        //아래는 테스트로 출력해 보기 위한 코드입니다.
-        System.out.println("최대값과 최소값은?" + minMax.getMinMaxString(str));
-    }
-}
-~~~
-내가 푼 방식이다. 먼저 split를 통해 공백으로 문자열을 나눈 후, 배열의 제일 첫번째 값을 min과 max에 담는다. 후에 for문을 돌리면서 0번째 이후의 값들과 비교한다. 비교하는 값이 min보다 작으면 그 값이 min이 되고, max보다 크면 그 값이 max가 된다.
-
-## 풀이 2
-~~~
-import java.util.Arrays;
-
-public class GetMinMaxString {
-    public String getMinMaxString(String str) {
-      String[] strArr = str.split(" ");
-      String result;
-      int arrInt[] = new int [strArr.length];
-
-      for(int i=0; i<strArr.length; i++){
-      	arrInt[i] = Integer.parseInt(strArr[i]);  
-      }
-
-      Arrays.sort(arrInt);
-
-      result = arrInt[0] + " " + arrInt[strArr.length-1];
-      
-      return result;
-    }
-
-    public static void main(String[] args) {
-        String str = "1 2 3 4";
-        GetMinMaxString minMax = new GetMinMaxString();
-        //아래는 테스트로 출력해 보기 위한 코드입니다.
-        System.out.println("최대값과 최소값은?" + minMax.getMinMaxString(str));
-    }
-}
-~~~
+---
+layout: post
+title:  "[Level1]최대값과 최소값"
+date:   2018-03-11 23:00:00
+author: EastGlow
+categories: 프로그래머스
+---
+
+## 문제
+
+getMinMaxString 메소드는 String형 변수 str을 매개변수로 입력받습니다.
+str에는 공백으로 구분된 숫자들이 저장되어 있습니다.
+str에 나타나는 숫자 중 최소값과 최대값을 찾아 이를 (최소값) (최대값)형태의 String을 반환하는 메소드를 완성하세요.
+예를 들어 str이 1 2 3 4라면 1 4를 리턴하고, -1 -2 -3 -4라면 -4 -1을 리턴하면 됩니다.
+
+
+## 풀이 1
+
+~~~
+public class GetMinMaxString {
+    public String getMinMaxString(String str) {
+        String[] strArr = str.split(" ");
+        String result;
+        int min = Integer.parseInt(strArr[0]);
+        int max = Integer.parseInt(strArr[0]);
+
+        for(int i=1; i < strArr.length; ++i){
+            if (min > Integer.parseInt(strArr[i])) min = Integer.parseInt(strArr[i]);
+            if (max < Integer.parseInt(strArr[i])) max = Integer.parseInt(strArr[i]);
+        }
+
+    	result = min + " " + max;
+        
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String str = "1 2 3 4";
+        GetMinMaxString minMax = new GetMinMaxString();
+        //아래는 테스트로 출력해 보기 위한 코드입니다.
+        System.out.println("최대값과 최소값은?" + minMax.getMinMaxString(str));
+    }
+}
+~~~
+
+내가 푼 방식이다. 먼저 split를 통해 공백으로 문자열을 나눈 후, 배열의 제일 첫번째 값을 min과 max에 담는다. 후에 for문을 돌리면서 0번째 이후의 값들과 비교한다. 비교하는 값이 min보다 작으면 그 값이 min이 되고, max보다 크면 그 값이 max가 된다.
+
+
+## 풀이 2
+
+~~~
+import java.util.Arrays;
+
+public class GetMinMaxString {
+    public String getMinMaxString(String str) {
+      String[] strArr = str.split(" ");
+      String result;
+      int arrInt[] = new int [strArr.length];
+      
+      for(int i=0; i<strArr.length; i++){
+      	arrInt[i] = Integer.parseInt(strArr[i]);
+      }
+
+      Arrays.sort(arrInt);
+
+      result = arrInt[0] + " " + arrInt[strArr.length-1];      
+
+      return result;
+    }
+
+    public static void main(String[] args) {
+        String str = "1 2 3 4";
+        GetMinMaxString minMax = new GetMinMaxString();
+        //아래는 테스트로 출력해 보기 위한 코드입니다.
+        System.out.println("최대값과 최소값은?" + minMax.getMinMaxString(str));
+    }
+}
+
+~~~
+
 다른 사람의 풀이 중에 추천수 상위권에 랭크되어 있던 풀이이다. split한 String 배열을 다시 int 배열로 바꾼 후, Arrays에 있는 sort를 통해 오름차순 정렬 후 출력하는 방식이다.

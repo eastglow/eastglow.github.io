@@ -1,53 +1,61 @@
----
-layout: post
-title:  "[Level1]가운데 글자 가져오기"
-date:   2018-03-14 22:00:00
-author: EastGlow
-categories: 1일1알
----
-## 문제
-
-getMiddle메소드는 하나의 단어를 입력 받습니다. 단어를 입력 받아서 가운데 글자를 반환하도록 getMiddle메소드를 만들어 보세요. 단어의 길이가 짝수일경우 가운데 두글자를 반환하면 됩니다.
-예를 들어 입력받은 단어가 power이라면 w를 반환하면 되고, 입력받은 단어가 test라면 es를 반환하면 됩니다.
-
-
-## 풀이 1
-~~~
-class StringExercise{
-    String getMiddle(String word){
-      StringBuilder sf = new StringBuilder();
-      int idx = word.length() / 2;
-      
-      if(word.length() % 2 == 0){
-        sf.append(word.charAt(idx-1));
-        sf.append(word.charAt(idx));
-      }else{
-        sf.append(word.charAt(idx));
-      }
-      
-    	return sf.toString();    
-    }
-    // 아래는 테스트로 출력해 보기 위한 코드입니다.
-    public static void  main(String[] args){
-        StringExercise se = new StringExercise();
-        System.out.println(se.getMiddle("test"));
-    }
-}
-~~~
-다른 사람들의 풀이를 보니 너무 복잡하게 생각한 것 같다; 빠른 시간 내에 간결한 코드로 같은 결과를 내는 사람들이 참 대단하다.
-
-## 풀이 2
-~~~
-class StringExercise{
-    String getMiddle(String word){
-
-        return word.substring((word.length()-1)/2, word.length()/2 + 1);    
-    }
-    // 아래는 테스트로 출력해 보기 위한 코드입니다.
-    public static void  main(String[] args){
-        StringExercise se = new StringExercise();
-        System.out.println(se.getMiddle("power"));
-    }
-}
-~~~
-이걸 한 줄로...
+---
+layout: post
+title:  "[Level1]가운데 글자 가져오기"
+date:   2018-03-14 22:00:00
+author: EastGlow
+categories: 프로그래머스
+---
+
+## 문제
+
+getMiddle메소드는 하나의 단어를 입력 받습니다. 단어를 입력 받아서 가운데 글자를 반환하도록 getMiddle메소드를 만들어 보세요. 단어의 길이가 짝수일경우 가운데 두글자를 반환하면 됩니다.
+
+예를 들어 입력받은 단어가 power이라면 w를 반환하면 되고, 입력받은 단어가 test라면 es를 반환하면 됩니다.
+
+
+## 풀이 1
+
+~~~
+class StringExercise{
+    String getMiddle(String word){
+        StringBuilder sf = new StringBuilder();
+        int idx = word.length() / 2;      
+
+        if(word.length() % 2 == 0){
+            sf.append(word.charAt(idx-1));
+            sf.append(word.charAt(idx));
+        }else{
+            sf.append(word.charAt(idx));
+        }
+        
+        return sf.toString();
+    }
+
+    // 아래는 테스트로 출력해 보기 위한 코드입니다.
+    public static void  main(String[] args){
+        StringExercise se = new StringExercise();
+   	 System.out.println(se.getMiddle("test"));
+    }
+}
+~~~
+
+다른 사람들의 풀이를 보니 너무 복잡하게 생각한 것 같다; 빠른 시간 내에 간결한 코드로 같은 결과를 내는 사람들이 참 대단하다.
+
+
+## 풀이 2
+
+~~~
+class StringExercise{
+    String getMiddle(String word){
+        return word.substring((word.length()-1)/2, word.length()/2 + 1);
+    }
+
+    // 아래는 테스트로 출력해 보기 위한 코드입니다.
+    public static void  main(String[] args){
+        StringExercise se = new StringExercise();
+        System.out.println(se.getMiddle("power"));
+    }
+}
+~~~
+
+이걸 한 줄로...
