@@ -1,88 +1,88 @@
----
-layout: post
-title:  "[Level1]서울에서 김서방 찾기"
-date:   2018-03-10 23:00:00
-author: EastGlow
-categories: 1일1알
----
-## 문제
-
-findKim 함수(메소드)는 String형 배열 seoul을 매개변수로 받습니다.
-
-seoul의 element중 Kim의 위치 x를 찾아, 김서방은 x에 있다는 String을 반환하세요.
-seoul에 Kim은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.
-
-
-## 풀이 1
-~~~
-public class FindKim {
-	public String findKim(String[] seoul){
-		//x에 김서방의 위치를 저장하세요.
-		int x = 0;
-		int i = 0;
-    
-        for(String str : seoul){
-          if("Kim".equals(str)) x = i;
-          else i++;
-        }   
-		
-		return "김서방은 "+ x + "에 있다";
-	}
-	
-	// 실행을 위한 테스트코드입니다.
-	public static void main(String[] args) {
-		FindKim kim = new FindKim();
-		String[] names = {"Queen", "Tod","Kim"};
-		System.out.println(kim.findKim(names));
-	}
-}
-~~~
-워낙 쉬운 기초 문제라서 프로그래밍을 배운 사람이라면 1분이면 풀 문제이다. 풀이 1은 향상된 for문을 이용한 풀이다. 일반 for문과 크게 다를 건 없지만 인덱스 값을 따로 선언해서 써야한다. 일반 for문도 좋지만 향상된 for문은 뭔가 깔끔해 보여서 가끔씩 사용하곤 한다.
-
-## 풀이 2
-~~~
-public class FindKim {
-	public String findKim(String[] seoul){
-		//x에 김서방의 위치를 저장하세요.
-		int x = 0;
-    
-        for(int i=0; i<seoul.length; ++i){
-          if("Kim".equals(seoul[i])){
-            x = i;
-          }
-        }   
-    
-		return "김서방은 "+ x + "에 있다";
-	}
-	
-	// 실행을 위한 테스트코드입니다.
-	public static void main(String[] args) {
-		FindKim kim = new FindKim();
-		String[] names = {"Queen", "Tod","Kim"};
-		System.out.println(kim.findKim(names));
-	}
-}
-~~~
-제일 무난하고 많은 사람들이 쓴 일반 for문이다. 딱히 설명할 부분은 없다. 그냥 seoul이라는 String 배열을 for문에 받아서 해당 length만큼 돌리면서 "Kim"과 일치하는 인덱스를 x에 저장한다.
-
-## 풀이 3
-~~~
-import java.util.Arrays;
-
-public class FindKim {
-	public String findKim(String[] seoul){
-		//x에 김서방의 위치를 저장하세요.
-    int x = Arrays.asList(seoul).indexOf("Kim");
-    
-		return "김서방은 "+ x + "에 있다";
-	}
-	
-	// 실행을 위한 테스트코드입니다.
-	public static void main(String[] args) {
-		FindKim kim = new FindKim();
-		String[] names = {"Queen", "Tod","Kim"};
-		System.out.println(kim.findKim(names));
-	}
-}
-~~~
-제일 처음 문제를 봤을 때 indexOf를 사용할까? 싶었는데 일단은 for문을 이용해 풀었었다. 풀고나서 다른 사람의 풀이를 보니 풀이 3 방법이 제일 추천이 많더라. String 배열을 List로 변환 후 indexOf를 통해 "Kim"와 일치하는 인덱스를 찾는 방법이다. 제일 깔끔하다.
+---
+layout: post
+title:  "[Level1]서울에서 김서방 찾기"
+date:   2018-03-10 23:00:00
+author: EastGlow
+categories: 1일1알
+---
+## 문제
+
+findKim 함수(메소드)는 String형 배열 seoul을 매개변수로 받습니다.
+
+seoul의 element중 Kim의 위치 x를 찾아, 김서방은 x에 있다는 String을 반환하세요.
+seoul에 Kim은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.
+
+
+## 풀이 1
+~~~
+public class FindKim {
+	public String findKim(String[] seoul){
+		//x에 김서방의 위치를 저장하세요.
+		int x = 0;
+		int i = 0;
+    
+        for(String str : seoul){
+          if("Kim".equals(str)) x = i;
+          else i++;
+        }   
+		
+		return "김서방은 "+ x + "에 있다";
+	}
+	
+	// 실행을 위한 테스트코드입니다.
+	public static void main(String[] args) {
+		FindKim kim = new FindKim();
+		String[] names = {"Queen", "Tod","Kim"};
+		System.out.println(kim.findKim(names));
+	}
+}
+~~~
+워낙 쉬운 기초 문제라서 프로그래밍을 배운 사람이라면 1분이면 풀 문제이다. 풀이 1은 향상된 for문을 이용한 풀이다. 일반 for문과 크게 다를 건 없지만 인덱스 값을 따로 선언해서 써야한다. 일반 for문도 좋지만 향상된 for문은 뭔가 깔끔해 보여서 가끔씩 사용하곤 한다.
+
+## 풀이 2
+~~~
+public class FindKim {
+	public String findKim(String[] seoul){
+		//x에 김서방의 위치를 저장하세요.
+		int x = 0;
+    
+        for(int i=0; i<seoul.length; ++i){
+          if("Kim".equals(seoul[i])){
+            x = i;
+          }
+        }   
+    
+		return "김서방은 "+ x + "에 있다";
+	}
+	
+	// 실행을 위한 테스트코드입니다.
+	public static void main(String[] args) {
+		FindKim kim = new FindKim();
+		String[] names = {"Queen", "Tod","Kim"};
+		System.out.println(kim.findKim(names));
+	}
+}
+~~~
+제일 무난하고 많은 사람들이 쓴 일반 for문이다. 딱히 설명할 부분은 없다. 그냥 seoul이라는 String 배열을 for문에 받아서 해당 length만큼 돌리면서 "Kim"과 일치하는 인덱스를 x에 저장한다.
+
+## 풀이 3
+~~~
+import java.util.Arrays;
+
+public class FindKim {
+	public String findKim(String[] seoul){
+		//x에 김서방의 위치를 저장하세요.
+    int x = Arrays.asList(seoul).indexOf("Kim");
+    
+		return "김서방은 "+ x + "에 있다";
+	}
+	
+	// 실행을 위한 테스트코드입니다.
+	public static void main(String[] args) {
+		FindKim kim = new FindKim();
+		String[] names = {"Queen", "Tod","Kim"};
+		System.out.println(kim.findKim(names));
+	}
+}
+~~~
+제일 처음 문제를 봤을 때 indexOf를 사용할까? 싶었는데 일단은 for문을 이용해 풀었었다. 풀고나서 다른 사람의 풀이를 보니 풀이 3 방법이 제일 추천이 많더라. String 배열을 List로 변환 후 indexOf를 통해 "Kim"와 일치하는 인덱스를 찾는 방법이다. 제일 깔끔하다.

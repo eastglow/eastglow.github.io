@@ -3,7 +3,7 @@ layout: post
 title:  "[Level4]공항 건설하기"
 date:   2018-04-04 22:40:00
 author: EastGlow
-categories: 1일1알
+categories: 프로그래머스
 ---
 ## 문제
 

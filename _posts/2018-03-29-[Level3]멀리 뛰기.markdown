@@ -3,7 +3,7 @@ layout: post
 title:  "[Level3]멀리 뛰기"
 date:   2018-03-29 21:40:00
 author: EastGlow
-categories: 1일1알
+categories: 프로그래머스
 ---
 ## 문제
 

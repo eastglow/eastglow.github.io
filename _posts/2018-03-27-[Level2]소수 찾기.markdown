@@ -3,7 +3,7 @@ layout: post
 title:  "[Level2]소수 찾기"
 date:   2018-03-27 22:40:00
 author: EastGlow
-categories: 1일1알
+categories: 프로그래머스
 ---
 ## 문제
 
