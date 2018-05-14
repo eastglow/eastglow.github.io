@@ -6,7 +6,7 @@ author: EastGlow
 categories: Back-end
 ---
 
-##1. 개념
+## 1. 개념
 
 Java로 실행되는 프로그램은 JVM위에서 돌아가게 된다. 이때 프로그램은 실행을 위해 메모리를 사용하게 되는데 메모리는 유한하다. 때문에 무한대로 퍼줄 수가 없다.
 
@@ -14,7 +14,7 @@ Garbage Collection의 Garbage는 위에서 언급한 프로그램 실행을 위�
 
 이러한 Garbage가 생기는 이유는 주로 Java에서는 프로그램 코드를 통해 메모리를 명시적으로 지정하여 해제하지 않기 때문이다. 일부러 null로 지정하거나 System.gc() 메서드를 호출하면 오히려 시스템 성능에 영향을 끼쳐 안 좋을 수도 있다. 때문에 Garbage Collector가 이러한 Garbage들을 찾아 지우는 작업을 한다.
 
-##2. 흐름
+## 2. 흐름
 
 그러면 Garbage Collector는 왜 만들어졌을까? 구글링을 통해 찾아보니 크게 두 가지 가설이 있었다.
 
@@ -35,7 +35,7 @@ Garbage Collection의 Garbage는 위에서 언급한 프로그램 실행을 위�
 위 링크의 글을 가면 Young & Old 영역과 GC에 대한 자세한 설명이 있기 때문에 뒤의 내용은 생략하겠다. 어쨌거나 이 글을 통해서 다루고자 하는 것은 GC에 대한 기본 개념과 대략적인 흐름이기 때문이다.
 
 
-##3. 정리
+## 3. 정리
 
 Garbage Collector가 GC(Garbage Collection)를 하여 JVM의 메모리 영역 중 하나인 힙 영역의 쓰레기 객체를 찾아 관리하게 된다.
 
