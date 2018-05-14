@@ -25,7 +25,7 @@ Garbage Collection의 Garbage는 위에서 언급한 프로그램 실행을 위�
 
 > 1) Young 영역(Yong Generation 영역): 새롭게 생성한 객체의 대부분이 여기에 위치한다. 대부분의 객체가 금방 접근 불가능 상태가 되기 때문에 매우 많은 객체가 Young 영역에 생성되었다가 사라진다. 이 영역에서 객체가 사라질때 Minor GC가 발생한다고 말한다.
 > 2) Old 영역(Old Generation 영역): 접근 불가능 상태로 되지 않아 Young 영역에서 살아남은 객체가 여기로 복사된다. 대부분 Young 영역보다 크게 할당하며, 크기가 큰 만큼 Young 영역보다 GC는 적게 발생한다. 이 영역에서 객체가 사라질 때 Major GC(혹은 Full GC)가 발생한다고 말한다.  
->   
+> 
 > *출처: 네이버 D2 Java Garbage Collection (https://d2.naver.com/helloworld/1329)*
 
 위 링크의 글을 가면 Young & Old 영역과 GC에 대한 자세한 설명이 있기 때문에 뒤의 내용은 생략하겠다. 어쨌거나 이 글을 통해서 다루고자 하는 것은 GC에 대한 기본 개념과 대략적인 흐름이기 때문이다.
