@@ -18,19 +18,15 @@ Garbage Collection의 Garbage는 위에서 언급한 프로그램 실행을 위�
 
 그러면 Garbage Collector는 왜 만들어졌을까? 구글링을 통해 찾아보니 크게 두 가지 가설이 있었다.
 
-> 
-1) 대부분의 객체는 금방 접근 불가능 상태(unreachable)가 된다.
+> 1) 대부분의 객체는 금방 접근 불가능 상태(unreachable)가 된다.
 2) 오래된 객체에서 젊은 객체로의 참조는 아주 적게 존재한다.
 
-위 가설을 'Weak Generational Hypothesis'라 한다. 이 가설의 장점을 최대한 살리기 위해서 HotSpot VM[^1]에서는 크게 2개로 물리적 공간을 나누었다. 그것이 바로 Young 영역과 Old 영역이다.
+위 가설을 'Weak Generational Hypothesis'라 한다. 이 가설의 장점을 최대한 살리기 위해서 HotSpot VM에서는 크게 2개로 물리적 공간을 나누었다. 그것이 바로 Young 영역과 Old 영역이다.
 
-> 
-1) Young 영역(Yong Generation 영역): 새롭게 생성한 객체의 대부분이 여기에 위치한다. 대부분의 객체가 금방 접근 불가능 상태가 되기 때문에 매우 많은 객체가 Young 영역에 생성되었다가 사라진다. 이 영역에서 객체가 사라질때 Minor GC가 발생한다고 말한다.
-> 
-2) Old 영역(Old Generation 영역): 접근 불가능 상태로 되지 않아 Young 영역에서 살아남은 객체가 여기로 복사된다. 대부분 Young 영역보다 크게 할당하며, 크기가 큰 만큼 Young 영역보다 GC는 적게 발생한다. 이 영역에서 객체가 사라질 때 Major GC(혹은 Full GC)가 발생한다고 말한다.
+> 1) Young 영역(Yong Generation 영역): 새롭게 생성한 객체의 대부분이 여기에 위치한다. 대부분의 객체가 금방 접근 불가능 상태가 되기 때문에 매우 많은 객체가 Young 영역에 생성되었다가 사라진다. 이 영역에서 객체가 사라질때 Minor GC가 발생한다고 말한다.
+> 2) Old 영역(Old Generation 영역): 접근 불가능 상태로 되지 않아 Young 영역에서 살아남은 객체가 여기로 복사된다. 대부분 Young 영역보다 크게 할당하며, 크기가 큰 만큼 Young 영역보다 GC는 적게 발생한다. 이 영역에서 객체가 사라질 때 Major GC(혹은 Full GC)가 발생한다고 말한다.
 
-> 
-*출처: 네이버 D2 Java Garbage Collection (https://d2.naver.com/helloworld/1329)*
+> *출처: 네이버 D2 Java Garbage Collection (https://d2.naver.com/helloworld/1329)*
 
 위 링크의 글을 가면 Young & Old 영역과 GC에 대한 자세한 설명이 있기 때문에 뒤의 내용은 생략하겠다. 어쨌거나 이 글을 통해서 다루고자 하는 것은 GC에 대한 기본 개념과 대략적인 흐름이기 때문이다.
 
@@ -46,7 +42,3 @@ Garbage Collector가 GC(Garbage Collection)를 하여 JVM의 메모리 영역 �
 마무리를 짓자면, 분명 Java에서는 GC가 쓰레기 객체들을 알아서 정리해준다고는 하지만 너무 그것을 맹신해서는 안된다고 한다.
 
 단순히 '아, GC란 놈이 내가 쓰다가 필요없어진 애들을 알아서 치워줄거야!'로 끝나는 것이 아닌, 어떻게 동작하고 실행되는지 자세히 알아야 더 생산성이 좋은 애플리케이션을 만들 수 있다고 생각된다. 
-
-
-
-[^1]: HotSpot (https://ko.wikipedia.org/wiki/%ED%95%AB%EC%8A%A4%ED%8C%9F_(%EA%B0%80%EC%83%81_%EB%A8%B8%EC%8B%A0)
