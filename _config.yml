@@ -51,8 +51,14 @@ descriptions:
   - cat: Database
     desc: "Organize knowledge of DBMS and SQL such as Oracle, MySQL and MSSQL."
 
-  - cat: Java
-    desc: "Organize knowledge about Java."
+  - cat: Front-end
+    desc: "Front-end related posts"
+    
+  - cat: Back-end
+    desc: "Back-end related posts"
+    
+  - cat: 프로그래머스
+    desc: "Programmers Algorithm Problem Posts"
 
 # Social icons and sharing options
 #
