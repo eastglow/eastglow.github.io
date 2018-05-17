@@ -56,7 +56,7 @@ Spring XML 파일에 이미 context:property-placeholder가 추가되어 있다�
 
 처음 암호화 관련 설정을 했을 때 분명히 다 맞게 설정한 거 같은데 아무리 해도 복호화가 안 되어서 설정 파일을 하나하나 뜯어보던 중 위 코드 때문이란걸 알게 되었다.
 
-<bean id="propertyConfigurer" class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer"> 를 통해서 placeholder를 지정해주고 있기 때문에 중복되어 그런거 같다.
+```<bean id="propertyConfigurer" class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">```를 통해서 placeholder를 지정해주고 있기 때문에 중복되어 그런거 같다.
 
 ## 3. 암호화를 위한 Java Class 생성
 
