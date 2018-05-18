@@ -41,9 +41,7 @@ categories: Back-end
 </bean>
 ```
 
-나는 현재 전자정부 프레임워크를 사용 중이기 때문에 context-datasource.xml 혹은 context-common.xml을 수정하였다.
-
-Spring을 사용 중이라면 설정 파일 이름이 다를테니 유의하기 바란다.
+나는 현재 전자정부 프레임워크를 사용 중이기 때문에 context-datasource.xml 혹은 context-common.xml을 수정하였다. Spring을 사용 중이라면 설정 파일 이름이 다를테니 유의하기 바란다.
 
 ### ※ 주의
 
@@ -56,7 +54,10 @@ Spring XML 파일에 이미 context:property-placeholder가 추가되어 있다�
 
 처음 암호화 관련 설정을 했을 때 분명히 다 맞게 설정한 거 같은데 아무리 해도 복호화가 안 되어서 설정 파일을 하나하나 뜯어보던 중 위 코드 때문이란걸 알게 되었다.
 
-```<bean id="propertyConfigurer" class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">```를 통해서 placeholder를 지정해주고 있기 때문에 중복되어 그런거 같다.
+```
+<bean id="propertyConfigurer" class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+```
+를 통해서 placeholder를 지정해주고 있기 때문에 중복되어 그런거 같다.
 
 ## 3. 암호화를 위한 Java Class 생성
 
@@ -88,7 +89,7 @@ public class JasyptUtil {
 
 추가로 setAlgorithm은 암호화에 사용될 알고리즘 종류를 뜻한다. MD5 말고도 SHA256도 사용 가능하다. 이경우는 따로 라이브러리를 추가해야한다. 소스 또한 조금 달라진다.
 
-setPassword는 암호화 & 복호화에 이용될 키값이다. 
+setPassword는 암호화 & 복호화에 이용될 키값이다. 2번 XML 파일 수정에서 configurationEncryptor Bean의 property 중에 "password"가 있는데 이 값과 같은 값이 되어야 한다.
 
 ## 4. .properties 파일 수정
 
@@ -99,4 +100,4 @@ db.username=ENC(aPzuR1AFxucnvie1h1Jnqw==)
 db.password=ENC(l6ZtYkfUKvEwEXlA4n1uAZQEzqB7F/kJ)
 ```
 
-3번에서 암호화한 문자열을 ENC()로 감싸서 원하는 곳에 붙여넣는다. 끝.
+3번에서 암호화한 문자열을 ENC()로 감싸서 원하는 properties 파일에 붙여넣는다.
