@@ -49,7 +49,7 @@ Spring XML 파일에 이미 context:property-placeholder가 추가되어 있다�
 
 ```
 <!-- dataSource property를 위한 PropertyPlaceholderConfigurer 설정 -->
-<context:property-placeholder location="/WEB-INF/config/jdbc.properties" />
+<context:property-placeholder location="/WEB-INF/props/jdbc.properties" />
 ```
 
 처음 암호화 관련 설정을 했을 때 분명히 다 맞게 설정한 거 같은데 아무리 해도 복호화가 안 되어서 설정 파일을 하나하나 뜯어보던 중 위 코드 때문이란걸 알게 되었다.
