@@ -38,7 +38,8 @@ while (iterator.hasPrevious()) {
 사실 내가 일하기 시작했을 땐, 기업의 소스 대부분이 전자와 같은 방식으로 쓰고 있었기 때문에 나도 그냥 그렇게 쓰기 시작했다. 그래도 둘의 차이점은 알고 쓰는게 좋지 않을까 싶어서 알아보니 다음과 같은 차이가 있었다.
 
 ```
-전자(List<?>)의 경우, List라는 인터페이스를 ArrayList라는 클래스로 구현하였고, 후자(ArrayList<?>)의 경우는 클래스로 바로 구현하였다.
+전자(List<?>)의 경우, List라는 인터페이스를 ArrayList라는 클래스로 구현하였고,  
+후자(ArrayList<?>)의 경우는 클래스로 바로 구현하였다.
 ```
 
 처음 딱 이해했을 땐 그냥 인터페이스와 클래스의 차이 아니야? 라고 이해했는데 여러 글들을 찾아보다보니 꽤나 큰 차이점이 있었다.
@@ -56,7 +57,7 @@ list.add("Hello Word");
 list.add("Hello Word 2");
 
 for(String str : list){
-	System.out.println(str);
+  System.out.println(str);
 }
 
 list = new LinkedList<String>();
@@ -65,7 +66,7 @@ list.add("Hell Word");
 list.add("Hell Word 2");
 
 for(String str : list){
-    System.out.println(str);
+  System.out.println(str);
 }
 ```
 
@@ -87,7 +88,7 @@ list.add("Hello Word");
 list.add("Hello Word 2");
 
 for(String str : list){
-	System.out.println(str);
+  System.out.println(str);
 }
 
 list = new LinkedList<String>();
@@ -96,7 +97,7 @@ list.add("Hell Word");
 list.add("Hell Word 2");
 
 for(String str : list){
-    System.out.println(str);
+  System.out.println(str);
 }
 ```
 
