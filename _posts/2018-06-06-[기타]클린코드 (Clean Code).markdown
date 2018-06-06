@@ -3,7 +3,7 @@ layout: post
 title:  "[기타]클린코드 (Clean Code)"
 date:   2018-06-06 16:22:00
 author: EastGlow
-categories: 
+categories: 기타
 ---
 
 ## Chapter 1. 깨끗한 코드
