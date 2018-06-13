@@ -22,7 +22,7 @@ categories: Front-end
 
 사실 요새는 iframe 사용을 지양하는 분위기로 알고 있어서 시기적절(?) 하지 않은 감이 있지만 뭐... 그냥 나같이 막 웹에 입문한 초보자나 Ajax 처리가 귀찮은 사람들은 iframe을 이용하여 간단하게 처리를 해줄 수가 있다.
 
-<script async src="//jsfiddle.net/eastglow/mef65vqw/15/embed/js,html,result/"></script>  
+<script async src="//jsfiddle.net/eastglow/mef65vqw/15/embed/js,html,result/"></script>
 
 위 소스를 보도록 하자. 간단하게 4개의 데이터를 보여주고 있는데 각각 삭제 버튼이 달려있다. 각 버튼마다는 데이터 고유값이 value로 들어가있다. 스크립트를 살펴보면 삭제하겠냐는 메시지를 띄워주고 확인을 누르면 삭제가 진행되도록 하였다.
 
