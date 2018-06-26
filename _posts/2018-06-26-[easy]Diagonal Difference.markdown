@@ -3,7 +3,7 @@ layout: post
 title:  "[easy]Diagonal Difference"
 date:   2018-06-26 23:30:00
 author: EastGlow
-categories: HackerRank
+categories: 해커랭크
 ---
 ## 문제
 
@@ -15,7 +15,7 @@ categories: HackerRank
 9 8 9
 ~~~
 
-위 행렬을 예로 들면 1+5+9 = 15, 3+5+9 = 17 이며 두 합 사이의 절대값은 |15-17| = 2 이다.
+위 행렬을 예로 들면 1+5+9 = 15, 3+5+9 = 17 이며 두 합 사이의 절대값은 15-17 = 2 이다.
 
 
 
