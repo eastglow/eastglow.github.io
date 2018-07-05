@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[jekyll]posts 페이지의 categories 정렬 순서 바꾸기"
+title:  "[Jekyll]posts 페이지의 categories 정렬 순서 바꾸기"
 date:   2018-07-05 23:30:00
 author: EastGlow
 categories: 기타
