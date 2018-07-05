@@ -4,8 +4,8 @@ title: "Posts"
 permalink: /posts/
 ---
 
-{% for category in site.categories  | sort %}
-	{% capture cat %}{{ category | first }}{% endcapture %}
+{% for category in site.categories  | downcase %}
+	{% capture cat %}{{ category | downcase }}{% endcapture %}
   <h2 id="{{cat}}">{{ cat | capitalize }}</h2>
   {% for desc in site.descriptions %}
     {% if desc.cat == cat %}
