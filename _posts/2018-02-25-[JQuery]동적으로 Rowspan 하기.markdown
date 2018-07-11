@@ -17,7 +17,7 @@ categories: Front-end
 대략적으로 병합하는 과정을 설명하자면,
 
 1. first 클래스를 가진 tr만 골라내어 해당 tr의 text값을 가져온다.
-2. length가 1보다 큰 tr에만 rowspan을 줘야하기 때문에 죠건문을 통해 한번 필터링 해준다.
+2. length가 1보다 큰 tr에만 rowspan을 줘야하기 때문에 건문을 통해 한번 필터링 해준다.
 3. 1번에서 가져온 tr 리스트에서 제일 첫번째 tr에 rowspan을 추가해준다.(attr)
 4. 마지막으로 rowspan을 추가한 첫번째 tr 외의 tr은 다 지워준다.(remove)
 
