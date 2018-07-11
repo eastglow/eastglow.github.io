@@ -1,0 +1,98 @@
+---
+layout: post
+title:  "[Jekyll]posts 페이지의 categories 정렬 순서 바꾸기"
+date:   2018-07-11 22:30:00
+author: EastGlow
+categories: Back-end
+---
+## 1. Java 7
+
+학부생 때 주로 이용한 Java 버전은 7이었다. 그런데 막상 현업에서 일해보니 보통 6을 사용하고 4버전까지 사용하는 것을 보았다.
+
+사실 4 ~ 6에 있는 기능들도 50%는 활용하고 있을지 내 자신에게 의문이긴 하지만 단지 ~6에서 7 이상의 버전으로 버전업만 해도 성능상의 이득이나 구버전의 버그 픽스 등 얻는 이득이 많다고 한다.
+
+이미 Java 10까지 나온 마당에 Java 7을 공부해서 뭐하나 싶을 수 있지만 요새는 7 버전으로 개발을 많이 하기도 하고 7 버전부터 좋은 문법들이 많이 추가되었다고 하기에 시간들여 알아보고 간단히 정리하기로 하엿다.
+
+
+
+## 2. 그래서 Java 7을(Java 6 이하 버전에서부터) 왜 써야할까?
+
+Java 7은 벌써 나온지 7년이나 된 버전이다. 올해 초 쯤 Java 10이 나왔으니 얼마나 오래되었는지 새삼 깨닫게 되는 부분이다.
+
+일단 대표적으로 Java 6에서 Java 7로 오면서 수치상 성능 향상이 *46%*나 올랐다고 한다. (벤치마크 사이트마다 조금씩 수치는 다르지만 최소 16% 이상 향상됐다고 한다.)
+
+> 참고: http://geeknizer.com/java-7-whats-new-performance-benchmark-1-5-1-6-1-7/#ixzz1ezWIHUc8
+
+성능 향상도 주요 사항이긴 하지만, 보안 문제도 버전에 따라 많이 문제가 된다. Java 7의 공식적인 지원은 2015년 4월에 종료되었다고 한다. 때문에 이후에 발견되는 보안적인 결함에 대해서는 오라클 쪽에서 대처를 해주지 않기 때문에 버전업을 해야하는 중요한 이유 중 하나라고 할 수 있다.
+
+이외에도 몇몇 문제나 이슈가 더 있지만 간단히 알아볼 수 있을 정도만 정리해두겠다.
+
+
+
+## 3. Java 7 특징
+
+### 1) Diamond Operator
+
+~~~
+//Java 6
+List<String> list = new ArrayList<String>();
+~~~
+
+보통 Java 6까지는 List를 선언할 때 위와 같이 양쪽 <>에 타입을 명시해주었다. 하지만 Java 7부터는 왼쪽만 작성하여도 컴파일러가 타입을 추측하여 대응할 수 있도록 바뀌었다.
+
+~~~
+//Java 7
+List<String> list = new ArrayList<>();
+~~~
+
+String 몇 글자 더 써주는게 뭐 귀찮다고 할 수 있지만 코드를 짜보면 참 와닿는 부분인 듯 하다.
+
+
+### 2) Using strings in switch statements
+
+처음 Java 6 이하 버전을 사용했을 때 왜 Switch 문에 String 타입을 넣으면 오류가 나는지 의문이었는데 구글링을 통해 찾아보니 7부터 String 등 Primitive 자료형이나 Enumerated 자료형을 사용할 수 있게 되었다고 한다.
+
+사실 if문을 쓰나 switch문을 쓰나 둘 다 비슷하긴 하지만 switch문이 어떨 땐 가독성 면에서 더 좋기 때문에 종종 이용하곤 한다. 그래서 이러한 변경사항은 참 좋은 것 같다.
+
+
+### 3) Automatic resource management
+
+Spring으로 개발할 땐 몰랐지만 다른 프레임워크로 개발할 때 (오래된 프레임워크들) 보통 DB와 커넥션을 맺어 SQL문을 쓸 때, preparestatment를 사용한 뒤 끝에 명시적으로 close()를 해주었다. 이게 빠진다고 해서 오류를 뿜거나 멈추진 않지만 자원이 계속 낭비되므로 서버에 좋지 않다.
+
+Java 7부터는 Try 문 안에 해당 리소스를 선언하면 자동으로 관리를 해준다고 한다. 굳이 쓰고나서 close()를 해줄 필요가 없는 것이다.
+
+~~~
+private void writingWithARM() throws IOException {
+   try (DataOutputStream out 
+           = new DataOutputStream(new FileOutputStream("data"))) {
+       out.writeInt(666);
+       out.writeUTF("Hello");
+   }
+}
+~~~
+
+### 4) Underscore in Numeric literal
+
+숫자형(정수,실수)에 _(underscore) 문자열을 사용 할 수 있게 되었다. 1000000000보단 1_000_000_000가 확실히 가독성이 좋다.
+
+~~~
+int billion = 1_000_000_000; // 10^9
+long creditCardNumber = 1234_4567_8901_2345L; //16 digit number
+long ssn = 777_99_8888L;
+double pi = 3.1415_9265;
+float pif = 3.14_15_92_65f;
+~~~
+
+### 5) Catching Multiple Exception Type in Single Catch Block
+
+하나의 catch 절 안에 여러 Exception을 쓸 수 있게 되었다. 이전에는 여러 Exception을 처리하려면 한없이 catch문이 길어졌었다...
+
+~~~
+try {
+    //......
+} catch (ClassNotFoundException|SQLException ex) {
+   ex.printStackTrace();
+}
+~~~
+
+이외에도 몇 가지 추가된 것들이 있지만 사실 내가 당장 이해하고 적용하여 쓰기는 힘들 것 같아서 당장 실무에 적용해도 괜찮을 법한 것들만 정리해보았다. 후에 시간이 될 때 Java 8도 알아보도록 해야겠다.
