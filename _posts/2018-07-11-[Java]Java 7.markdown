@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Jekyll]posts 페이지의 categories 정렬 순서 바꾸기"
+title:  "[Java]Java 7"
 date:   2018-07-11 22:30:00
 author: EastGlow
 categories: Back-end
