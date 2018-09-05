@@ -48,8 +48,8 @@ SELECT A.COL1, A.COL2, A.COL3, B.COL1, B.COL2, B.COL3
 FROM TABLE1 A JOIN TABLE2 B
   ON A.PKID = B.PKID
 WHERE A.COL1 IN (SELECT COL1
-    				FROM TABLE3
-                    WHERE COL2 = 'B')
+                 FROM TABLE3
+                 WHERE COL2 = 'B')
 ```
 
 위 쿼리보다 5~6배는 더 긴 쿼리인데 그 긴 쿼리 중 문제가 되는 부분만 살짝 떼와봤다. 그냥 보면 간단한 쿼리인데 두 테이블을 조인시키고 또다른 테이블에서 COL1이라는 값을 가져와서 A테이블의 COL1과 IN으로 비교하여 조건을 걸어주도록 해주었다.
@@ -63,9 +63,9 @@ SELECT A.COL1, A.COL2, A.COL3, B.COL1, B.COL2, B.COL3
 FROM TABLE1 A JOIN TABLE2 B
   ON A.PKID = B.PKID
 WHERE EXISTS (SELECT 1
-    				FROM TABLE3 C
-                    WHERE C.COL2 = 'B'
-                    AND A.COL1 = C.COL1)
+              FROM TABLE3 C
+              WHERE C.COL2 = 'B'
+              AND A.COL1 = C.COL1)
 ```
 
 위와 같이 수정하였더니 5~6초에 걸리던 시간이 0.몇 초대로 줄어들었다. 이렇게 함수 수정은 완료되었다.
