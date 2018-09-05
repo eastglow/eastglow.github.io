@@ -3,7 +3,7 @@ layout: post
 title:  "[Oracle]서브쿼리와 IN 문으로 인한 성능 저하"
 date:   2018-09-06 24:00:00
 author: EastGlow
-categories: Back-end
+categories: Data-base
 ---
 ## 사건의 발단
 
