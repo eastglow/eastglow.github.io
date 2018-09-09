@@ -1,0 +1,69 @@
+---
+layout: post
+title:  "[1차]다트 게임"
+date:   2018-09-09 17:05:00
+author: EastGlow
+categories: 프로그래머스
+---
+## 문제
+
+[https://www.welcomekakao.com/learn/courses/30/lessons/17682](https://www.welcomekakao.com/learn/courses/30/lessons/17682)
+
+## 풀이 1
+~~~
+class Solution {
+  public int solution(String dartResult) {
+      int answer = 0;
+      int[] tempArray = new int[3];
+      int temp = 0;
+      int cnt = 0;
+      char[] charArray = dartResult.toCharArray();
+      
+      for(char ch : charArray){
+          if(Character.isDigit(ch)){ //숫자                   
+              if(temp == 1 && ch == '0'){                  
+                  temp = 10;
+                  tempArray[cnt-1] = temp; 
+                  continue;
+              }
+              
+              temp = Character.getNumericValue(ch);
+              tempArray[cnt++] = temp;           
+          }else{ //문자
+              if(ch == 'D'){                
+                  temp = (int)Math.pow(temp, 2);
+              }else if(ch == 'T'){
+                  temp = (int)Math.pow(temp, 3);
+              }else if(ch == '*'){
+                  if(cnt == 0){
+                      temp = temp*2;
+                  }else{
+                      if(cnt == 1) tempArray[cnt-1] = tempArray[cnt-1]*2;
+                      else tempArray[cnt-2] = tempArray[cnt-2]*2;
+                      temp = temp*2;
+                  }
+              } else if(ch == '#'){
+                  temp = temp*-1;
+              }
+              
+              tempArray[cnt-1] = temp;
+          }          
+      }
+      
+      for (int n : tempArray) answer += n;
+      
+      return answer;
+  }
+}
+~~~
+다른 사람들의 풀이를 안 보고 풀어보겠다고 나름 풀어봤는데... 풀고 나서 다른 사람들의 풀이를 보니 너무 바보같이 푼 것 같다. 왜 풀 때는 정규식으로 split할 생각을 못 했는지... 아무튼 내가 푼 방식은 먼저 String 변수를 char로 한 글자씩 쪼개어 Array에 담아서 각 글자를 체크하는 방식이다.
+
+일단 처음 생각했을 때 String 문자는 결국 숫자 아니면 문자(*,#,S,D,T)이기 때문에 먼저 꺼낸 문자가 숫자인지 체크해준다.(isDigit)
+
+그런 다음 숫자라면 또 케이스가 나뉘는데 0~9인지, 10인지 체크해준다. 10인지 체크할 땐 이전 루프에서 temp 변수에 담아두었던 문자가 숫자일 때, 그 문자가 1이고 지금 꺼낸 문자가 0이면 10으로 인식하고 현재의 temp 변수에 10을 담아준다.
+
+만약 문자라면 S는 사실상 \*1이기 때문에 if 케이스에서 빼버렸고 D, T일 땐 각각 Math.pow를 이용하여 제곱을 계산해주었다. 그리고 \*일 경우는 두가지 케이스로 나누어 생각했는데 1) 첫번째 숫자에 나왔을 때, 2) 2, 3번째 숫자에 나왔을 때 이다. 첫번째 숫자라면 첫 숫자만 2배로 해주면 되지만 2, 3번째 숫자라면 현재 숫자(temp)와 각각 1, 2번재 숫자도 같이 2배로 해줘야한다. 
+
+마지막으로 #이 나오면 temp에 -1을 곱하여 빼주도록 해준다. 이렇게 각 케이스에 대하여 다 계산을 마친 후 최종적으로 for문을 통해 tempArray 안의 3개 값을 더해준다.
+
+일단 보이는 테스트 케이스는 다 합격 하였고 보통 시간도 0.몇 초에서 1초 대 정도 걸린 것 같다. 하지만 내가 봐도 뭔가 숨은 테스트 케이스에서 걸릴 거 같은 엉성한 부분이 있어서 완전히 잘 풀었다곤 자신 못 하겠다.
