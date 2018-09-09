@@ -9,7 +9,7 @@ categories: 프로그래머스
 
 [https://www.welcomekakao.com/learn/courses/30/lessons/17682](https://www.welcomekakao.com/learn/courses/30/lessons/17682)
 
-## 풀이 1
+## 풀이
 ~~~
 class Solution {
   public int solution(String dartResult) {

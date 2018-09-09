@@ -1,0 +1,44 @@
+---
+layout: post
+title:  "[1차]비밀지도"
+date:   2018-09-09 18:20:00
+author: EastGlow
+categories: 프로그래머스
+---
+## 문제
+
+[https://www.welcomekakao.com/learn/courses/30/lessons/17681](https://www.welcomekakao.com/learn/courses/30/lessons/17681)
+
+## 풀이
+~~~
+class Solution {
+  public String[] solution(int n, int[] arr1, int[] arr2) {
+      String[] answer = new String[n];
+      
+      for(int i=0; i<n; ++i){
+          int tempNum = arr1[i]|arr2[i];
+          String tempBinary = Integer.toBinaryString(tempNum);
+          int tempLength = tempBinary.length();
+          
+          if(tempLength < n){
+              for(int j=0; j<n-tempLength; ++j){
+                  tempBinary = "0"+tempBinary;
+              }
+          }          
+          
+          answer[i] = tempBinary.replace("1", "#").replace("0", " ");
+      }
+      
+      return answer;
+  }
+}
+~~~
+이 문제는 다트 게임보단 좀 쉬운(?), 아니 깔끔했던 문제같다. 성능이나 로직상으로 높은 점수를 받을 코드인지는 모르겠지만 다트 게임보다는 무난하게 풀었다.
+
+문제를 다 읽자마자 딱 OR 연산이 생각이 났다. OR 연산은 (1,1), (1,0), (0,1) 이면 모두 1을 반환해버린다. 그래서 최종적으로 문제에서 원하는 "하나라도 벽이라면 결국 벽이다" 라는 조건에 부합하는 연산이라고 생각하였다.
+
+두 배열에서 각각의 숫자를 꺼내서 OR 연산을 해주고 그 결과를 이진수로 바꾼다. 여기서 조심해야할 부분은 변환한 이진수를 바로 reaplce를 통해 #과 공백으로 변환해버리면 오답이 나온다.
+
+왜냐하면 00101 이나 00001과 같은 것들은 이진수로 변환할 때 앞에 0이 붙지 않기 때문이다. 그래서 tempLength 변수를 통해 n과 길이를 비교하여 n보다 작다면 0을 붙여주도록 하였다.
+
+끝에는 replace를 통해 1을 #으로, 0을 공백으로 바꿔주면 끝이다.
