@@ -11,7 +11,7 @@ categories: 코딜리티
 
 ## 풀이
 ~~~
-public class sample1 {
+public class Solution {
     public int solution(int N) {
         // write your code in Java SE 8
 
@@ -31,11 +31,11 @@ public class sample1 {
                 }        		
                 tempNum = 0;
             }else{
-        		tempNum++;
+        		    tempNum++;
             }
         }
 
-		if(flag){
+        if(flag){
             return biggerNum;
         }else{
             return 0;
