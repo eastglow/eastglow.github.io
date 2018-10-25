@@ -31,7 +31,7 @@ public class Solution {
                 }        		
                 tempNum = 0;
             }else{
-        		    tempNum++;
+                tempNum++;
             }
         }
 
