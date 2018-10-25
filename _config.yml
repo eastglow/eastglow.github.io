@@ -68,6 +68,9 @@ descriptions:
     
   - cat: 해커랭크
     desc: "Hackerrank Algorithm Problem Posts"
+    
+  - cat: 코딜리티
+    desc: "odility Algorithm Problem Posts"
 
 # Social icons and sharing options
 #
