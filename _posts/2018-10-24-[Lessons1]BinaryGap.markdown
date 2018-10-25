@@ -15,7 +15,7 @@ public class Solution {
     public int solution(int N) {
         // write your code in Java SE 8
 
-        boolean flag = true;
+        boolean flag = false;
         int biggerNum = 0;
         int tempNum = 0;
         String binaryStr = Integer.toBinaryString(N);
