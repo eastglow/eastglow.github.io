@@ -95,8 +95,7 @@ public class AuthInterceptor extends WebContentInterceptor {
     }
 
     /**
-     * 세션에 메뉴권한(SessionVO)이 있는지 여부로 메뉴권한 여부를 체크한다. 계정정보(SessionVO)가 없다면, 로그인
-     * 페이지로 이동한다.
+     * 세션에 메뉴권한(SessionVO)이 있는지 여부로 메뉴권한 여부를 체크한다. 계정정보(SessionVO)가 없다면, 로그인 페이지로 이동한다.
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
@@ -107,10 +106,7 @@ public class AuthInterceptor extends WebContentInterceptor {
             if (!requestURI.equals("/index.do")) {
                 sessionVo = (SessionVO) SessionUtil.getSessionAttribute(request, "sessUser");
 
-                if (sessionVo != null && sessionVo.getSessUserID() != null) { // 세션이
-                                                                              // 있을
-                                                                              // 경우만
-                                                                              // 체크
+                if (sessionVo != null && sessionVo.getSessUserID() != null) { // 세션이 있을 경우만 체크
                     HashMap<String, Object> menuAuthMap = (HashMap<String, Object>) modelAndView.getModel().get("menuAuth");
                     String sessUserAuth = sessionVo.getSessUserAuth();
                     String menuCode = String.valueOf(menuAuthMap.get("menuCode"));
