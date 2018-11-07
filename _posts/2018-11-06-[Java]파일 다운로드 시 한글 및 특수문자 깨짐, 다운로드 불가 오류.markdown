@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Java]파일 다운로드 시 한글 및 특수문자 깨짐 / 파이어폭스 다운로드 오류"
+title:  "[Java]파일 다운로드 시 한글 및 특수문자 깨짐, 다운로드 불가 오류"
 date:   2018-11-06 20:00:00
 author: EastGlow
 categories: Back-end
