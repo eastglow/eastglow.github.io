@@ -44,7 +44,7 @@ var targetValue = opener.document.getElementById('target').style.display;
 > 
 > So for you it would be
 > 
-> `var target = $('.target', opener.document).css('display');`
+> `var target = $('#target', opener.document).css('display');`
 > 
 > But IE has a weird bug where `opener.getComputedStyle()`'s values will all be set to null.
 > 
