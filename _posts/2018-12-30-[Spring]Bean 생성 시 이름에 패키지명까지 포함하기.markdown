@@ -98,7 +98,7 @@ public class FullBeanNameGenerator implements BeanNameGenerator {
 
 이렇게 패키지명까지 포함하게 되면서 Spring 시작 시, Bean 이름을 생성할 때 오류가 나지 않고 정상적으로 생성이 되게 된다. 위와 같이 benaNameGenerator를 만들어줬다면 이것을 사용하기 위해 아래와 같이 설정해줘야 한다.
 
-전자정부 프레임워크를 기준으로 egov-com-servlet.xml에서 아래와 
+전자정부 프레임워크를 기준으로 egov-com-servlet.xml에서 아래와 같이 써주도록 한다.
 
 ```
 <!-- 패키지 내 Controller, Service, Repository 클래스의 auto detect를 위한 mvc 설정. name-generator를 통해 컨트롤러는 패키지명까지 포함하여 bena 이름을 등록하도록 설정 -->
