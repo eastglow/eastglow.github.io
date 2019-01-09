@@ -15,7 +15,6 @@ categories: Data-base
 |--|--|--|
 | NVL | ifnull |  |
 | rownum | limit | MySQL의 '@변수' 사용자변수를 이용하여 각 row마다 rownum을 만들어줄 수 있지만 속도에 영향을 미치고 필요없기 때문에 limit을 이용하도록 한다.  |
-|  | limit | ifnull |
 | TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') | DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')| 현재 시간을 '201901011200' 형식으로 바꿔주는 부분이다. |
 | '단어'\|\|'단어' | CONCAT('단어', '단어') | MySQL은 \|\|를 통해서 단어를 합치지 못하고 CONCAT을 이용해야 한다. |
 | SUBSTR | SUBSTRING |  |
