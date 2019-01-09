@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[MySQL]Oracle to MySQL"
 date:   2019-01-08 19:00:00
