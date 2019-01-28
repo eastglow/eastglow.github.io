@@ -1,12 +1,12 @@
 ﻿---
 layout: post
 title:  "[MySQL]A테이블 검색 시 B테이블의 특정 컬럼 값 이용하기"
-date:   2019-01-27 19:00:00
+date:   2019-01-28 23:00:00
 author: EastGlow
 categories: Data-base
 ---
 
-## 서론
+## 내용
 
 전자정부+MySQL 기반의 웹 프로젝트를 개발하던 중에 하나의 기능이 필요하게 되었다. A라는 테이블의 리스트를 뽑아오는 화면인데 또다른 B라는 테이블의 특정 컬럼에 있는 특정 값을 검색 조건으로 달아줘야 했다.
 
@@ -66,4 +66,18 @@ WHERE USER_ID NOT IN (SELECT ADMIN_ID
 
 첫번째 인자로 위치를 찾을 문자를 입력하고 두번째 인자로 위치 검색을 하려는 문자열을 입력해준다.
 
+```
+SELECT T.*
+FROM (  	
+    SELECT USER_ID
+        , USER_NM
+        , (SELECT ADMIN_ID FROM B WHERE PKID = 1) ADMIN_ID    
+    FROM A
+    ORDER BY USER_NAME
+) T
+WHERE FIND_IN_SET(T.USER_ID, T.ADMIN_ID) = 0
+```
 
+`FIND_IN_SET`을 이용한 쿼리이다. ADMIN_ID 컬럼을 추가하였고 이 ADMIN_ID 컬럼 안에 USER_ID가 있는지 `FIND_IN_SET`으로 찾아준다. 만약 없다면 0이 나올 것이고 있다면 1 이상의 값이 나오게 된다.
+
+`WHERE FIND_IN_SET(T.USER_ID, T.ADMIN_ID) = 0`의 의미는 결국에는 ADMIN_ID에 USER_ID가 없는 값들만 뽑아오게 하려는 것이다. 정리해보자면 B테이블에서 PKID=1에 해당하는 ADMIN_ID를 뽑아와서 A테이블에 비교를 하는데, A테이블의 값들 중 뽑아온 ADMIN_ID에 포함되지 않는 데이터만 검색하는 쿼리이다.
