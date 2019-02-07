@@ -57,7 +57,7 @@ encodingFilter는 이런식으로 사용하면 되고 HTMLTagFilter도 비슷하
 </filter-mapping>
 ```
 
-앞서 설명했던 encodingFilter와 비슷한 구조이다. 조금 다른 점은 원래 `excludePatterns`라는 매개변수는 없는데 제외해주고 싶은 URI가 있어서 넣어주게 되었다. `/admin/*.do`는 /admin/으로 시작하는 모든 URI를 제외하겠다는 뜻이고 `/user/boardlist.do`는 이 URI만 제외하겠다는 뜻이다.
+앞서 설명했던 encodingFilter와 비슷한 구조이다. 조금 다른 점은 원래 `excludePatterns`라는 매개변수는 없는데 제외해주고 싶은 URI가 있어서 넣어주게 되었다. `/admin/*.do`는 `/admin/`으로 시작하는 모든 URI를 제외하겠다는 뜻이고 `/user/boardlist.do`는 이 URI만 제외하겠다는 뜻이다.
 
 바로 아래 filter-mapping은 HTMLTagFilter를 `.do`로 시작하는 모든 URI에 적용하겠다는 뜻이다. 정리하자면
 > .do로 끝나는 모든 URI에 HTMLTagFilter를 적용할건데, /admin/으로 시작하거나 /user/boardlist.do URI는 적용하지 않을 것이다.
