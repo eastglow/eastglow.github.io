@@ -23,6 +23,25 @@ categories: Back-end
 찾아보니 이미 전자정부 프레임워크 내부에도 관련된 서비스가 있어서 참고하여 만들었다.
 
 ## 본론
+### pom.xml
+```
+<dependency>
+  <groupId>egovframework.rte</groupId>
+  <artifactId>egovframework.rte.fdl.excel</artifactId>
+  <version>${egovframework.rte.version}</version>
+</dependency>
+
+<!-- XML스키마를 자바클래스로 생성하는 라이브러리 -->
+<dependency>
+    <groupId>org.apache.xmlbeans</groupId>
+    <artifactId>xmlbeans</artifactId>
+    <version>2.4.0</version>
+</dependency>
+```
+
+전자정부 프레임워크에서 Excel 관련 서비스를 이용하려면 위와 같이 2개의 라이브러리가 추가로 필요하다. pom.xml에 없다면 추가해준다.
+
+
 ### context-common.xml
 ```
 <bean id="excelView" class="egovframework.test.egov.util.ExcelView" />
