@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring]Jasypt를 이용하여 .properties 파일 암호화하기"
+title:  "[Spring]Jasypt를 이용하여 properties 파일 암호화하기"
 date:   2018-05-17 20:00:00
 author: EastGlow
 categories: Back-end
