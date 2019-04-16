@@ -13,7 +13,8 @@ categories: Back-end
 
 `Blob Data Select => Java에서 Bytes[]로 변환 후 다시 Base64로 Encode => HTML에서 Data URI Scheme을 통해 보여주기`
 
->참고 1 : [https://en.wikipedia.org/wiki/Data_URI_scheme](https://en.wikipedia.org/wiki/Data_URI_scheme)
+>참고 1 : [https://en.wikipedia.org/wiki/Data_URI_scheme](https://en.wikipedia.org/wiki/Data_URI_scheme
+>
 >참고 2 : [https://hyeonseok.com/soojung/webstandards/2011/02/17/641.html](https://hyeonseok.com/soojung/webstandards/2011/02/17/641.html)
 
 
