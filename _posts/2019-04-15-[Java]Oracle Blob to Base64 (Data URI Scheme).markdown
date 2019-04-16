@@ -22,6 +22,9 @@ categories: Back-end
 
 ### Java encodeBlobToBase64(Blob data)
 ```
+import java.sql.Blob;
+import org.apache.commons.codec.binary.Base64;
+
 /**
  * Oracle BLOB 타입을 Base64로 변환
  * @param BLOB
