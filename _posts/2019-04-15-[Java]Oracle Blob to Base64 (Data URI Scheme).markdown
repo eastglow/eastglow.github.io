@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[Java]Oracle Blob to Base64 (Data URI Scheme)"
 date:   2019-04-15 19:00:00
