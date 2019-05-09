@@ -194,7 +194,7 @@ log4jdbc.dump.sql.maxlinelength=0
 
 ### 9. 기본적인 구조를 생성해준다. 구조는 본인 취향에 따라 달라질 수 있으니 꼭 나와 같이 하지 않아도 된다.
 
-![](/assets/post/20190508_9.png)
+![](/assets/post/20190508_9.PNG)
 
 구조를 대략적으로 설명하자면 mapper에는 실제 Mybatis와 관련된 SQL이 적혀있는 xml과 연결될 interface가 들어가있다.
 
