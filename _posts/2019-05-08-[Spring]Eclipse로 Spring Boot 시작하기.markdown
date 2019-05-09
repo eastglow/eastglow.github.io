@@ -309,6 +309,8 @@ public class TestController {
 
 `sqlSessionFactory(DataSource datasource)`에서 DataSource를 설정해주고 TypeAliasesPackage를 통해 `me.eastglow.vo`경로 아래의 파일들은 @Alias를 사용하여 별칭을 사용할 수 있게 된다. 그리고 MapperLocations에 실제 Mapper XML파일들이 존재하는 경로를 설정한다.
 
+#### MapperConfiguration.java
+
 ```
 package me.eastglow.configuration;
 
