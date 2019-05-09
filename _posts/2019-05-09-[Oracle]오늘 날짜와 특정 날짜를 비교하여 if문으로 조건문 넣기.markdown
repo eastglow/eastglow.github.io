@@ -22,7 +22,7 @@ categories: Data-base
 ```
 SELECT DAYS
 FROM
-	(
+    (
       SELECT TO_CHAR(BASE_MON+LEVEL-1,'YYYYMMDD') AS DAYS
       FROM 
           ( 
