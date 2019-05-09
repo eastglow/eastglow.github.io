@@ -53,6 +53,8 @@ categories: Back-end
 
 ![](/assets/post/20190508_4.png)
 
+DevTools라는 것을 Spring Boot를 사용하며 처음 써보았는데 상당히 편한 툴 같다. 프로젝트 내의 소스코드가 바뀌면 자동으로 리로드해줘서 개발자가 재시작해줄 필요없이 알아서 적용된다. 또한, LiveReload라는 크롬 확장프로그램을 깔면 HTML이나 JS 등의 소스코드가 바뀌면 알아서 웹페이지도 리로딩 된다.
+
 ### 5. Finish를 눌러주면 프로젝트가 생성된다.
 
 ![](/assets/post/20190508_5.png)
@@ -70,6 +72,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("me.eastglow.mapper")
 public class Application {
 
 	public static void main(String[] args) {
@@ -78,6 +81,8 @@ public class Application {
 
 }
 ```
+
+@MapperScan은 mapper interface가 있는 경로를 명시하여 해당 경로를 스캔하고 거기에 있는 클래스들은 SqlSessionFactoryBean을 주입 받게 된다.
 
 ### 7. Application.java에 오른쪽 클릭 > Run As > Spring Boot App 을 클릭하면 앱이 실행된다. 하지만 아래와 같은 오류 로그가 올라오며 실행이 되지 않을 것이다.
 
@@ -109,6 +114,12 @@ spring.datasource.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
 spring.datasource.url=jdbc:log4jdbc:mysql://localhost/testdb?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
 spring.datasource.username=test
 spring.datasource.password=test
+
+mybatis.type-aliases-package=me.eastglow.vo
+mybatis.configuration.map-underscore-to-camel-case=true
+mybatis.configuration.default-fetch-size=100
+mybatis.configuration.default-statement-timeout=30
+mybatis.mapper-locations=classpath:mapper/*.xml
 ```
 
 1번째줄부터 사용할 DB의 Driver, DB 주소, DB Username, DB Password이다.
@@ -125,6 +136,10 @@ spring.datasource.password=test
 그리고 여기서 하나 짚고 넘어갈 부분이 있는데 spring.datasource.url 쪽의 맨 뒷 부분을 보면 serverTimezone을 써준 것이 보일 것이다. 저 부분을 생략하고 그냥 하니깐 DB와 커넥션을 맺을 때 오류가 났었다. 구글링을 해보니 mysql connector의 특정 버전 이상에서 Timezone을 인식하지 못하여 발생하는 문제라던데 자세한건 아래 링크를 참고하면 좋을 듯 하다.
 
 >https://yenaworldblog.wordpress.com/2018/01/24/java-mysql-%EC%97%B0%EB%8F%99%EC%8B%9C-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EC%97%90%EB%9F%AC-%EB%AA%A8%EC%9D%8C/
+
+DB 관련 설정을 다 적어주고 바로 아래에 mybatis 관련 설정들을 적어준다. type-aliases-package에 명시한 패키지 아래의 클래스들은 @Alias를 통해 별칭을 지어 사용할 수 있다. map-underscore-to-camel-case는 DB 컬럼은 보통 단어가 2개 이상이면 언더바(_)로 구분 지어준다. 그것을 VO 객체에 매핑시켜줄 때 자동으로 camel case 형태로 들어가도록 해주는 설정이다.
+
+그 외에 mapper-locations를 통해 실제 SQL이 적혀있는 xml 경로를 명시해준다.
 
 #### pom.xml
 
@@ -179,7 +194,7 @@ log4jdbc.dump.sql.maxlinelength=0
 
 ### 9. 기본적인 구조를 생성해준다. 구조는 본인 취향에 따라 달라질 수 있으니 꼭 나와 같이 하지 않아도 된다.
 
-![](/assets/post/20190508_9.PNG)
+![](/assets/post/20190508_9.png)
 
 구조를 대략적으로 설명하자면 mapper에는 실제 Mybatis와 관련된 SQL이 적혀있는 xml과 연결될 interface가 들어가있다.
 
@@ -302,48 +317,6 @@ public class TestController {
 	}
 }
 ```
-
-그리고 Mybatis를 이용하려면 조금의 설정이 필요한데 configuration이라는 패키지 안의 MapperConfiguration.java 파일 안에 설정해두었다.
-
-@Configruation을 통해 기존에 XML로 설정하던 Mybatis 설정들을 Java 파일로 설정해주는 부분이다. 이 안에서 @Bean을 이용하여 Bean을 생성, 등록할 수 있게 된다. @MapperScan을 통해 어느 경로에 있는 Mapper interface 파일을 스캔할 것인지 선언해준다.
-
-`sqlSessionFactory(DataSource datasource)`에서 DataSource를 설정해주고 TypeAliasesPackage를 통해 `me.eastglow.vo`경로 아래의 파일들은 @Alias를 사용하여 별칭을 사용할 수 있게 된다. 그리고 MapperLocations에 실제 Mapper XML파일들이 존재하는 경로를 설정한다.
-
-#### MapperConfiguration.java
-
-```
-package me.eastglow.configuration;
-
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
-@Configuration
-@MapperScan("me.eastglow.mapper")
-public class MapperConfiguration {
-	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource datasource) throws Exception {
-		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-		sqlSessionFactory.setDataSource(datasource);		
-		sqlSessionFactory.setTypeAliasesPackage("me.eastglow.vo");
-		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*.xml"));
-		return sqlSessionFactory.getObject();
-	}
-
-	@Bean
-	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
-		return new SqlSessionTemplate(sqlSessionFactory);
-	}
-}
-```
-
-Mybatis에서 이용하는 SQL이 담긴 XML은 resources > mapper 폴더 안에 넣어준다.
 
 #### Test.xml
 
