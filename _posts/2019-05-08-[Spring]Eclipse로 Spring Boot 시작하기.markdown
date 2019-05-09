@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Spring]Eclipse로 Spring Boot 시작하기"
-date:   2019-05-08 23:30:00 +0000
+date:   2019-05-08 23:30:00
 author: EastGlow
 categories: Back-end
 ---
