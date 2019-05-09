@@ -23,7 +23,7 @@ layout: default
       <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
     </section>
     <section class="post-meta">
-      <div class="post-date">{{ post.date | date: "%Y년 %m월 %d일 %H시 %M" }}</div>
+      <div class="post-date">{{ post.date | date: "%Y년 %m월 %d일 %H시 %M분" }}</div>
       <div class="post-categories">
       {% if post.categories.size > 0 %}in {% for cat in post.categories %}        
         <a href="{{ site.baseurl }}/posts/#{{ cat }}">{{ cat | capitalize }}</a>{% if forloop.last == false %}, {% endif %}
