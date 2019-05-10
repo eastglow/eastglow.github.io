@@ -27,6 +27,7 @@ categories: Back-end
 - Lombok
 - DevTools
 - MySQL
+- Maven
 - Eclipse IDE 2019‑03
 
 대략 이렇게 이용할 것이다. 사실 프로젝트를 진행하다보면 하나 둘 더 추가되는 것들이 있을 수 있다.
