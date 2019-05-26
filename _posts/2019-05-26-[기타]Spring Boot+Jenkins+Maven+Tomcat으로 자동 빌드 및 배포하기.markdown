@@ -12,12 +12,12 @@ Jenkins는 예전부터 써봐야지 생각은 하고 있었는데 사내에서�
 
 ## 환경
 
-프레임워크 : Spring (Spring Boot 2.1.4) 
-OS : Windows Server 2019 
-Subversion : SVN 
-WAS : Tomcat 8.0 
-빌드 : Maven 
-패키징 방식 : WAR 
+프레임워크 : Spring (Spring Boot 2.1.4)  
+OS : Windows Server 2019  
+Subversion : SVN  
+WAS : Tomcat 8.0  
+빌드 : Maven  
+패키징 방식 : WAR  
 
 ## Jenkins 설치 및 세팅
 
