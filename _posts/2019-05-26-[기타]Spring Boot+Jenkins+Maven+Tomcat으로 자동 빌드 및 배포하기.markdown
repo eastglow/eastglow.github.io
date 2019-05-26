@@ -12,12 +12,12 @@ Jenkins는 예전부터 써봐야지 생각은 하고 있었는데 사내에서�
 
 ## 환경
 
-프레임워크 : Spring (Spring Boot 2.1.4)
-OS : Windows Server 2019
-Subversion : SVN
-WAS : Tomcat 8.0
-빌드 : Maven
-패키징 방식 : WAR
+프레임워크 : Spring (Spring Boot 2.1.4) 
+OS : Windows Server 2019 
+Subversion : SVN 
+WAS : Tomcat 8.0 
+빌드 : Maven 
+패키징 방식 : WAR 
 
 ## Jenkins 설치 및 세팅
 
@@ -37,7 +37,7 @@ JDK 부분을 보면 Name, JAVA_HOME 부분이 있다. Name은 그냥 JDK 1.8 �
 
 JDK와 마찬가지로 Name을 적어주고 MAVEN_HOME에는 경로를 적어준다. 혹은 Install automatically를 체크하면 빌드 시 자동으로 Maven을 Install하여 사용하게 된다. 까는게 귀찮다면(...) 이 옵션을 사용하면 될 것 같다.
 
-![](/assets/post/20190508_2.PNG)
+![](/assets/post/20190526_2.PNG)
 
 ## Jenkins와 SVN 연결하기
 
@@ -55,7 +55,7 @@ Jenkins를 설치하고 계정 생성 후 기본적인 세팅을 다 하고 나�
 
 실질적인 SVN 관련 정보들을 설정하는 부분이다. Git을 쓴다면 Git을 클릭하면 되고 여기선 SVN을 사용할 것이기 때문에 Subversion을 클릭한다. 그러면 아래에 상세정보를 입력하는 란이 나온다.
 
-![](/assets/post/20190508_3.PNG)
+![](/assets/post/20190526_3.PNG)
 
 - Repository URL : 연결할 SVN 프로젝트 URL을 적어주도록 한다.
 - Credentials : SVN에 접속할 자격증명정보를 적어주는 부분이다. 처음에 `-none-`으로 선택되어 있을텐데 옆에 Add를 클릭한다. 그러면 Jenkins가 나올텐데 또 클릭한다. 그러면 Add Credentials창이 나오게 된다. Username과 Password에 SVN 계정 정보를 입력하고 Add를 클릭하면 계정 정보가 저장된다. 다시 원래 창으로 돌아오면 셀렉트 박스를 클릭하여 방금 추가한 계정정보를 클릭한다. 제대로 추가한 정보라면 아무 메시지도 뜨지 않을 것이고 계정 정보가 유효하지 않다면 오류 메시지가 출력될 것이다.
