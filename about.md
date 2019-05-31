@@ -25,9 +25,11 @@ permalink: /about/
 # Skill Set
 
 * Language: Java
-* Database: Oracle, MySQL, MSSQL, Tibero
-* Framework: Spring, Struts, eGovFrame
-* Web: HTML5, Javascript, JQuery, CSS3, Bootstrap, Ajax
-* Server-Side Script: JSP, ASP
+* WAS: Tomcat, Resin
+* Server: Windows, Linux
 * IDE: Eclipse, IntelliJ
-* Etc: Mybatis, CVS, SVN, Git, GitHub
+* Server-Side Script: JSP, ASP
+* Database: Oracle, MySQL, MSSQL, Tibero
+* Etc: Mybatis, CVS, SVN, Git, GitHub, Jenkins
+* Framework: Spring, Spring Boot, Struts, eGovFrame
+* Web: HTML5, Javascript, JQuery, CSS3, Bootstrap, Ajax
