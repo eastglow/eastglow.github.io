@@ -25,9 +25,9 @@ permalink: /about/
 # Skill Set
 
 * Language: Java
+* IDE: Eclipse, IntelliJ
 * WAS: Tomcat, Resin
 * Server: Windows, Linux
-* IDE: Eclipse, IntelliJ
 * Server-Side Script: JSP, ASP
 * Database: Oracle, MySQL, MSSQL, Tibero
 * Etc: Mybatis, CVS, SVN, Git, GitHub, Jenkins
