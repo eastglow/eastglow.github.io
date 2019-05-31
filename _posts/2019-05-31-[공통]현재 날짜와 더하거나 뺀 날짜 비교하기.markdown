@@ -1,0 +1,73 @@
+﻿---
+layout: post
+title:  "[공통]현재 날짜와 더하거나 뺀 날짜 비교하기"
+date:   2019-05-31 13:00:00
+author: EastGlow
+categories: Data-base
+---
+## 서론
+
+유지보수를 진행하고 있던 프로젝트에 새로운 기능 추가 요청이 들어왔다. 게시판에서 글을 등록하였는데 이 등록한 글들을 특정 기간이 지나면 보이지 않게 하고 싶다는 것이었다.
+
+예를 들어 오늘 날짜(2019.05.31)로 게시글을 등록하였고, 게시판 설정에서 게시글 노출 기간을 `1년`으로 설정하였다. 그러면 2020.05.31이 지나면 이 글은 보이지 않게 되어야 한다.
+
+## 본론
+
+크게 어려운 요청은 아니라서 조금의 검색을 통해 금방 해결하였다. 유지보수 중인 솔루션 프로젝트에 공통적으로 적용해야해서 Oracle, MySQL, MSSQL 세가지 버전으로 쿼리를 작성하였다.
+
+참고로 게시글이 등록될 때 등록일은 '20190531180000'과 같이 VARCHAR2 형식의 4자리 년도 + 2자리 월 + 2자리 일 + 6자리 시간(시/분/초)으로 등록된다.
+
+### Oracle
+```
+SELECT *
+FROM BOARD_TABLE
+WHERE 1=1
+    AND SYSDATE <= TO_DATE(REG_DATE, 'yyyymmddhh24miss')+(7*?)
+    AND SYSDATE <= ADD_MONTHS(TO_DATE(REG_DATE, 'yyyymmddhh24miss'), ?)
+    AND SYSDATE <= TO_DATE(REG_DATE, 'yyyymmddhh24miss')+(365*?)
+```
+
+#### 주 단위로 더하기
+먼저 TO_DATE를 통해 VARCHAR2 형식의 등록일을 DATE 형식으로 바꿔준다. 그런 다음 뒤쪽에 파라미터값(=?)으로는 `7×원하는 주의 수`를 넘겨준다. 주(WEEK) 단위로 더해주는 함수가 있는지 찾아봤는데 따로 없길래 그냥 1주는 7일이므로 원하는 주의 수에 7일을 곱하여 넣어주었다.
+
+#### 월 단위로 더하기
+월 단위로 더하는 것은 Oracle 자체에 함수가 있었다. ADD_MONTHS를 이용하면 된다. 주 단위로 더하기와 거의 비슷하고 ADD_MONTHS로 한번 더 감싸주어 파라미터값으로 원하는 월 수를 넘겨주면 된다.
+
+#### 년 단위로 더하기
+년 단위도 주 단위와 같이 따로 함수가 보이지 않아서 그냥 1년이 365일이라 365일을 곱하여 파라미터값으로 넘겨주었다. 다른 방법으로는 ADD_MONTHS를 이용할 수도 있는데 1년은 12개월이므로 ADD_MONTHS의 파라미터값에 `12×원하는 년 수`를 넣어서 계산해도 같은 결과가 나온다. (`AND SYSDATE <= ADD_MONTHS(TO_DATE(REG_DATE, 'yyyymmddhh24miss'), 12*?)`)
+
+### MySQL
+```
+SELECT *
+FROM BOARD_TABLE
+WHERE 1=1
+    AND NOW() <= DATE_ADD(STR_TO_DATE(REG_DATE, '%Y%m%d%H%i%s'), interval+? week)
+    AND NOW() <= DATE_ADD(STR_TO_DATE(REG_DATE, '%Y%m%d%H%i%s'), interval+? month)
+    AND NOW() <= DATE_ADD(STR_TO_DATE(REG_DATE, '%Y%m%d%H%i%s'), interval+? year)
+```
+
+MySQL은 Oracle보다는 쉽다. DATE_ADD 함수 하나로 주, 월, 년 한번에 계산이 가능하다. 맨 끝에 변수만 week, month, year을 주면 각각의 형식으로 계산할 수 있다. DATE_ADD의 변수는 아래와 같이 들어갈 수 있다.
+
+![](/assets/post/20190531_1.PNG)
+
+### MSSQL
+```
+SELECT *
+FROM BOARD_TABLE
+WHERE 1=1
+    AND GETDATE() <= DATEADD(WEEK, ?, CONVERT(DATETIME, SUBSTRING(REG_DATE,0,9)+' '+ STUFF(STUFF(SUBSTRING(REG_DATE,9,14),3,0,':'),6,0,':'), 120)) 
+    AND GETDATE() <= DATEADD(MONTH, ?, CONVERT(DATETIME, SUBSTRING(REG_DATE,0,9)+' '+ STUFF(STUFF(SUBSTRING(REG_DATE,9,14),3,0,':'),6,0,':'), 120)) 
+    AND GETDATE() <= DATEADD(YEAR, ?, CONVERT(DATETIME, SUBSTRING(REG_DATE,0,9)+' '+ STUFF(STUFF(SUBSTRING(REG_DATE,9,14),3,0,':'),6,0,':'), 120)) 
+```
+
+MSSQL도 MySQL처럼 DATEADD(심지어 이름도 언더바(_) 한개 차이...) 함수 하나로 모두 계산이 가능하다. 다만, MSSQL은 날짜 타입에 대하여 되게 까칠해서(...) 기존의 VARCHAR2 14자리 형식의 날짜를 가공해줘야한다.
+
+CONVERT 함수를 통해 DATETIME으로 바꿔줘야하는데 먼저 SUBSTRING을 통해 년월일 부분과 시간 부분을 잘라낸다. YYYY-MM-DD HH:MI:SS 형태로 바꿔서 DATEADD를 해줘야하기 때문에 'YYYYMMDD'와 'HH:MI:SS' 두 부분으로 자르는 것이다. 이렇게 형태를 바꿔주지 않으면 에러가 난다.
+
+STUFF를 통해 ':'를 넣어주고 완성된 두 부분의 문자열을 서로 합친 후, DATEADD를 이용하여 결과를 뽑아내면 오류없이 잘 나오는 것을 확인할 수 있다. 아래 그림은 CONVERT 함수 사용 시, 3번째 파라미터값으로 받는 숫자값에 따른 시간 형태이다.
+
+![](/assets/post/20190531_2.png)
+
+## 결론
+
+말하면 입 아플 당연한 소리이겠지만 날짜를 빼는 것은 위와 똑같은 방식으로 마이너스(-)만 해주면 된다. 별로 어려운 쿼리는 아니지만 DBMS별로 날짜를 계산하는 함수가 다르기도 하고 날짜 계산이 은근 헷갈리는 부분이 있어서 정리해둔다.
