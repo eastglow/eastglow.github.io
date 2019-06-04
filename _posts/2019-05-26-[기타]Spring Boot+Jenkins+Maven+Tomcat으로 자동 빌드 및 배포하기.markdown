@@ -79,15 +79,15 @@ Jenkins를 설치하고 계정 생성 후 기본적인 세팅을 다 하고 나�
 
 ```
 @echo off
-copy /Y "C:\Program Files (x86)\Jenkins\workspace\test_project\target\test_project.war" D:\apache-tomcat-8.0.49\webapps\test_project.war
 D:
 cd apache-tomcat-8.0.49\bin
 cmd /c shutdown.bat
 cmd /c waitfor SomethingThatIsNeverHappening /t 5 2>NUL
+copy /Y "C:\Program Files (x86)\Jenkins\workspace\test_project\target\test_project.war" D:\apache-tomcat-8.0.49\webapps\test_project.war
 cmd /c startup.bat
 ```
 
-2번째 줄부터 설명하자면 copy 명령어를 통해 Jenkins 설치 경로 아래의 workspace에 생성된 SVN 소스 안에서 WAR 파일을 찾는다. 그것을 Tomcat 경로 아래의 webapps에 복사해준다. 그런 다음 Tomcat 경로로 이동한 다음 bin 폴더 안에 기본적으로 있는 shutdown.bat 파일을 통해 Tomcat을 꺼준다. 혹시나 꺼지는 데 걸릴 시간이 있을 수 있어서 그것을 고려하여 5초 간 일시정지를 해준다. 그런 다음 startup.bat을 통해 Tomcat을 다시 시작해준다.
+먼저 Tomcat이 설치된 폴더로 이동하여 bin 폴더 내의 shutdown.bat을 통해 Tomcat 서비스를 중지한다. 중지를 위해 5초 간 기다려준 뒤, copy 명령어를 통해 Jenkins 설치 경로 아래의 workspace에 생성된 SVN 소스 안에서 WAR 파일을 찾는다. 그것을 Tomcat 경로 아래의 webapps에 복사해준다. 그런 다음 bin 폴더 안의 startup.bat 파일을 통해 Tomcat을 다시 시작해준다.
 
 참고로 Jenkins의 workspace 안에 생성되는 폴더명은 앞에서 말했지만 이 프로젝트의 이름(아이템 이름)으로 생성된다. 그리고 target 폴더 안에 생성된 WAR 파일의 이름은 pom.xml에서 미리 설정 가능하다. 기본적으로는 프로젝트 이름_버전명.war로 저장될 것이다. 하지만 다른 이름으로 사용하고 싶다면 아래와 같이 설정해주면 된다.
 
