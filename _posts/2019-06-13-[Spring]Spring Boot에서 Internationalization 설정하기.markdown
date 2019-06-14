@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[Spring]Spring Boot에서 Internationalization 설정하기"
 date:   2019-06-13 20:00:00
