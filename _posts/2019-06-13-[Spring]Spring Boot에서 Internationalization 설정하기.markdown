@@ -76,7 +76,7 @@ import com.sogood.common.HandlerInterceptor;
 @Controller
 public class CustomErrorController implements ErrorController {
  
-	private static final Logger LOGGER = LoggerFactory.getLogger(HandlerInterceptor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HandlerInterceptor.class);
 	
     private static final String ERROR_PATH = "/error";
      
