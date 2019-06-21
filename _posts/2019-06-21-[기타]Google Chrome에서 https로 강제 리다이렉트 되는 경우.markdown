@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[기타]Google Chrome에서 https로 강제 리다이렉트 되는 경우"
 date:   2019-06-21 13:00:00
