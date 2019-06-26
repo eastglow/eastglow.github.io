@@ -71,7 +71,7 @@ Json 형태는 `MappingJackson2HttpMessageConverter`를 통해 변환된다고 �
 No serializer found for class java.io.ByteArrayInputStream and no properties discovered to create BeanSerializer multipartfile
 ```
 
-이리저리 찾아보니 Json 형태로 return해줄 때, Json 형태로 바꿀 객체의 필드들은 getter를 가지고 있어야 한다. getter가 없으면 오류가 난다고 하였고 `input type="file"`에 해당하는 MultipartFile 타입은 getter, setter를 만들어줬는데도 오류가 나고 있었다. 아마 file 형태이다보니 Json 형태로 변환할 수가 없어서 나는 듯하다. 추가로 이 필드는 굳이 Json 형태로 return 해줄 필요도 없다.
+이리저리 찾아보니 Json 형태로 return해줄 때, Json 형태로 바꿀 객체의 필드들은 getter를 가지고 있어야 한다. getter가 없으면 오류가 난다고 하였고 `input type="file"`에 해당하는 MultipartFile 타입은 getter, setter를 만들어줬는데도 오류가 나고 있었다. 아마 file 형태이다보니 Json 형태로 변환할 수가 없어서 나는 듯하다. 그런데 이 필드는 굳이 Json 형태로 return 해줄 필요가 없다.
 
 아니, 제일 중요한건 내가 Json 형태로 return 해줄 객체는 MultipartFile 필드가 들어가는 VO 객체가 아니라 그냥 일반 HashMap<String, Object> 객체였다.
 
