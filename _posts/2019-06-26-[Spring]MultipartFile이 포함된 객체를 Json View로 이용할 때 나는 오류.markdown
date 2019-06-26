@@ -38,7 +38,7 @@ categories: Back-end
 ```
 
 ### TestController.java
-```
+```java
 // Controller에서 사용 시
 @RequestMapping(value={"/test"})
 @ResponseBody
@@ -79,7 +79,7 @@ No serializer found for class java.io.ByteArrayInputStream and no properties dis
 
 정확한 답은 얻을 수 없었지만 추측으로는 아래 소스에서 Ajax를 통해 넘어온 Form 객체가 BoardVO에 매핑되면서 자동으로 적재(?)되는게 아닌가 싶다.
 
-```
+```java
 public ModelAndView boardProcess(BoardVO boardVO, ...){
     ModelAndView mav = new ModelAndView("jsonView");
     Map<String,Object> resultMap = new HashMap<>();
