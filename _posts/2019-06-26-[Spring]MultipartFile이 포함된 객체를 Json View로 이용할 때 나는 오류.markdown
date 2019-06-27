@@ -41,7 +41,6 @@ categories: Back-end
 ```java
 // Controller에서 사용 시
 @RequestMapping(value={"/test"})
-@ResponseBody
 public ModelAndView test(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 	ModelAndView mav = new ModelAndView("jsonView");
 	Map<String, Object> resultMap = new HashMap<>();
