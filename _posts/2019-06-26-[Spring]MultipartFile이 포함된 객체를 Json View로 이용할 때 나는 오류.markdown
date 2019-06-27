@@ -42,13 +42,13 @@ categories: Back-end
 // Controller에서 사용 시
 @RequestMapping(value={"/test"})
 public ModelAndView test(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
-	ModelAndView mav = new ModelAndView("jsonView");
-	Map<String, Object> resultMap = new HashMap<>();
+    ModelAndView mav = new ModelAndView("jsonView");
+    Map<String, Object> resultMap = new HashMap<>();
 	
-	resultMap.put("code", "200");
-	resultMap.put("msg", "test");
+    resultMap.put("code", "200");
+    resultMap.put("msg", "test");
 	
-	mav.addObject("resultMap", resultMap);
+    mav.addObject("resultMap", resultMap);
 	
     return mav;
 }
