@@ -74,7 +74,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
     
     @Bean
-    public CmsmInterceptor customInterceptor() {
+    public CustomInterceptor customInterceptor() {
         return new CustomInterceptor();
     }
     
