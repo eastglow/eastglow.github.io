@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring]RestTemplate를 이용하여 카카오 API 사용하기"
+title:  "[Spring]RestTemplate를 이용하여 카카오 API 사용하기 (1)"
 date:   2019-08-20 00:00:00
 author: EastGlow
 categories: Back-end
