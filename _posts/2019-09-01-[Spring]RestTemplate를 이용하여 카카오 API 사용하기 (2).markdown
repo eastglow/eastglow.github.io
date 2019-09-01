@@ -21,7 +21,7 @@ categories: Back-end
 
 이전 포스팅 중에서도 Spring Boot 기본 프로젝트를 만드는 부분이 있지만 간단하게 한번 정리하고 넘어가고자 한다.
 
-## 1) IntelliJ 에서 Spring Initializr를 이용하여 Spring Boot 프로젝트를 생성
+## 1. IntelliJ 에서 Spring Initializr를 이용하여 Spring Boot 프로젝트를 생성
 
 Spring Boot를 한번이라도 이용해봤다면 다들 알 법한 Spring Initializr를 이용하여 Spring Boot 기본 프로젝트를 만들어준다.
 
@@ -35,7 +35,7 @@ Spring Boot를 한번이라도 이용해봤다면 다들 알 법한 Spring Initi
 
 만들어본 지 좀 지난(...) 프로젝트라 기억이 정확하진 않지만 대략 위와 같이 선택하고 프로젝트를 생성해주었다.
 
-## 2) 패키지 구조 생성
+## 2. 패키지 구조 생성
 
 패키지 구조는 어디서나 흔히 볼 수 있는 구조로 만들어주었다. 대략 아래와 같다.
 
