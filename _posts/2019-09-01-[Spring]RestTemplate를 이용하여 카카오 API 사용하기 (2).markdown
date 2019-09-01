@@ -6,6 +6,8 @@ author: EastGlow
 categories: Back-end
 ---
 
+> 프로젝트 전체 소스 : https://github.com/eastglow/spring-boot-kakao-api-sample
+
 # 3. AJAX를 통해 API 호출
 
 ## 1) 프론트 화면에서 AJAX를 통해 호출하는 과정

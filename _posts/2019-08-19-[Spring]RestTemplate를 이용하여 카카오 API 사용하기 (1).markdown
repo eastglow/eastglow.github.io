@@ -6,6 +6,8 @@ author: EastGlow
 categories: Back-end
 ---
 
+> 프로젝트 전체 소스 : https://github.com/eastglow/spring-boot-kakao-api-sample
+
 이번 글에서는 Spring에서 기본적으로 제공하는 RestTemplate를 이용하여 카카오 REST API 및 카카오맵 API를 써본 경험을 남기려 한다.
 
 대략적인 글의 흐름은,
@@ -16,6 +18,7 @@ categories: Back-end
 4. Controller에서 API 호출을 요청받으면 API를 처리하는 class를 호출하여 RestTemplate를 이용하여 REST API 통신을 한 뒤, 결과값을 Return
 
 와 같이 진행 될 것이다. 이번편에는 1~2번까지만 다룰 것이며 3~4번은 다음 포스팅에서 다룰 예정이다.
+
 
 # 1. Spring Boot 기본 프로젝트 세팅
 
