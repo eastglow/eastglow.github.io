@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[기타]Facebook Login API(OAuth2) 이용 시 주의할 점"
 date:   2019-09-10 13:00:00
