@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring]OAuth2 기반의 SNS 간편 로그인 구현하기(1)"
+title:  "[Spring]OAuth2 기반의 SNS 간편 로그인 구현하기 (1)"
 date:   2019-11-26 12:00:00
 author: EastGlow
 categories: Back-end
