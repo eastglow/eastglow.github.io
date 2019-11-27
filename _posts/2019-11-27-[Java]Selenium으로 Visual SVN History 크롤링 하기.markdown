@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring]Selenium으로 Visual SVN History 크롤링 하기"
+title:  "[Java]Selenium으로 Visual SVN History 크롤링 하기"
 date:   2019-11-27 13:00:00
 author: EastGlow
 categories: Back-end
