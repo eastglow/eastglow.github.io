@@ -1,0 +1,51 @@
+﻿---
+layout: post
+title:  "[기타]유용한 사이트들"
+date:   2019-11-28 13:00:00
+author: EastGlow
+categories: 기타
+---
+
+# 1. Curioustore - 변수명 지어주는 사이트
+
+https://www.curioustore.com
+
+개발을 하다보면 자바든 자바스크립트든 DB Table이나 Column 등 이름을 지어야 할 경우가 많다. 그때그때 그냥 단어를 조합해서 만들곤 하는데 이 사이트에서는 한글 단어를 넣으면 영어 단어로 변수명을 지어줘서 편하다.
+
+# 2. Instant SQL Formatter - SQL 정렬해주는 사이트
+
+http://www.dpriver.com/pp/sqlformat.htm
+
+요새는 DBMS 툴에서 쿼리 정렬을 지원해주는 툴들이 많지만(내가 쓰는 Datagrip도 그렇고) 그냥 간단하고 빠르게 확인해볼 수 있는 곳이 필요할 때 사용할 수 있는 사이트이다. 원하는 부분만(ex: Column만, Table명만, Function만 등) 대소문자 설정도 따로 할 수 있고 괜찮은 거 같다.
+
+# 3. Image-Maps - 이미지맵 만들어주는 사이트
+
+https://www.image-maps.com
+
+어쩌다 한번씩 이미지의 특정 위치에 링크를 걸어줘야할 때가 있는데 이럴 때 유용하게 쓰이는 사이트이다. 이미지를 업로드하고 원하는 부분에 링크를 걸어주면 소스코드로 반환해주는 사이트이다.
+
+# 4. Online JavaScript Beautifier - 자바스크립트 정렬해주는 사이트
+
+https://beautifier.io
+
+자바스크립트 소스코드를 정렬해주는 사이트이다. 다만, 양이 좀 많은 건 정렬하는데 시간이 조금 오래 걸리더라.
+
+# 5. RegExr - 정규표현식 테스트해보는 사이트
+
+https://regexr.com
+
+잘 짠 정규표현식 하나면 열 개 replace 안 부럽다. 정규표현식 테스트할 때 쓰이는 사이트로 정말 유용하게 잘 쓰고 있다.
+
+# 6. Clear Cache - 캐시 지워주는 크롬 확장프로그램
+
+https://chrome.google.com/webstore/detail/clear-cache/cppjkneekbjaeellbfkmgnhonkkjfpdn
+
+크롬 자체에 캐시를 무시하는 설정이 아마 있는 걸로 알고 있지만 개발만 할 것도 아니고 캐시가 필요할 때도 있을 것이다. 그럴 때 크롬 확장 프로그램 중 Clear Cache를 깔아두면 편하다. 원클릭으로 캐시를 삭제해준다.
+
+# 7. Json Parser Online - JSON 보기좋게 정렬해주는 사이트
+
+http://json.parser.online.fr
+
+그냥 웹에서 리턴 받은 JSON 형태는 정렬이 안된 경우가 많아서 한눈에 알아보기 힘들 때가 있다. 그럴 때 요긴하게 쓰이는 사이트이다.
+
+> P.S 언제든 좋은 사이트를 더 발견하게 된다면 내용이 추가될 수 있다.
