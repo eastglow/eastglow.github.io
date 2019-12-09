@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[Spring]OAuth2 기반의 SNS 간편 로그인 구현하기 (2)"
 date:   2019-12-09 18:00:00
