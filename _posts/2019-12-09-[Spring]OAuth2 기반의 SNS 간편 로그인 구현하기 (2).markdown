@@ -30,9 +30,9 @@ Front-end 쪽에서 실행되는 SNS 간편 로그인 or 회원가입 프로세�
 @RequestMapping(value={"/naver/Login.json"})  
 public ModelAndView getNaverLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {  
     ModelAndView mav = new ModelAndView();  
-  mav.addObject("apiUri", snsUtil.getCallbackUri("naver"));  
+    mav.addObject("apiUri", snsUtil.getCallbackUri("naver"));  
   
- return mav;  
+    return mav;  
 }
 ```
 
@@ -42,23 +42,23 @@ public ModelAndView getNaverLogin(HttpServletRequest request, HttpServletRespons
 ```
 public String getCallbackUri(String type) throws Exception {  
     SecureRandom random = new SecureRandom();  
-  String state = new BigInteger(130,random).toString();  
-  String apiUrl = "";  
-  
- if("naver".equals(type)){  
+    String state = new BigInteger(130,random).toString();  
+    String apiUrl = "";
+    
+    if("naver".equals(type)){  
         apiUrl = "https://nid.naver.com/oauth2.0/authorize";  
-  apiUrl += "?response_type=code";  
-  apiUrl += "&client_id="+naverApiKey;  
-  apiUrl += "&redirect_uri=https://eastglow.com/naver/Join.do";  
-  apiUrl += "&state="+state;  
-  }else if("kakao".equals(type)){  
+        apiUrl += "?response_type=code";  
+        apiUrl += "&client_id="+naverApiKey;  
+        apiUrl += "&redirect_uri=https://eastglow.com/naver/Join.do";  
+        apiUrl += "&state="+state;  
+    }else if("kakao".equals(type)){  
         apiUrl = "https://kauth.kakao.com/oauth/authorize";  
-  apiUrl += "?client_id="+kakaoApiKey;  
-  apiUrl += "&redirect_uri=https://eastglow.com/kakao/Join.do";  
-  apiUrl += "&response_type=code";  
-  apiUrl += "&state="+state;  
-  apiUrl += "&encode_state=true";  
-  }  
+        apiUrl += "?client_id="+kakaoApiKey;  
+        apiUrl += "&redirect_uri=https://eastglow.com/kakao/Join.do";  
+        apiUrl += "&response_type=code";  
+        apiUrl += "&state="+state;  
+        apiUrl += "&encode_state=true";  
+    }  
   
     return apiUrl;  
 }
@@ -89,19 +89,19 @@ public String getNaverJoin(HttpServletRequest request, HttpServletResponse respo
   
     String accessToken = "";  
   
-  // 접근 토큰 발급 요청  
-  ResponseEntity<Map> accessTokenEntity = snsUtil.getNaverAccessToken(code, state);  
-  Map<String, Object> accessTokenMap = accessTokenEntity.getBody();  
-  accessToken = (accessTokenMap != null && !accessTokenMap.isEmpty()) ? String.valueOf(accessTokenMap.get("access_token")) : "";  
+    // 접근 토큰 발급 요청  
+    ResponseEntity<Map> accessTokenEntity = snsUtil.getNaverAccessToken(code, state);  
+    Map<String, Object> accessTokenMap = accessTokenEntity.getBody();  
+    accessToken = (accessTokenMap != null && !accessTokenMap.isEmpty()) ? String.valueOf(accessTokenMap.get("access_token")) : "";  
   
-  // 회원 프로필 조회  
-  ResponseEntity<Map> memberProfileEntity = snsUtil.getNaverMemberProfile(accessToken);  
-  Map<String, Object> memberProfileMap = memberProfileEntity.getBody();  
-  Map<String, Object> responseMap = (Map<String, Object>) memberProfileMap.get("response");  
+    // 회원 프로필 조회  
+    ResponseEntity<Map> memberProfileEntity = snsUtil.getNaverMemberProfile(accessToken);  
+    Map<String, Object> memberProfileMap = memberProfileEntity.getBody();  
+    Map<String, Object> responseMap = (Map<String, Object>) memberProfileMap.get("response");  
   
-  model.addAttribute("responseMap", responseMap);  
+    model.addAttribute("responseMap", responseMap);  
   
- return "join";  
+    return "join";  
 }
 ```
 
@@ -128,30 +128,30 @@ private static final String NAVER_VERIFY_URI = "https://openapi.naver.com/v1/nid
 public ResponseEntity<Map> getNaverAccessToken(String code, String state) throws Exception {  
     RestTemplate restTemplate = new RestTemplate();  
   
-  MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();  
-  paramMap.add("grant_type", "authorization_code");  
-  paramMap.add("client_id", naverApiKey);  
-  paramMap.add("client_secret", naverSecretKey);  
-  paramMap.add("code", code);  
-  paramMap.add("state", state);  
+    MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();  
+    paramMap.add("grant_type", "authorization_code");  
+    paramMap.add("client_id", naverApiKey);  
+    paramMap.add("client_secret", naverSecretKey);  
+    paramMap.add("code", code);  
+    paramMap.add("state", state);  
   
-  URI uri = URI.create(NAVER_TOKEN_URI);  
+    URI uri = URI.create(NAVER_TOKEN_URI);  
   
- return restTemplate.postForEntity(uri, paramMap, Map.class);  
+    return restTemplate.postForEntity(uri, paramMap, Map.class);  
 }  
   
 public ResponseEntity<Map> getNaverMemberProfile(String accessToken) throws Exception {  
     RestTemplate restTemplate = new RestTemplate();  
-  HttpHeaders headers = new HttpHeaders();  
+    HttpHeaders headers = new HttpHeaders();  
   
-  headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, "UTF-8");  
-  headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");  
+    headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, "UTF-8");  
+    headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");  
   
-  URI uri = URI.create(NAVER_INFO_URI);  
-  RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.POST, uri);  
-  ResponseEntity<Map> re = restTemplate.exchange(rq, Map.class);  
+    URI uri = URI.create(NAVER_INFO_URI);  
+    RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.POST, uri);  
+    ResponseEntity<Map> re = restTemplate.exchange(rq, Map.class);  
   
- return re;  
+    return re;  
 }
 ```
 
@@ -189,9 +189,9 @@ public FacebookConnectionFactory facebookConnectionFactory() {
 @Bean  
 public OAuth2Parameters oAuth2Parameters() {  
     OAuth2Parameters param = new OAuth2Parameters();  
-  param.setRedirectUri("https://eastglow.com/facebook/Join.do");  
+    param.setRedirectUri("https://eastglow.com/facebook/Join.do");  
   
- return param;  
+    return param;  
 }
 ```
 
@@ -236,22 +236,22 @@ public class SnsApiController {
     @Resource  
     private SnsUtil snsUtil;  
   
-  @Resource  
+    @Resource  
     private FacebookConnectionFactory connectionFactory;  
   
-  @Resource  
+    @Resource  
     private OAuth2Parameters oAuth2Parameters;  
   
-  @RequestMapping(value={"/facebook/Login.json"})  
+    @RequestMapping(value={"/facebook/Login.json"})  
     public ModelAndView getFacebookLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {  
         ModelAndView mav = new ModelAndView();  
-  OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();  
-  String apiUri = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);  
+        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();  
+        String apiUri = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);  
   
-  mav.addObject("apiUri", apiUri);  
+        mav.addObject("apiUri", apiUri);  
   
- return mav;  
-  }  
+        return mav;  
+    }  
   
     @RequestMapping(value={"/facebook/Join.do"})  
     public String getFacebookJoin(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model,  
@@ -259,38 +259,38 @@ public class SnsApiController {
   
         String accessToken = "";  
   
-  // 접근 토큰 발급 요청  
-  OAuth2Operations oAuth2Operations = connectionFactory.getOAuthOperations();  
-  AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, oAuth2Parameters.getRedirectUri(), null);  
-  accessToken = accessGrant.getAccessToken();  
+        // 접근 토큰 발급 요청  
+        OAuth2Operations oAuth2Operations = connectionFactory.getOAuthOperations();  
+        AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, oAuth2Parameters.getRedirectUri(), null);  
+        accessToken = accessGrant.getAccessToken();  
   
-  Long currentTime = System.currentTimeMillis();  
-  Long expireTime = accessGrant.getExpireTime();  
+        Long currentTime = System.currentTimeMillis();  
+        Long expireTime = accessGrant.getExpireTime();  
   
- if (expireTime != null && expireTime < currentTime) {  
+        if (expireTime != null && expireTime < currentTime) {  
             accessToken = accessGrant.getRefreshToken();  
-  };  
+        };  
   
-  // 회원 프로필 조회  
-  Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);  
-  Facebook facebook = connection == null ? new FacebookTemplate(accessToken) : connection.getApi();  
-  UserOperations userOperations = facebook.userOperations();  
+        // 회원 프로필 조회  
+        Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);  
+        Facebook facebook = connection == null ? new FacebookTemplate(accessToken) : connection.getApi();  
+        UserOperations userOperations = facebook.userOperations();  
   
-  String [] fields = { "id", "email", "name"};  
-  Map<String, Object> memberProfileMap = facebook.fetchObject("me", Map.class, fields);  
+        String [] fields = { "id", "email", "name"};  
+        Map<String, Object> memberProfileMap = facebook.fetchObject("me", Map.class, fields);  
   
-  model.addAttribute("memberProfileMap", memberProfileMap);  
+        model.addAttribute("memberProfileMap", memberProfileMap);  
   
- return "join";  
-  }  
+        return "join";  
+    }
   
     @RequestMapping(value={"/naver/Login.json"})  
     public ModelAndView getNaverLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {  
         ModelAndView mav = new ModelAndView();  
-  mav.addObject("apiUri", snsUtil.getCallbackUri("naver"));  
+        mav.addObject("apiUri", snsUtil.getCallbackUri("naver"));  
   
- return mav;  
-  }  
+         return mav;  
+    }  
   
     @RequestMapping(value={"/naver/Join.do"})  
     public String getNaverJoin(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model,  
@@ -299,28 +299,28 @@ public class SnsApiController {
   
         String accessToken = "";  
   
-  // 접근 토큰 발급 요청  
-  ResponseEntity<Map> accessTokenEntity = snsUtil.getNaverAccessToken(code, state);  
-  Map<String, Object> accessTokenMap = accessTokenEntity.getBody();  
-  accessToken = (accessTokenMap != null && !accessTokenMap.isEmpty()) ? String.valueOf(accessTokenMap.get("access_token")) : "";  
+        // 접근 토큰 발급 요청  
+        ResponseEntity<Map> accessTokenEntity = snsUtil.getNaverAccessToken(code, state);  
+        Map<String, Object> accessTokenMap = accessTokenEntity.getBody();  
+        accessToken = (accessTokenMap != null && !accessTokenMap.isEmpty()) ? String.valueOf(accessTokenMap.get("access_token")) : "";  
   
-  // 회원 프로필 조회  
-  ResponseEntity<Map> memberProfileEntity = snsUtil.getNaverMemberProfile(accessToken);  
-  Map<String, Object> memberProfileMap = memberProfileEntity.getBody();  
-  Map<String, Object> responseMap = (Map<String, Object>) memberProfileMap.get("response");  
+        // 회원 프로필 조회  
+        ResponseEntity<Map> memberProfileEntity = snsUtil.getNaverMemberProfile(accessToken);  
+        Map<String, Object> memberProfileMap = memberProfileEntity.getBody();  
+        Map<String, Object> responseMap = (Map<String, Object>) memberProfileMap.get("response");  
   
-  model.addAttribute("responseMap", responseMap);  
+        model.addAttribute("responseMap", responseMap);  
   
- return "join";  
-  }  
+        return "join";  
+    }  
   
     @RequestMapping(value={"/kakao/Login.json"})  
     public ModelAndView getKakaoLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {  
         ModelAndView mav = new ModelAndView();  
-  mav.addObject("apiUri", snsUtil.getCallbackUri("kakao"));  
+        mav.addObject("apiUri", snsUtil.getCallbackUri("kakao"));  
   
- return mav;  
-  }  
+        return mav;  
+    }  
   
     @RequestMapping(value={"/kakao/Join.do"})  
     public String getKakaoJoin(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model,  
@@ -329,20 +329,20 @@ public class SnsApiController {
   
         String accessToken = "";  
   
-  // 접근 토큰 발급 요청  
-  ResponseEntity<Map> accessTokenEntity = snsUtil.getKakaoAccessToken(code);  
-  Map<String, Object> accessTokenMap = accessTokenEntity.getBody();  
-  accessToken = (accessTokenMap != null && !accessTokenMap.isEmpty()) ? String.valueOf(accessTokenMap.get("access_token")) : "";  
+        // 접근 토큰 발급 요청  
+        ResponseEntity<Map> accessTokenEntity = snsUtil.getKakaoAccessToken(code);  
+        Map<String, Object> accessTokenMap = accessTokenEntity.getBody();  
+        accessToken = (accessTokenMap != null && !accessTokenMap.isEmpty()) ? String.valueOf(accessTokenMap.get("access_token")) : "";  
   
-  // 회원 프로필 조회  
-  ResponseEntity<Map> memberProfileEntity = snsUtil.getKakaoMemberProfile(accessToken);  
-  Map<String, Object> memberProfileMap = memberProfileEntity.getBody();  
-  Map<String, Object> kakaoAccountsMap = (Map<String, Object>) memberProfileMap.get("kakao_account");  
+        // 회원 프로필 조회  
+        ResponseEntity<Map> memberProfileEntity = snsUtil.getKakaoMemberProfile(accessToken);  
+        Map<String, Object> memberProfileMap = memberProfileEntity.getBody();  
+        Map<String, Object> kakaoAccountsMap = (Map<String, Object>) memberProfileMap.get("kakao_account");  
   
-  model.addAttribute("memberProfileMap", memberProfileMap);  
+        model.addAttribute("memberProfileMap", memberProfileMap);  
   
- return "join";  
-  }  
+        return "join";  
+    }  
 }
 ```
 
@@ -373,114 +373,113 @@ import java.util.Map;
 public class SnsUtil {  
   
     @Value("${sns.kakao.api.key}") private String kakaoApiKey;  
-  @Value("${sns.kakao.secret.key}") private String kakaoSecretKey;  
+    @Value("${sns.kakao.secret.key}") private String kakaoSecretKey;  
   
-  @Value("${sns.naver.api.key}") private String naverApiKey;  
-  @Value("${sns.naver.secret.key}") private String naverSecretKey;  
+    @Value("${sns.naver.api.key}") private String naverApiKey;  
+    @Value("${sns.naver.secret.key}") private String naverSecretKey;  
+    @Value("${sns.facebook.api.key}") private String facebookApiKey;  
+    @Value("${sns.facebook.secret.key}") private String facebookSecretKey;  
   
-  @Value("${sns.facebook.api.key}") private String facebookApiKey;  
-  @Value("${sns.facebook.secret.key}") private String facebookSecretKey;  
+    private static final String KAKAO_TOKEN_URI = "https://kauth.kakao.com/oauth/token";  
+    private static final String KAKAO_INFO_URI = "https://kapi.kakao.com/v2/user/me";  
+    private static final String KAKAO_VERIFY_URI = "https://kapi.kakao.com/v1/user/access_token_info";  
   
- private static final String KAKAO_TOKEN_URI = "https://kauth.kakao.com/oauth/token";  
- private static final String KAKAO_INFO_URI = "https://kapi.kakao.com/v2/user/me";  
- private static final String KAKAO_VERIFY_URI = "https://kapi.kakao.com/v1/user/access_token_info";  
+    private static final String NAVER_TOKEN_URI = "https://nid.naver.com/oauth2.0/token";  
+    private static final String NAVER_INFO_URI = "https://openapi.naver.com/v1/nid/me";  
+    private static final String NAVER_VERIFY_URI = "https://openapi.naver.com/v1/nid/verify";  
   
- private static final String NAVER_TOKEN_URI = "https://nid.naver.com/oauth2.0/token";  
- private static final String NAVER_INFO_URI = "https://openapi.naver.com/v1/nid/me";  
- private static final String NAVER_VERIFY_URI = "https://openapi.naver.com/v1/nid/verify";  
-  
-  @Bean  
+    @Bean  
     public FacebookConnectionFactory facebookConnectionFactory() {  
         return new FacebookConnectionFactory(facebookApiKey, facebookSecretKey);  
-  }  
+    }  
   
     @Bean  
     public OAuth2Parameters oAuth2Parameters() {  
         OAuth2Parameters param = new OAuth2Pareters();  
-  param.setRedirectUri("https://eastglow.com/facebook/Join.do");  
+        param.setRedirectUri("https://eastglow.com/facebook/Join.do");  
   
- return param;  
-  }  
+        return param;  
+    }  
   
     public String getCallbackUri(String type) throws Exception {  
         SecureRandom random = new SecureRandom();  
-  String state = new BigInteger(130,random).toString();  
-  String apiUrl = "";  
+        String state = new BigInteger(130,random).toString();  
+        String apiUrl = "";  
   
- if("naver".equals(type)){  
+        if("naver".equals(type)){  
             apiUrl = "https://nid.naver.com/oauth2.0/authorize";  
-  apiUrl += "?response_type=code";  
-  apiUrl += "&client_id="+naverApiKey;  
-  apiUrl += "&redirect_uri=https://eastglow.com/naver/Join.do";  
-  apiUrl += "&state="+state;  
-  }else if("kakao".equals(type)){  
+            apiUrl += "?response_type=code";  
+            apiUrl += "&client_id="+naverApiKey;  
+            apiUrl += "&redirect_uri=https://eastglow.com/naver/Join.do";  
+            apiUrl += "&state="+state;  
+        }else if("kakao".equals(type)){  
             apiUrl = "https://kauth.kakao.com/oauth/authorize";  
-  apiUrl += "?client_id="+kakaoApiKey;  
-  apiUrl += "&redirect_uri=https://eastglow.com/kakao/Join.do";  
-  apiUrl += "&response_type=code";  
-  apiUrl += "&state="+state;  
-  apiUrl += "&encode_state=true";  
-  }  
-  
+            apiUrl += "?client_id="+kakaoApiKey;  
+            apiUrl += "&redirect_uri=https://eastglow.com/kakao/Join.do";  
+            apiUrl += "&response_type=code";  
+            apiUrl += "&state="+state;  
+            apiUrl += "&encode_state=true";  
+        }  
+
         return apiUrl;  
-  }  
+    }  
   
     public ResponseEntity<Map> getNaverAccessToken(String code, String state) throws Exception {  
         RestTemplate restTemplate = new RestTemplate();  
   
-  MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();  
-  paramMap.add("grant_type", "authorization_code");  
-  paramMap.add("client_id", naverApiKey);  
-  paramMap.add("client_secret", naverSecretKey);  
-  paramMap.add("code", code);  
-  paramMap.add("state", state);  
+        MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();  
+        paramMap.add("grant_type", "authorization_code");  
+        paramMap.add("client_id", naverApiKey);  
+        paramMap.add("client_secret", naverSecretKey);  
+        paramMap.add("code", code);  
+        paramMap.add("state", state);  
   
-  URI uri = URI.create(NAVER_TOKEN_URI);  
+        URI uri = URI.create(NAVER_TOKEN_URI);  
   
- return restTemplate.postForEntity(uri, paramMap, Map.class);  
-  }  
+        return restTemplate.postForEntity(uri, paramMap, Map.class);  
+    }  
   
     public ResponseEntity<Map> getNaverMemberProfile(String accessToken) throws Exception {  
         RestTemplate restTemplate = new RestTemplate();  
-  HttpHeaders headers = new HttpHeaders();  
+        HttpHeaders headers = new HttpHeaders();  
   
-  headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, "UTF-8");  
-  headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");  
+        headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, "UTF-8");  
+        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");  
   
-  URI uri = URI.create(NAVER_INFO_URI);  
-  RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.POST, uri);  
-  ResponseEntity<Map> re = restTemplate.exchange(rq, Map.class);  
+        URI uri = URI.create(NAVER_INFO_URI);  
+        RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.POST, uri);  
+        ResponseEntity<Map> re = restTemplate.exchange(rq, Map.class);  
   
- return re;  
-  }  
+        return re;  
+    }  
   
     public ResponseEntity<Map> getKakaoAccessToken(String code) throws Exception {  
         RestTemplate restTemplate = new RestTemplate();  
   
-  MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();  
-  paramMap.add("grant_type", "authorization_code");  
-  paramMap.add("client_id", kakaoApiKey);  
-  paramMap.add("redirect_uri", httpsBaseUrl+kakaoCallbackUri);  
-  paramMap.add("code", code);  
-  paramMap.add("client_secret", kakaoSecretKey);  
+        MultiValueMap<String, String> paramMap = new LinkedMultiValueMap<>();  
+        paramMap.add("grant_type", "authorization_code");  
+        paramMap.add("client_id", kakaoApiKey);  
+        paramMap.add("redirect_uri", httpsBaseUrl+kakaoCallbackUri);  
+        paramMap.add("code", code);  
+        paramMap.add("client_secret", kakaoSecretKey);  
   
-  URI uri = URI.create(KAKAO_TOKEN_URI);  
+        URI uri = URI.create(KAKAO_TOKEN_URI);  
   
- return restTemplate.postForEntity(uri, paramMap, Map.class);  
-  }  
+        return restTemplate.postForEntity(uri, paramMap, Map.class);  
+    }  
   
     public ResponseEntity<Map> getKakaoMemberProfile(String accessToken) throws Exception {  
         RestTemplate restTemplate = new RestTemplate();  
-  HttpHeaders headers = new HttpHeaders();  
+        HttpHeaders headers = new HttpHeaders();  
   
-  headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, "UTF-8");  
-  headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");  
+        headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, "UTF-8");  
+        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");  
   
-  URI uri = URI.create(KAKAO_INFO_URI);  
-  RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.POST, uri);  
-  ResponseEntity<Map> re = restTemplate.exchange(rq, Map.class);  
+        URI uri = URI.create(KAKAO_INFO_URI);  
+        RequestEntity<String> rq = new RequestEntity<>(headers, HttpMethod.POST, uri);  
+        ResponseEntity<Map> re = restTemplate.exchange(rq, Map.class);  
   
- return re;  
-  }  
+        return re;  
+    }  
 }
 ```
