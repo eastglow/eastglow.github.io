@@ -77,7 +77,7 @@ public String getCallbackUri(String type) throws Exception {
 
 ## 2) Back-end
 
-앞의 과정을 잘 거쳐왔다면 플랫폼 별 로그인 후에 리다이렉트되는 URI가 잘 호출되었을 것이다. 나같은 경우는 `https://eastglow.com/join/naver`를 설정해주었기 때문에 네이버 로그인이 성공했다면 위 URI로 돌아왔을 것이다.
+앞의 과정을 잘 거쳐왔다면 플랫폼 별 로그인 후에 리다이렉트되는 URI가 잘 호출되었을 것이다. 나같은 경우는 `https://eastglow.com/naver/Join.do`를 설정해주었기 때문에 네이버 로그인이 성공했다면 위 URI로 돌아왔을 것이다.
 
 ### SnsController.java 중 getNaverJoin 소스
 
@@ -174,7 +174,7 @@ Map<String, Object> memberProfileMap = memberProfileEntity.getBody();
 Map<String, Object> responseMap = (Map<String, Object>) memberProfileMap.get("response");
 ```
 
-카카오의 경우 네이버와 호출하는 주소만 다를 뿐 전반적인 과정은 같기 때문에 이 글 끝에 올려둘 전체 소스에서 확인해보길 바란다.
+카카오의 경우 네이버와 호출하는 주소만 다를 뿐 전반적인 과정은 같기 때문에 이 글 끝에 올려둔 전체 소스에서 확인해보길 바란다.
 
 페이스북은 spring social 관련 디펜던시를 이용하여 진행하였기 때문에 RestTemplate로 진행한 카카오, 네이버와는 조금 소스가 다르다.
 
@@ -196,6 +196,19 @@ public OAuth2Parameters oAuth2Parameters() {
 ```
 
 그러고나서 SnsController쪽을 보면 getFacebookLogin, getFacebookJoin를 통해서 각각 로그인 버튼 링크를 만들어주고 로그인 후에 리다이렉트 되는 페이지로의 이동을 다루게 된다. 소스를 보는 편이 이해가 더 빠를 거라 생각되어 별도의 설명은 생략하도록 하겠다.
+
+글을 마치면서 전체 프로세스를 한번 정리해보자면,
+
+1. 사용자가 로그인 페이지에 접근한다.
+2. 로그인 페이지에서 각 플랫폼 별 로그인 버튼에 넣어줄 링크값을 서버단에서 만들어서 넣어준다.
+3. 사용자가 만들어진 로그인 링크를 클릭하면 각 플랫폼 별 로그인 페이지로 이동한다.
+4. 사용자가 로그인을 성공하게 되면 redirect URI로 설정해둔 페이지로 이동한다.
+5. (나같은 경우) `/{플랫폼이름}/Join.do`으로 이동하게 되는데 이 URI로 접근하게 되면 먼저 사용자의 accessToken을 취득한 뒤, 그 accessToken을 통해서 사용자의 프로필 조회를 하게 된다.
+6. 최종적으로 사용자의 프로필 조회로 받은 정보를 JSP 쪽으로 내려주어 완료하게 된다.
+
+나는 단순히 accessToken이 필요한 프로필 조회 API를 이용하기 위해 accessToken을 취하고 프로필 조회만 하는 기능을 구현했지만 보통은 refreshToken도 필요하고 expire 됐을 경우에 다시 token을 발급받고 하는 과정 등이 필요할 수도 있다. 이러한 로직을 구현하려면 DB나 Redis 등의 캐쉬를 이용해서 하는 예제들을 본 듯 하다. 이러한 경우는 나중에 기회가 된다면 다뤄보도록 하겠다.
+
+***
 
 ## SnsController.java
 
