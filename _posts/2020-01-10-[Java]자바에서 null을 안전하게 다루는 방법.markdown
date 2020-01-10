@@ -3,7 +3,7 @@ layout: post
 title:  "[Java]자바에서 null을 안전하게 다루는 방법"
 date:   2020-01-10 17:00:00
 author: EastGlow
-categories: 기타
+categories: Back-end
 ---
 2020년 새해의 첫 포스트이다. 작년 상반기 2019 Spring Camp에서 들었던 내용을 이제야 써본다. 당시 Spring Camp에 참가하여 세션을 들으면서 노트북에 내용들을 정리해뒀었는데 "나중에 정리해야지"하고는 계속 묻어두고 있었다... 
 
