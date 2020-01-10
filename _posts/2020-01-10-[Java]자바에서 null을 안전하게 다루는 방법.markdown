@@ -1,0 +1,118 @@
+﻿---
+layout: post
+title:  "[Java]자바에서 null을 안전하게 다루는 방법"
+date:   2020-01-10 17:00:00
+author: EastGlow
+categories: 기타
+---
+2020년 새해의 첫 포스트이다. 작년 상반기 2019 Spring Camp에서 들었던 내용을 이제서야 써본다. 당시 Spring Camp에 참가하여 세션을 들으면서 노트북에 내용들을 정리해뒀었는데 "나중에 정리해야지"하고는 계속 묻어두고 있었다...
+
+마침 오늘 연차라서 휴일이기도 해서 카페에서 묻혀있던(?) 내용들을 좀 정리해보고자 한다. 그 중에서도 되게 기억에 남고 재미있게 들었던 "자바에서 null을 안전하게 다루는 방법"이라는 주제를 써보려한다. 발표자는 우아한형제들에 다니시는 [박성철](https://kr.linkedin.com/in/fupfin) 발표자님이셨다.
+
+아래 내용들은 작년 발표에서 들은 내용을 토대로 정리한거기도 하고 발표자님께서 자료를 슬라이드 쉐어([https://www.slideshare.net/gyumee/null-142590829](https://www.slideshare.net/gyumee/null-142590829))에 올려주셨기 때문에 이 자료를 참고해도 좋을 듯 하다.
+
+# null에 대해서
+
+글의 진행은 Spring Camp 당시에 정리해두었던 내용 흐름대로 진행될 것이다. 우선은 자바에서 null이 무엇인지부터 고민해봐야할 것 같다. 프로그래밍을 처음 배우고 자바를 처음 알게 되었을 때 null이라는 개념이 되게 생소했다. 값이 없는 것도 아니고 값이 0도 아니고 빈 값도 아니고 뭐... 이런 녀석이 다있나 했다. 구글링을 해가면서 국내외 여러 글들을 찾아본 결과 null은 아래와 같이 다들 정의하고 있었다.
+
+## null 정의
+
+- `null` means that the variable hasn't been set a value = null은 값이 할당되지 않은 변수
+- merely a special literal that can be of any reference type =   
+모든 참조 유형이 될 수있는 특수 리터럴이다. = 모든 참조는 null 가능
+- `null` is used to denote "no object" or "unknown" or "unavailable",  but these meanings are application specific =   
+`null`은 "객체 없음"또는 "알 수 없음" 또는 "사용할 수 없음"을 나타내는 데 사용되지만 이러한 의미는 응용 프로그램에 따라 다르다.
+- null은 존재하지 않는 상태를 나타내기 위한 것이다.
+
+> 참고 페이지1 : [https://stackoverflow.com/questions/2707322/what-is-null-in-java](https://stackoverflow.com/questions/2707322/what-is-null-in-java)
+> 참고 페이지2 : [https://coderanch.com/t/688734/java/null](https://coderanch.com/t/688734/java/null)
+> 참고 페이지3 : [https://ssoco.tistory.com/50](https://ssoco.tistory.com/50)
+> 참고 페이지4 : [https://www.slideshare.net/gyumee/null-142590829](https://www.slideshare.net/gyumee/null-142590829)
+
+조금씩 의미하는 바는 다른거 같지만 한 줄로 요약하자면 *객체가 없거나 상태가 정의되지 않은 상태* 로 이해하면 될 거 같다. 앞에서 언급했던 값이 "빈" 상태는  `String str = "";`와 같이 "빈 값"이 객체에 할당되어 있기 때문에 null과는 다르며, 0도 0이라는 값이 할당된 상태이기 때문에 null과는 전혀 다르다.
+
+## null 참조
+- 특별한 값이 없음을 나타내려고 null을 도입했고 이 값을 사용하려고 할 때 오류를 내도록 설계
+- 두 참조값이 null일 때 두 참조는 동일하다고 판단
+
+## 소프트웨어 결함 통계
+- 구글 플레이 앱 약 1000개를 조사해보니 NullPointer 문제가 150여 개 발생
+- 그만큼 null과 관련된 Exception이나 오류가 많이 흔히 발생하고 있다는 뜻
+
+
+# null을 안전하게 다루는 방법
+
+## 자바 기본 장치
+
+### 단정문(Assertion)
+
+- 자바 1.4부터 새롭게 추가되었다고 한다.
+- JSR(Java Specifiaction Request)에서는 아래와 같이 정의하고 있다.
+	- Assertion은 부울식(expression)을 포함하고 있는 문장으로서, 프로그래머는 그 문장이 실행될 경우 불리언 식이 참이라고 단언할 수 있다.
+	- 즉, 개발자가 본인의 코드에서 가정한 사실이 올바른 지 검사할 수 있게 해주는 기능
+	- Exception을 통해서 본인이 가정한 상황 외의 예외에 대해서 처리를 할 수도 있지만 Assertion은 예외 처리가 아니라 검사라는 기능을 제공한다.
+	- 정리하자면 예외 처리는 프로그램 구동 중에 생길 수 있는 예외 상황들(네트워크 이상, 파일을 읽을 수 없는 등)에 대해서 처리를 하는 것이고, Assertion은 개발자가 의도한 특정 코드나 조건, 변수값을 먼저 검증, 검사한다는 점에서 차이가 있다.
+	- Assertion은 프로그램이 올바르게 실행되도록 해주는 효과적인 도구가 될 수 있으며, 프로그램의 안정성을 높여줄 수 있다.
+
+#### 기본 사용법
+
+- `assert 부울식;` 혹은 `assert 부울식 : 수식;`
+	- 예1) assert age > 0 : "나이는 음수가 될 수 없습니다:"+age;
+	- 예2) aasert val < 10 ; "10보다 작은 값만 쓸 수 있습니다.";
+- 부울식이 거짓이면 AssertionError 발생
+- 수식은 AssertionError에 포함될 상세 정보를 만드는 생성식
+
+#### 주의해야할 점
+
+- Assertion은 일반적으로 Compile되는 상황에서는 실행되지 않는다. 따라서 아래와 같이 별도의 옵션을 줘야 한다.
+	- -enableassertions 또는 -ea
+- Assertion을 사용하면 안되는 상황이 있다.
+	- public 메소드의 파라미터를 검사하는 경우 : 파라미터값이 잘못되었을 경우는 Assertion으로 검사하기보다는 IllegalArgumentException를 발생시키는게 맞다.
+	-  올바른 수행을 위해 필요한 작업을 수행하는 경우 :  `assert checkName();`와 같이 특정 상황을 체크하여 어떠한 결과를 기대하는 메서드를 만들었을 때, assert를 이용하려고 한다면 위에서 말했듯이 Compile시 실행이 되지 않기 때문에 위 `assert checkName();`은 실행되지 않는다. 때문에 별도의 결과값을 담을 변수를 생성하여 그 변수를 가지고 assert에 사용하도록 해야한다.
+
+### Java.util.Objects
+
+- Java 8
+	- isNull(Object obj)
+	- nonNull(Object obj)
+	- requireNonNull(T obj)
+	- requireNonNull(T obj, String message)
+	- requireNonNull(T obj, Supplier\<String> messageSupplier)
+- Java 9
+	- requireNonNullElse(T obj, T defaultObj)
+	- requireNonNullElseGet(T obj, Supplier<? extends T> supplier)
+
+### java.util.Optional
+
+- The Mother of All Bikesheds by Stuart Marks
+- 절대로 Optional 변수와 반환값에 null을 사용하지 말라
+- Optional을 필드, 메서드 매개변수, 집합 자료형에 쓰지 말라
+
+### null 잘 쓰는 법
+
+- API에 null을 최대한 쓰지 말아라
+	- null로 지나치게 유연한 메서드를 만들지 말고 명시적인 메서드를 만들어라
+		- API에 null을 받아서 분기처리 하지말고 애초에 null이 있을 때 메서드와 없을 때 메서드를 나눠서 만들어라
+	- null을 반환하지 말라
+		- null을 반환하지 말고 예외를 던져라
+		- 빈 반환 값은 빈 컬렉션이나 Null 객체를 활용하라
+- 사전 조건과 사후 조건을 확인하라: "계약에 의한 설계"
+	- Spring의 Assert 클래스
+- (상태와 같이) null의 범위를 지역(클랫, 메서드)에 제한하라
+	- 상태와 비슷하게 null도 지역적으로 제한하면 큰 문제가 안된다
+	- 클래스와 메서드를 작게 만들어라
+	- 설게가 잘 된 코드에선 null의 위험도 줄어든다
+- 초기화를 명확히 하라
+
+# null에 안전하다고 보장해주는 도구
+
+- 자바의 엘비스 연산자(?:) 논의
+	- 도입하면 null을 더 많이 사용할거라 생각하여 최종 도입에서 탈락
+- 대신 Optional 사용 권유
+- JSR 305
+- JSR 308
+	- [Checker Framework](https://checkerframework.org/)
+		- [@NonNull](https://checkerframework.org/api/org/checkerframework/checker/nullness/qual/NonNull.html)
+		- [@Nullable](https://checkerframework.org/api/org/checkerframework/checker/nullness/qual/Nullable.html)
+	- JSR 308 타입 어노테이션
+		- 선언부가 아닌 타입 지정 위치에 어노테이션 사용 가능
