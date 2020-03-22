@@ -64,4 +64,4 @@ categories: 기타
   - Clean Code
   - Effective Java
   - Design Patterns:Elements of Reusable Object-oriented Software
-- Programming Pearls
+  - Programming Pearls
