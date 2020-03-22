@@ -13,6 +13,7 @@ categories: 기타
 오랜만에(?) 책을 읽게 되어 읽으면서 기억에 남을만한 구절들을 정리하여 남겨본다.
 
 > 2020-03-08 아직 읽는중
+> 2020-03-22 완독
 
 ***
 
@@ -43,3 +44,24 @@ categories: 기타
 - 코드에서 빠르게 유추할 수 있는 내용은 굳이 주석으로 달지 말자.
 
 - 주석 없이 설명이 되지 않는 코드에 주석을 달지 말고 해당 코드를 설명없이 이해되도록 고쳐라.
+
+- 기본적으로 if/else를 사용하라. 삼항 연산은 매우 간단할 때만 사용해야한다.
+	- 줄 수를 최소화하는 것보다 다른 사람이 코드를 읽고 이해하는 데 걸리는 시간을 최소화하는 것이 더 중요하다.
+
+- 필요없는 변수는 제거하라. 여러 곳에서 쓰일 줄 알고 별도의 변수로 빼두었지만 한번만 사용하고 버릴 변수는 굳이 따로 담아둘 필요가 없다. 오히려 코드 이해에 독이 될 수 있다.
+
+- 한 번에 하나의 일만 수행하도록 함수를 만들어라.
+
+- 요구사항에 질문을 던지고 질문을 잘게 나누어 분석하라.
+
+- 읽거나 유지보수하기 쉽게 테스트를 만들어라.
+
+- 이 책에서 추천하는 다른 책들
+  - Code Complete
+  - Refactoring
+  - The Practice of Programming
+  - The Pragmatic Programmer : From Journeyman to Master
+  - Clean Code
+  - Effective Java
+  - Design Patterns:Elements of Reusable Object-oriented Software
+- Programming Pearls
