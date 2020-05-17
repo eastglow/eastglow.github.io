@@ -141,4 +141,4 @@ categories: Back-end
 # 기타 참고사항
 
 *  SSM은 Spring AOP를 사용하여 pointcut 및 weaving을 하고 있다. Spring AOP의 proxy는 bean을 감싸고 있기 때문에 같은 class의 내부 호출은 annotation이 있더라도 적용되지 않는다. 즉 내부 메서드 호출로는 Cache가 적용되지 않는다. (http://blog.naver.com/PostView.nhn?blogId=tmondev&logNo=220725135383)
-* Key 값은 250자까지만 허용되므로 Request Dto 자체를 Key로 쓸 순 없었고 별도의 Key 형식을 지정해야된다.
+* Key 값은 250자까지만 허용되므로 보통 Parameter로 받은 Dto 자체를 Key로 쓸 순 없었고 별도의 Key 형식을 지정해야된다.
