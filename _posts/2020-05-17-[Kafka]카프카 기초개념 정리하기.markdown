@@ -75,11 +75,11 @@ categories: Back-end
 
 ## [참고자료]
 
-> https://kafka.apache.org/
-> http://cloudurable.com/blog/kafka-architecture/index.html
-> https://team-platform.tistory.com/11
-> https://epicdevs.com/17?category=460351
-> https://www.popit.kr/kafka-%EC%9A%B4%EC%98%81%EC%9E%90%EA%B0%80-%EB%A7%90%ED%95%98%EB%8A%94-topic-replication/
+> https://kafka.apache.org/  
+> http://cloudurable.com/blog/kafka-architecture/index.html  
+> https://team-platform.tistory.com/11  
+> https://epicdevs.com/17?category=460351  
+> https://www.popit.kr/kafka-%EC%9A%B4%EC%98%81%EC%9E%90%EA%B0%80-%EB%A7%90%ED%95%98%EB%8A%94-topic-replication/  
 
 
 # Kafka 도입 사례와 예시
@@ -95,8 +95,8 @@ categories: Back-end
 
 ## [참고자료]
 
-> https://pubdata.tistory.com/30
-> https://wooyoung85.tistory.com/32
+> https://pubdata.tistory.com/30  
+> https://wooyoung85.tistory.com/32  
 
 
 # 기타
