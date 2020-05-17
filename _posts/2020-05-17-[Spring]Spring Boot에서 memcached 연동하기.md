@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[Spring]Spring Boot에서 memcached 연동하기"
 date:   2020-05-17 20:15:00
@@ -130,11 +130,13 @@ categories: Back-end
     }
 
 # 최초 호출시
-2020-05-17 09:04:50.783  INFO 19324 --- [nio-8080-exec-8] com.google.code.ssm.spring.SSMCache      : Cache miss. Get by key 000001 from cache testCache@
-2020-05-17 09:04:50.844  INFO 19324 --- [nio-8080-exec-8] com.google.code.ssm.spring.SSMCache      : Put '[TestDto(itemNm=테스트1, itemCnt=5)]' under key 000001 to cache testCache@
+
+    @2020-05-17 09:04:50.783  INFO 19324 --- [nio-8080-exec-8] com.google.code.ssm.spring.SSMCache      : Cache miss. Get by key 000001 from cache testCache
+    2020-05-17 09:04:50.844  INFO 19324 --- [nio-8080-exec-8] com.google.code.ssm.spring.SSMCache      : Put '[TestDto(itemNm=테스트1, itemCnt=5)]' under key 000001 to cache testCache@
 
 # 이후 호출시
-@2020-05-17 09:05:38.793  INFO 19324 --- [nio-8080-exec-4] com.google.code.ssm.spring.SSMCache      : Cache hit. Get by key 000001 from cache testCache value '[TestDto(itemNm=테스트1, itemCnt=5)]'@
+
+    @2020-05-17 09:05:38.793  INFO 19324 --- [nio-8080-exec-4] com.google.code.ssm.spring.SSMCache      : Cache hit. Get by key 000001 from cache testCache value '[TestDto(itemNm=테스트1, itemCnt=5)]'@
 
 # 기타 참고사항
 
