@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  "[Kafka]ReplyingKafkaTemplate 사용하기"
 date:   2021-03-01 22:50:00
@@ -47,16 +47,16 @@ categories: Back-end
 
     @Bean(name = "replyKafkaListenerContainerFactory")  
     public ConcurrentKafkaListenerContainerFactory<String, String> replyKafkaListenerContainerFactory(KafkaTemplate<String, String> defaultKafkaTemplate) {  
-      ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();  
-      factory.setConsumerFactory(defaultConsumerFactory());  
-      factory.setConcurrency(1);  
-      factory.setErrorHandler(defaultConsumerErrorHandler);  
-      factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);  
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();  
+        factory.setConsumerFactory(defaultConsumerFactory());  
+        factory.setConcurrency(1);  
+        factory.setErrorHandler(defaultConsumerErrorHandler);  
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);  
       
-      factory.setReplyTemplate(defaultKafkaTemplate);  
-      //factory.setReplyHeadersConfigurer((k, v) -> k.equals("cat"));  
+        factory.setReplyTemplate(defaultKafkaTemplate);  
+        //factory.setReplyHeadersConfigurer((k, v) -> k.equals("cat"));  
       
-      return factory;  
+        return factory;  
     }
 
 이미 기존에 `ConcurrentKafkaListenerContainerFactory`가 하나 있기 때문에 `@Bean(name = "replyKafkaListenerContainerFactory") `을 통해 별도로 Bean Name을 지정해줬다.
@@ -69,26 +69,27 @@ categories: Back-end
 
     @Bean  
     public ProducerFactory<String, String> defaultProducerFactory() {  
-      Map<String, Object> props = new HashMap<>();  
+        Map<String, Object> props = new HashMap<>();  
       
-      props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);  
-      props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);  
-      props.put(ProducerConfig.ACKS_CONFIG, "1");  
-      props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16_384);  
-      props.put(ProducerConfig.LINGER_MS_CONFIG, 50);  
-      props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");  
-      props.put(ProducerConfig.RETRIES_CONFIG, 0);  
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);  
+        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33_554_432);  
+        props.put(ProducerConfig.ACKS_CONFIG, "1");  
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16_384);  
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 50);  
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "lz4");  
+        props.put(ProducerConfig.RETRIES_CONFIG, 0);  
       
-      props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);  
-      props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);  
-     return new DefaultKafkaProducerFactory<>(props, new StringSerializer()  
-      , new JsonSerializer<String>().noTypeInfo());  
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);  
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);  
+        
+        return new DefaultKafkaProducerFactory<>(props, new StringSerializer()  
+            , new JsonSerializer<String>().noTypeInfo());  
     }  
       
     @Bean(name = "defaultKafkaTemplate")  
     public KafkaTemplate<String, String> defaultKafkaTemplate(ProducerFactory<String, String> defaultProducerFactory) {  
       
-      return new KafkaTemplate<>(defaultProducerFactory);  
+        return new KafkaTemplate<>(defaultProducerFactory);  
     }
 
 원래 컨슈머 역할을 하는 프로젝트에는 위와 같은 ProducerFactory 관련 설정이 아예 없었다. 이번에 `ReplyingKafkaTemplate`를 추가하면서 Producer 관련 설정도 필요한 것을 알게 되었고 이에 맞춰서 추가한 것이다.
@@ -98,35 +99,35 @@ categories: Back-end
 ## 메시지를 소비하는 메소드
 
     @KafkaListener(topics = "SEND_MAIL"  
-      , groupId = "SEND_MAIL_GROUP"  
-      , containerFactory = "replyKafkaListenerContainerFactory")  
+        , groupId = "SEND_MAIL_GROUP"  
+        , containerFactory = "replyKafkaListenerContainerFactory")  
     @SendTo("SEND_MAIL_REPLY")  
     public String sendMail(@Header(KafkaHeaders.RECEIVED_TOPIC) String topic  
-          , @Header(value = KafkaHeaders.RECEIVED_MESSAGE_KEY, required = false) String messageKey  
-          , @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partitionId  
-          , @Header(KafkaHeaders.OFFSET) String offset  
-          , @Header(KafkaHeaders.RECEIVED_TIMESTAMP) String timestamp  
-          , @Header(KafkaHeaders.GROUP_ID) String groupId  
-          , @Header(KafkaHeaders.REPLY_TOPIC) String replyTopic  
-          , @Payload String msg) throws Exception {  
+        , @Header(value = KafkaHeaders.RECEIVED_MESSAGE_KEY, required = false) String messageKey  
+        , @Header(KafkaHeaders.RECEIVED_PARTITION_ID) String partitionId  
+        , @Header(KafkaHeaders.OFFSET) String offset  
+        , @Header(KafkaHeaders.RECEIVED_TIMESTAMP) String timestamp  
+        , @Header(KafkaHeaders.GROUP_ID) String groupId  
+        , @Header(KafkaHeaders.REPLY_TOPIC) String replyTopic  
+        , @Payload String msg) throws Exception {  
       
-      RestTemplate restTemplate = new RestTemplate();  
+        RestTemplate restTemplate = new RestTemplate();  
       
-      List<MediaType> acceptableMediaTypes = new ArrayList<>();  
-      acceptableMediaTypes.add(MediaType.APPLICATION_JSON);  
+        List<MediaType> acceptableMediaTypes = new ArrayList<>();  
+        acceptableMediaTypes.add(MediaType.APPLICATION_JSON);  
       
-      HttpHeaders httpHeaders = new HttpHeaders();  
-      httpHeaders.setAccept(acceptableMediaTypes);  
-      httpHeaders.setContentType(MediaType.APPLICATION_JSON);  
+        HttpHeaders httpHeaders = new HttpHeaders();  
+        httpHeaders.setAccept(acceptableMediaTypes);  
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);  
       
-      JsonObject msgJsonObject = new Gson().fromJson(msg, JsonObject.class);  
-      JsonObject reqJsonObject = new JsonObject();  
-      reqJsonObject.add("params", msgJsonObject);  
+        JsonObject msgJsonObject = new Gson().fromJson(msg, JsonObject.class);  
+        JsonObject reqJsonObject = new JsonObject();  
+        reqJsonObject.add("params", msgJsonObject);  
       
-      HttpEntity<String> httpEntity = new HttpEntity<>(reqJsonObject.toString(), httpHeaders);  
-      ResponseEntity<String> responseEntity = restTemplate.exchange("www.mail-api.com/mail/send", HttpMethod.POST, httpEntity, String.class);  
+        HttpEntity<String> httpEntity = new HttpEntity<>(reqJsonObject.toString(), httpHeaders);  
+        ResponseEntity<String> responseEntity = restTemplate.exchange("www.mail-api.com/mail/send", HttpMethod.POST, httpEntity, String.class);  
       
-     return responseEntity.getBody().toString();  
+        return responseEntity.getBody().toString();  
     }
 
 간단한 REST API 호출용 메소드이다. `SEND_MAIL`이라는 Topic으로 들어온 메시지를 소비하는 메소드인데 못보던 어노테이션이 하나 붙어있다. 바로 `@SendTo`이다. 이것을 통해 메시지를 생산해줄 수 있는 것이다.
@@ -146,18 +147,18 @@ categories: Back-end
     @Bean(name = "replyKafkaTemplate")  
     public ReplyingKafkaTemplate<String, String, String> replyKafkaTemplate(ProducerFactory<String, String> defaultProducerFactory, ConcurrentMessageListenerContainer<String, String> replyContainer) {  
       
-      return new ReplyingKafkaTemplate<>(defaultProducerFactory, replyContainer);  
+        return new ReplyingKafkaTemplate<>(defaultProducerFactory, replyContainer);  
     }  
       
     @Bean  
     public ConcurrentMessageListenerContainer<String, String> replyContainer(ConcurrentKafkaListenerContainerFactory<String, String> replyKafkaListenerContainerFactory) {  
       
-      ConcurrentMessageListenerContainer<String, String> replyContainer = replyKafkaListenerContainerFactory.createContainer("SEND_MAIL_REPLY");  
-      replyContainer.getContainerProperties().setGroupId("REPLY_CONSUME_GROUP");  
-      replyContainer.setAutoStartup(false);  
-      replyContainer.setBatchErrorHandler(new SeekToCurrentBatchErrorHandler());  
+        ConcurrentMessageListenerContainer<String, String> replyContainer = replyKafkaListenerContainerFactory.createContainer("SEND_MAIL_REPLY");  
+        replyContainer.getContainerProperties().setGroupId("REPLY_CONSUME_GROUP");  
+        replyContainer.setAutoStartup(false);  
+        replyContainer.setBatchErrorHandler(new SeekToCurrentBatchErrorHandler());  
       
-     return replyContainer;  
+        return replyContainer;  
     }
 
 완전 진짜 간소하게 축소한 코드이다. 보통의 KafkaTemplate는 `KafkaTemplate<?, ?`라는 타입으로 Bean을 생성해주는데 ReplyingKafkaTemplate은 `ReplyingKafkaTemplate<?, ?, ?>`로 별도로 생성해주었다.
@@ -178,16 +179,16 @@ categories: Back-end
 
     @Bean(name = "replyKafkaListenerContainerFactory")  
     public ConcurrentKafkaListenerContainerFactory<String, String> replyKafkaListenerContainerFactory(KafkaTemplate<String, String> defaultKafkaTemplate) {  
-      ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();  
-      factory.setConsumerFactory(defaultConsumerFactory());  
-      factory.setConcurrency(1);  
-      factory.setErrorHandler(defaultConsumerErrorHandler);  
-      factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);  
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();  
+        factory.setConsumerFactory(defaultConsumerFactory());  
+        factory.setConcurrency(1);  
+        factory.setErrorHandler(defaultConsumerErrorHandler);  
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);  
       
-      factory.setReplyTemplate(defaultKafkaTemplate);  
-      //factory.setReplyHeadersConfigurer((k, v) -> k.equals("cat"));  
+        factory.setReplyTemplate(defaultKafkaTemplate);  
+        //factory.setReplyHeadersConfigurer((k, v) -> k.equals("cat"));  
       
-      return factory;  
+        return factory;  
     }
 
 컨슈머 쪽과 똑같이 추가해주면 된다. 그러면 바로 위쪽에서 `replyContainer`가 파라미터로 받는 `ConcurrentKafkaListenerContainerFactory`를 이 Bean 객체로 받을 수 있는 것이다. 그러면 프로듀서 쪽에서도 ReplyingKafkaTemplate를 쓰기 위한 준비가 끝난 것이다.
@@ -200,23 +201,23 @@ categories: Back-end
     public class ReplyingProducer {  
       
       public ReplyingProducer(ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate) {  
-      this.replyingKafkaTemplate = replyingKafkaTemplate;  
+        this.replyingKafkaTemplate = replyingKafkaTemplate;  
       }  
       
       private final ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate;  
       
      private String sendMessage(final String topic, final String replyTopic, final String key, final String msg) throws Exception {  
-      ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, msg);  
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, msg);  
       
-      record.headers().add(new RecordHeader(KafkaHeaders.REPLY_TOPIC, replyTopic.getBytes()));  
+        record.headers().add(new RecordHeader(KafkaHeaders.REPLY_TOPIC, replyTopic.getBytes()));  
       
-      RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);  
+        RequestReplyFuture<String, String, String> replyFuture = replyingKafkaTemplate.sendAndReceive(record);  
       
-      SendResult<String, String> sendResult = replyFuture.getSendFuture().get(10, TimeUnit.SECONDS);  
+        SendResult<String, String> sendResult = replyFuture.getSendFuture().get(10, TimeUnit.SECONDS);  
       
-      ConsumerRecord<String, String> consumerRecord = replyFuture.get(10, TimeUnit.SECONDS);  
+        ConsumerRecord<String, String> consumerRecord = replyFuture.get(10, TimeUnit.SECONDS);  
       
-     return consumerRecord.value();  
+        return consumerRecord.value();  
       }  
     }
 
