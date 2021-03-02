@@ -61,9 +61,9 @@ categories: Back-end
 
 이미 기존에 `ConcurrentKafkaListenerContainerFactory`가 하나 있기 때문에 `@Bean(name = "replyKafkaListenerContainerFactory") `을 통해 별도로 Bean Name을 지정해줬다.
 
-`factory.setReplyHeadersConfigurer((k, v) -> k.equals("cat"));`는 주석 처리가 되어 있는 공식 Docs를 봐도 해당 부분 소스를 봐도 아직 무엇을 위한 설정인지 이해를 못해서-_-... 우선 주석 처리를 해두고 좀 더 찾아보는 중이다. 메시지를 쏴줄 때 헤더에 특정 값을 설정해줄 수 있는데 그때 쓰는거 같긴한데... 더 찾아보고 알게 되면 추가해둘 예정이다.
+`factory.setReplyHeadersConfigurer((k, v) -> k.equals("cat"));`는 주석 처리가 되어 있는데... 공식 Docs를 봐도 해당 부분 소스를 봐도 아직 무엇을 위한 설정인지 이해를 못해서-_-... 우선 주석 처리를 해두고 좀 더 찾아보는 중이다. 메시지를 쏴줄 때 헤더에 특정 값을 설정해줄 수 있는데 그때 쓰는거 같긴한데... 더 찾아보고 알게 되면 추가해둘 예정이다.
 
-다른 부분들은 기존의 컨슈머 설정과 동일하고 `setReplyTemplate`부분이 새로 추가되었다. 그럼 여기서 set되는 `defaultKafkaTemplat`는 어디에 있을까?
+다른 부분들은 기존의 컨슈머 설정과 동일하고 `setReplyTemplate`부분이 새로 추가되었다. 그럼 여기서 set되는 `defaultKafkaTemplate`는 어디에 있을까?
 
 ## Reply 메시지를 생산하기 위한 Producer 설정 추가
 
@@ -161,11 +161,11 @@ categories: Back-end
         return replyContainer;  
     }
 
-완전 진짜 간소하게 축소한 코드이다. 보통의 KafkaTemplate는 `KafkaTemplate<?, ?`라는 타입으로 Bean을 생성해주는데 ReplyingKafkaTemplate은 `ReplyingKafkaTemplate<?, ?, ?>`로 별도로 생성해주었다.
+완전 진짜 간소하게 축소한 코드이다. 보통의 KafkaTemplate는 `KafkaTemplate<?, ?>`라는 타입으로 Bean을 생성해주는데 ReplyingKafkaTemplate은 `ReplyingKafkaTemplate<?, ?, ?>`로 별도로 생성해주었다.
 
 더불어 `ConcurrentMessageListenerContainer<?, ?>`를 인자값으로 받고 있는데 여기에 Reply Topic에 대한 설정, Reply Group에 대한 설정을 할 수 있다.
 
-`replyKafkaListenerContainerFactory.createContainer`에 있는 `SEND_MAIL_REPLY`를 혹시 기억하는가? 아까 위쪽에서 `@SendTo`에 설정한 Topic명과 같다. 여기엔 하나가 아닌, 여러 Reply Topic명을 더 추가할 수 있다. (`String... topic`가 파라미터 타입이라 가변인자값으로 복수개의 Topic을 받을 수 있다.)
+`replyKafkaListenerContainerFactory.createContainer`에 있는 `SEND_MAIL_REPLY`를 혹시 기억하는가? 아까 위쪽에서 `@SendTo`에 설정한 Topic명과 같다. 여기엔 하나가 아닌, 여러 Reply Topic명을 더 추가할 수 있다. (`String... topic`이 파라미터 타입이라 가변인자값으로 복수개의 Topic을 받을 수 있다.)
 
 그리고 바로 아래에서 `setGroupId`를 통해 Reply Topic명으로 생성된 메시지를 소비할 Group명을 세팅해줄 수 있다.
 
