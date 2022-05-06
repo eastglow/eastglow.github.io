@@ -114,7 +114,7 @@ social:
     username: 
     url: 
     desc: Connect with me on LinkedIn
-    share: ㄹ민ㄷ
+    share: false
 
   - name: Google+
     icon: google-plus
