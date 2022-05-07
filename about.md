@@ -6,7 +6,7 @@ permalink: /about/
 
 # 들어가며...
 
-아직은 미숙한 초보 개발자입니다. 서울의 온라인 유통 업체에서 일하고 있습니다.  
+아직은 미숙한 초보 개발자입니다. 서울의 이커머스 업체에서 일하고 있습니다.  
 주로 백엔드 개발을 하고 있으며 프론트 쪽도 간간히 만지고 있습니다.  
 웹 개발에 관련된 기술에 관심이 있고, 관련 세미나나 컨퍼런스에 다니는 것을 좋아합니다.  
 이렇게 제가 경험한 지식과 기술들을 정리하고자 블로그를 시작하게 되었습니다.  
@@ -26,10 +26,10 @@ permalink: /about/
 
 * Language: Java
 * IDE: Eclipse, IntelliJ
-* WAS: Tomcat, Resin
+* WAS: Tomcat
 * Server: Windows, Linux
-* Server-Side Script: JSP, ASP
-* Database: Oracle, MySQL, MSSQL, Tibero
-* Etc: Mybatis, CVS, SVN, Git, GitHub, Jenkins
-* Framework: Spring, Spring Boot, Struts, eGovFrame
+* Server-Side Script: JSP
+* Database: Oracle, MySQL, MSSQL, Tibero, PostgreSQL
+* Etc: Mybatis, Git, Jenkins, k8s, MSA, Apache Kafka
+* Framework: Spring, Spring Boot
 * Web: HTML5, Javascript, JQuery, CSS3, Bootstrap, Ajax
