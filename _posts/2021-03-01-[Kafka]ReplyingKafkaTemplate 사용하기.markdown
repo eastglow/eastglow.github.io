@@ -3,7 +3,7 @@ layout: post
 title:  "[Kafka]ReplyingKafkaTemplate 사용하기"
 date:   2021-03-01 22:50:00
 author: EastGlow
-categories: Back-end
+categories: Kafka
 ---
 
 작년 말부터 사내에 구축되어 있는 Kafka를 이용하여 이것저것 해보고 있다. RabbitMQ같은 메시지 큐 시스템은 익히 들어 알고 있었고 Kafka도 직접 써본 적은 없지만 여러 세미나나 컨퍼런스에서 조금씩 주워들은(?) 경험이 있어서 어느정도 알고는 있었다.
