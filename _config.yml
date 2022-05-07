@@ -58,6 +58,9 @@ descriptions:
   - cat: Back-end
     desc: "Back-end related posts"
     
+  - cat: Kafka
+    desc: "Apache Kafka related posts"
+    
   - cat: 기타
     desc: "Odds and ends"
     
