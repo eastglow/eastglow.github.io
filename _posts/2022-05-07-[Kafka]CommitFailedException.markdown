@@ -75,6 +75,7 @@ Caused by: org.apache.kafka.clients.consumer.CommitFailedException: Offset commi
 
 ### 당시 남아있던 오류 로그의 일부
 - 원본 로그의 날짜나 토픽명은 이 글에선 임의의 값으로 변경함
+
 ```
 Apr 14, 2022 @ 03:43:58.000 Caused by: org.apache.kafka.clients.consumer.CommitFailedException: Offset commit cannot be completed since the consumer is not part of an active group for auto partition assignment; it is likely that the consumer was kicked out of the group.
 
