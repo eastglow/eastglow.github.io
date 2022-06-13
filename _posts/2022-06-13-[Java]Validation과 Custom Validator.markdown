@@ -68,10 +68,12 @@ Validator를 통해 파라미터를 검증할 클래스에 붙일 어노테이�
           return false;
         }
         
-        private void setMessage(String message, ConstraintValidatorContext context) {  
-          context.disableDefaultConstraintViolation();  
-          context.buildConstraintViolationWithTemplate(message).addConstraintViolation();  
-        }  
+      }
+
+      private void setMessage(String message, ConstraintValidatorContext context) {  
+        context.disableDefaultConstraintViolation();  
+        context.buildConstraintViolationWithTemplate(message).addConstraintViolation();  
+      }
     }
 
 1번에서 만든 어노테이션이 붙은 부분에서 실제로 요청받은 파라미터를 받아서 검증하는 Validator 클래스이다.
