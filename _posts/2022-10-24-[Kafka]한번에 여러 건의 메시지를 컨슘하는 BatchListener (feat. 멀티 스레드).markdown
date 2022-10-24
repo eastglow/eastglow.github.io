@@ -103,6 +103,6 @@ ConsumerRecords는 살짝 뜯어보면 내부적으로는 Iterable를 구현하�
 
 아직 배치 리스너롤 실제 업무 영역에 적용하여 성능이나 로직 상의 이슈 등을 완벽하게 체크하고 써본건 아니기 때문에 오늘은 간단하게 이런게 있다~정도로만 짚고 넘어가려고 한다. 추후에 배치 리스너를 적용하여 제대로 써볼 일이 생기면 다시 다뤄보도록 하겠다.
 
-> 참고:
-> https://yaboong.github.io/spring/2020/06/07/kafka-batch-consumer-unintended-listener-invoking/
-> https://docs.spring.io/spring-kafka/reference/html/
+> 참고:  
+> https://yaboong.github.io/spring/2020/06/07/kafka-batch-consumer-unintended-listener-invoking/  
+> https://docs.spring.io/spring-kafka/reference/html/  
