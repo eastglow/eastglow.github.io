@@ -29,7 +29,7 @@ permalink: /about/
 * WAS: Tomcat
 * Server: Windows, Linux
 * Server-Side Script: JSP
-* Database: Oracle, MySQL, MSSQL, Tibero, PostgreSQL
-* Etc: Mybatis, Git, Jenkins, k8s, MSA, Apache Kafka
+* Database: Oracle, MySQL, PostgreSQL
+* Etc: Mybatis, Git, Jenkins, k8s, MSA, Apache Kafka, Jira, Bitbucket, Bamboo
 * Framework: Spring, Spring Boot
 * Web: HTML5, Javascript, JQuery, CSS3, Bootstrap, Ajax
