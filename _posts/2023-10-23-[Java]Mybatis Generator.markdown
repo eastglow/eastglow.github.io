@@ -22,7 +22,7 @@ categories: Back-end
 
 현재 우리팀 MSA 프로젝트는 maven, gradle를 혼합해서 사용 중이나 공용 DTO가 들어갈 프로젝트는 gradle을 사용 중이라 gradle 기준으로 설명하고자 한다. (gradle 버전은 7.5.1이다.)
 
-우선은 `com.thinkimi.gradle.MybatisGenerator`라는 Mybatis Generator 오픈소스를 이용하였다. 찾아보니 비슷한 역할을 하는 몇가지가 더 있는거 같긴한데 얘가 제일 검색되었기도 하고 다 비슷비슷해보여서 이걸로 정했다.
+우선은 `com.thinkimi.gradle.MybatisGenerator`라는 Mybatis Generator 오픈소스를 이용하였다. 찾아보니 비슷한 역할을 하는 몇가지가 더 있는거 같긴한데 얘가 제일 먼저 검색되었기도 하고 다 비슷비슷해보여서 이걸로 정했다.
 
 ```
 buildscript {  
