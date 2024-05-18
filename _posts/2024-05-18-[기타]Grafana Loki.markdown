@@ -14,7 +14,6 @@ categories: Back-end
 그러다보니 팀 내에서도 2주는 너무 짧은 것 같다, 별도의 로그 수집 체계를 구축하는게 어떻겠냐 라는 의견이 나왔었고 결과적으로 이번글에서 다룰 Grafana Loki를 검토해보게 되었다. 스포(?)를 좀 하자면 결과적으로는 사용 안 하게 되었지만(이유는 마지막에 후술하겠다.) 검토 과정에서 정리한 내용들과 간단한 테스트 과정을 정리하여 글로 남겨두었다.
 
 # Grafana Loki
-
 > [https://github.com/grafana/loki?tab=readme-ov-file#loki-like-prometheus-but-for-logs](https://github.com/grafana/loki?tab=readme-ov-file#loki-like-prometheus-but-for-logs)
 > 
 > [https://grafana.com/docs/loki/latest/get-started/overview/](https://grafana.com/docs/loki/latest/get-started/overview/)
@@ -26,7 +25,6 @@ Loki는 수평 확장이 가능하고 가용성이 높은 다중 테넌트 로�
 ![](https://grafana.com/docs/loki/latest/get-started/loki-overview-2.png)
 
 ## 다른 로그 시스템과의 차이점
-
 -   로그 전체를 인덱싱을 하지않으며, 압축되고 구조화되지 않은 로그를 저장하고 메타데이터만 인덱싱함으로써 Loki는 작동이 더 간단하고 실행 비용이 더 저렴
 -   매트릭을 pull하여 수집하는게 아니라 반대로 push를 통해 수집받는(?) 방식에서 Prometheus와 다름
 -   Prometheus에서 이미 사용하고 있는 것과 동일한 레이블을 사용하여 로그 스트림을 인덱스 및 그룹화하므로 이미 Prometheus에서 사용하고 있는 것과 동일한 레이블을 사용하여 지표와 로그 간에 원활하게 전환 가능
@@ -34,22 +32,18 @@ Loki는 수평 확장이 가능하고 가용성이 높은 다중 테넌트 로�
 -   Grafana에서 기본 지원중 (Grafana v6.0 필요)
 
 ## Loki 서비스 구성
-
 1. Loki: 로그 저장 및 쿼리 처리를 하는 역할 (server)
 2. Promtail: 로그를 수집하여 Loki로 보내는 역할 (agent)
 3. Grafana: 수집한 로그를 시각화하는 역할 (visualizer)
 
 ## Loki 아키텍처
-
 1. 다중 테넌시: 다중 테넌트 모드에서 실행될 때 모든 데이터는 X-Scope-OrgID HTTP 헤더에서 가져온 테넌트 ID에 의해 분할될 수 있다. 다중 테넌트 모드가 아닐 땐 헤더는 무시되고 테넌트 ID는 "fake"라는 값으로 세팅된다. 이것은 인덱스와 저장된 청크를 나타내게 된다. 
 2. 단일 저장소: Loki는 모든 데이터를 단일 객체 스토리지 백엔드에 저장한다.
 
 ## Loki 구성요소
-
 ![구성요소_다이어그램](https://grafana.com/docs/loki/latest/get-started/loki_architecture_components.svg)
 
 ## Loki 설치 및 구성
-
 [https://github.com/grafana/loki/releases/tag/v2.9.6](https://github.com/grafana/loki/releases/tag/v2.9.6)
 
 [https://grafana.com/docs/loki/latest/setup/install/](https://grafana.com/docs/loki/latest/setup/install/)
@@ -61,7 +55,6 @@ Loki는 수평 확장이 가능하고 가용성이 높은 다중 테넌트 로�
 # 로컬에서 Grafana Loki 세팅해서 돌려보기
 
 ## 1. Docker 설치
-
 [https://docs.docker.com/desktop/install/mac-install/](https://docs.docker.com/desktop/install/mac-install/)
 
 ![](/assets/post/20240518_1.png)
@@ -69,7 +62,6 @@ Loki는 수평 확장이 가능하고 가용성이 높은 다중 테넌트 로�
 ![](/assets/post/20240518_2.png)
 
 ## 2. centos7 이미지 설치 및 Docker 기본 세팅
-
 공식 Docs: [https://grafana.com/docs/loki/latest/setup/install/docker/](https://grafana.com/docs/loki/latest/setup/install/docker/)
 
 > centos8은 지원 기간이 종료되어서 yum install 시 제대로 동작하지 않고 보안적으로도 안 좋다해서 지원 기간이 남은 centos7을 쓰는게 좋다고 한다
@@ -79,25 +71,20 @@ Loki는 수평 확장이 가능하고 가용성이 높은 다중 테넌트 로�
 ### 1) centos7 이미지 pull
 
 1. docker 명령어로 받기 
-
 > docker pull centos:centos7
 
-2. Docker Desktop에서 받기  
-
+2. Docker Desktop에서 받기
 ![](/assets/post/20240518_3.png)
 
 ### 2) Docker Volume create
-
 > 후에 나올 단계 중에 Loki와 관련된 config yaml 파일을 받아놔야 하는 부분이 있는데 도커 컨테이너를 띄울 때 이 파일을 사용해야해서 공통으로 쓸 수 있는 볼륨을 만들고 centos7에 마운트해서 도커 이미지를 띄워줘야한다.
 
 1. docker 명령어로 create (볼륨명은 자유롭게)
-
 ```
 docker volume create {볼륨명}
 ```
 
 2. Docker Desktop에서 create  
-
 ![](/assets/post/20240518_4.png)
 
 그냥 좌측 메뉴 중 Volumes에 들어가서 Create하면 됨
@@ -105,7 +92,6 @@ docker volume create {볼륨명}
 ### 3) Docker Network create
 
 1. 생성할 컨테이너들을 하나의 네트워크로 묶어주기 위해 Docker Network를 생성해준다.
-
 ```
 docker network create {네트워크명}
 ```
@@ -119,16 +105,15 @@ docker run -it -d --name centos7 --network {네트워크명} -v {볼륨명}:/{�
 ```
 
 2. docker ps 명령어로 띄워진 컨테이너 확인이 가능하고 Docker Desktop에서도 확인 가능함
-
 ![](/assets/post/20240518_5.png)
-![](/assets/post/20240518_3.png)
+
+![](/assets/post/20240518_6.png)
 
 ## 3. Loki, Promtail, Grafana 세팅
 
 ### 1) Loki, Promtail config yaml 받고 컨테이너 띄우기
 
 1. 좀전에 띄운 centos 컨테이너에 접속해서 wget으로 config 파일 2개를 받아준다. 경로는 아까 생성한 data01 볼륨 안에 자유롭게 잡아준다.
-
 ```
 cd /data01
 mkdir loki-config
@@ -137,23 +122,21 @@ wget https://raw.githubusercontent.com/grafana/loki/v2.9.4/cmd/loki/loki-local-c
 wget https://raw.githubusercontent.com/grafana/loki/v2.9.4/clients/cmd/promtail/promtail-docker-config.yaml -O promtail-config.yaml
 ```
 
-![](/assets/post/20240518_4.png)
+![](/assets/post/20240518_7.png)
 
 2. 아래 명령어를 통해 Loki & Promtail 컨테이너를 띄워준다.
-
 ```
 docker run --name loki --network {네트워크명} -d -v {볼륨명}:/{볼륨 내 디렉토리명} -p 3100:3100 grafana/loki:2.9.4 -config.file=/{볼륨 내 디렉토리명}/loki-config.yaml
 docker run --name promtail --network {네트워크명} -d -v {볼륨명}:/{볼륨 내 디렉토리명} grafana/promtail:2.9.4 -config.file=/{볼륨 내 디렉토리명}/promtail-config.yaml
 ```
 
 ### 2) 최종적으로 Loki & Promtail 컨테이너가 올라와있고 정상 실행 중인걸 볼 수 있다.
-
 - Loki
-  ![](/assets/post/20240518_5.png)
+  ![](/assets/post/20240518_8.png)
   - 매트릭도 정상 출력되고 있다.
-    ![](/assets/post/20240518_7.png)
+    ![](/assets/post/20240518_10.png)
 - Promtail
-  ![](/assets/post/20240518_6.png)
+  ![](/assets/post/20240518_9.png)
 
 ### 3) Grafana 컨테이너 띄우기
 
@@ -164,8 +147,8 @@ docker run -d -p 3000:3000 --name=grafana --network {네트워크명} -v {볼륨
 
 2. 이후 데이터소스 추가에 가서 Loki를 선택하여 아래와 같이 추가해보면 정상적으로 추가되는 것을 볼 수 있다.
 
-![](/assets/post/20240518_8.png)
-![](/assets/post/20240518_9.png)
+![](/assets/post/20240518_11.png)
+![](/assets/post/20240518_12.png)
 
 ## 4. Local Spring Boot에서 로그 보내보기
 
@@ -207,7 +190,7 @@ docker run -d -p 3000:3000 --name=grafana --network {네트워크명} -v {볼륨
 
 ### 2) Grafana에서 조회
 
-![](/assets/post/20240518_10.png)
+![](/assets/post/20240518_13.png)
 
 # 마치며
 
