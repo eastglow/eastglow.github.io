@@ -217,7 +217,7 @@ Redis Exception 발생 시 핸들링 하는 방법 중 하나인 CacheErrorHandl
 3. extends CachingConfigurerSupport
    1. 별도의 Custom CacheErrorHandler를 등록하려면 위 CachingConfigurerSupport를 상속받아 @Override 메서드를 구현해야한다.
 
-#### CustomREdisAutoConfiguration
+#### CustomRedisAutoConfiguration
 ```
 @Configuration
 @ConditionalOnProperty("spring.redis.host")
