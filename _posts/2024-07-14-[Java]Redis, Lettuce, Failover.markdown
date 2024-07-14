@@ -215,26 +215,27 @@ Redis Exception 발생 시 핸들링 하는 방법 중 하나인 CacheErrorHandl
 1. 별도의 Custom CacheErrorHandler를 등록하지 않으면 등록되는 기본 핸들러이다. CacheAspectSupport 클래스에서 보면 this.errorHandler가 new SingletonSupplier에 담기는 것을 볼 수 있다. 이 클래스에서 볼 수 있듯이 별도의 errorHandler 객체를 받았으면 그걸 쓰고 아니면 SimpleCacheErrorHandler::new를 하여 사용한다. 
 2. 이 핸들러에서는 기본적으로 Cache Exception이 발생하면 바로 throw를 하고 있다. 그래서 만약 @Cacheable이라든지 Redis Operation을 통해 Redis Command를 실행했는데 에러가 발생하면 해당 에러가 바로 throw 되어 정상적으로 메서드 실행을 마칠 수 없게 된다.
 3. extends CachingConfigurerSupport
-   1. 별도의 Custom CacheErrorHandler를 등록하려면 위 CachingConfigurerSupport를 상속받아 @Override 메서드를 구현해야한다.  
-    ```
-    @Configuration
-    @ConditionalOnProperty("spring.redis.host")
-    @AutoConfigureBefore(RedisAutoConfiguration.class)
-    @EnableConfigurationProperties(CustomRedisProperties.class)
-    public class CustomRedisAutoConfiguration extends CachingConfigurerSupport {
-    
+   1. 별도의 Custom CacheErrorHandler를 등록하려면 위 CachingConfigurerSupport를 상속받아 @Override 메서드를 구현해야한다.
+
+```
+@Configuration
+@ConditionalOnProperty("spring.redis.host")
+@AutoConfigureBefore(RedisAutoConfiguration.class)
+@EnableConfigurationProperties(CustomRedisProperties.class)
+public class CustomRedisAutoConfiguration extends CachingConfigurerSupport {
+
     (생략)...
-    
-        @Override
-        public CacheErrorHandler errorHandler() {
-            log.info("### customCacheErrorHandler init");
-            return new CustomRedisCacheErrorHandler();
-        }
-    
-    (생략)...
-    
+
+    @Override
+    public CacheErrorHandler errorHandler() {
+        log.info("### customCacheErrorHandler init");
+        return new CustomRedisCacheErrorHandler();
     }
-    ```
+
+    (생략)...
+
+}
+```
 
 위와 같이 CustomRedisAutoConfiguration 클래스에서 CachingConfigurerSupport를 상속받아서 `errorHandler()` 메서드를 오버라이드해서 직접 Custom CacheErrorHandler를 return하도록 설정하면 끝이다.
 
