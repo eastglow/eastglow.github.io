@@ -3,7 +3,7 @@ layout: post
 title:  "[Oracle]현재 날짜에 원하는 시간 더하기"
 date:   2017-12-25 22:00:00
 author: EastGlow
-categories: Data-base
+categories: Database
 ---
 
 일반적으로 오라클을 다루는 툴로 SQLDeveloper를 많이 이용한다. 나 또한 학부 시절에 SQLDeveloper를 통해 과제나 프로젝트를 진행했었다. 국가나 사용자의 설정에 따라 다르긴 하지만 일반적으로 오라클에서 현재 날짜를 구한다면 아래와 같이 나올 것이다.

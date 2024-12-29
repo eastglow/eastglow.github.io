@@ -3,7 +3,7 @@ layout: post
 title:  "[공통]Scala Subquery vs Left Outer Join"
 date:   2017-12-23 22:57:00
 author: EastGlow
-categories: Data-base
+categories: Database
 ---
 
 저번주에 고객사로부터 한가지 문의사항이 들어왔다.

@@ -3,7 +3,7 @@ layout: post
 title:  "[MySQL]A테이블 검색 시 B테이블의 특정 컬럼 값 이용하기"
 date:   2019-01-28 23:00:00
 author: EastGlow
-categories: Data-base
+categories: Database
 ---
 
 ## 내용
