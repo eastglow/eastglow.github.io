@@ -3,7 +3,7 @@ layout: post
 title:  "[Oracle]오늘 날짜와 특정 날짜를 비교하여 if문으로 조건문 넣기"
 date:   2019-05-09 19:00:00
 author: EastGlow
-categories: Data-base
+categories: Database
 ---
 ## 서론
 

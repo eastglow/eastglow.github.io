@@ -3,7 +3,7 @@ layout: post
 title:  "[PostgreSQL] Oracle vs PostgreSQL 빈 문자열에 대한 NULL 처리 차이"
 date:   2024-12-30
 author: EastGlow
-categories: Data-base
+categories: Database
 ---
 
 # 1. 들어가며

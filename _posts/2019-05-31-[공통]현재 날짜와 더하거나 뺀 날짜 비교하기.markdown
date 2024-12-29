@@ -3,7 +3,7 @@ layout: post
 title:  "[공통]현재 날짜와 더하거나 뺀 날짜 비교하기"
 date:   2019-05-31 13:00:00
 author: EastGlow
-categories: Data-base
+categories: Database
 ---
 ## 서론
 
